@@ -13,7 +13,8 @@ public:
 	{
 		m_colorType = _color;
 	}
-
+	bool thisPiece() { return true; }
+	virtual void SetDefaultPos(int n) {}
 	virtual void DrawLit()override;
 	virtual void Init()override;
 protected:

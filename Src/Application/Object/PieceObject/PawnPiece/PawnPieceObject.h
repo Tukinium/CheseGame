@@ -4,7 +4,7 @@ class PawnPieceObject_Class : public PieceBaseObject_Class
 {
 public:
 	void Init()override;
-	void SetNum(int n);
+	void SetDefaultPos(int n);
 private:
 	const float BlackDefaultPosX = 0.5 - 0;
 	const float BlackDefaultPosZ = 0.5 - 3;
@@ -53,5 +53,5 @@ private:
 
 	const float WhiteDefaultPosX8 = 0.5 - 4;
 	const float WhiteDefaultPosZ8 = 0.5 + 2;
-	int m_num;
+
 };

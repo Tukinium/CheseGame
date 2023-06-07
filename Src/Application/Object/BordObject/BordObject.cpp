@@ -12,4 +12,3 @@ void BordObject_Class::Init()
 
 	printf("BordObject Init CheckOut\n");
 }
-

@@ -9,10 +9,9 @@ void PawnPieceObject_Class::Init()
 	printf("QueenPiece Init CheckOut\n");
 }
 
-void PawnPieceObject_Class::SetNum(int n)
+void PawnPieceObject_Class::SetDefaultPos(int n)
 {
-	m_num = n;
-	switch (m_num)
+	switch (n)
 	{
 	case 0:
 	{

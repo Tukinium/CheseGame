@@ -23,9 +23,18 @@ public:
 		 White,
 		 Black,
 	 };
+
+	 enum Phase
+	 {
+		 StartPhase,
+		 SelectPhase,
+		 SetPhase,
+		 EndPhase,
+	 };
 private:
 	std::shared_ptr<SkyBox_Class>m_sky;
 	std::shared_ptr<Camera_Class>m_camera;
+	std::shared_ptr<BordObject_Class>m_bord;
 
 	std::shared_ptr<SelectingBord_Class>m_selectBord;
 
@@ -34,13 +43,13 @@ private:
 	std::shared_ptr<KingPieceObject_Class>m_kingBlack;
 	std::shared_ptr<KingPieceObject_Class>m_kingWhite;
 
-	std::shared_ptr<BordObject_Class>m_bord;
-
 	std::shared_ptr<QueenPieceObject_Class>m_queenWhite;
 	std::shared_ptr<QueenPieceObject_Class>m_queenBlack;
 
 	std::shared_ptr<PawnPieceObject_Class>m_pawnWhite[8];
 	std::shared_ptr<PawnPieceObject_Class>m_pawnBkack[8];
+
+	int m_Phase;
 	struct Piece
 	{
 		Math::Vector3 piecePos;
@@ -50,5 +59,5 @@ private:
 	Math::Vector3 selectPos;
 	bool m_selectObject = false;
 	bool meTrun = true;
-	
+	POINT MousePos;
 };

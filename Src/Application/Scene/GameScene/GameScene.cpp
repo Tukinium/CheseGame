@@ -7,6 +7,7 @@
 #include"Application/Object/SelectingBord/SelectingBord.h"
 #include"Application/UI/PieceSelectingUI/PieceSelectingUI.h"
 #include"Application/Object/PieceObject/PawnPiece/PawnPieceObject.h"
+
 void GameScene_Class::SetSharedPtr()
 {
 	if (!m_camera)m_camera = std::make_shared<Camera_Class>();
@@ -44,15 +45,15 @@ void GameScene_Class::SetSharedPtr()
 	{
 		if (!m_pawnBkack[n])m_pawnBkack[n] = std::make_shared<PawnPieceObject_Class>();
 		m_pawnBkack[n]->SetColor(Black);
-		m_pawnBkack[n]->SetNum(n);
+		m_pawnBkack[n]->SetDefaultPos(n);
 		m_baseObjList.push_back(m_pawnBkack[n]);
 
 		if (!m_pawnWhite[n])m_pawnWhite[n] = std::make_shared<PawnPieceObject_Class>();
 		m_pawnWhite[n]->SetColor(White);
-		m_pawnWhite[n]->SetNum(n);
+		m_pawnWhite[n]->SetDefaultPos(n);
 		m_baseObjList.push_back(m_pawnWhite[n]);
 	}
-	
+
 	printf("GameScene SetSharedPtr checkOut\n");
 }
 
@@ -64,8 +65,29 @@ void GameScene_Class::Update()
 	if (GetAsyncKeyState('2'))m_camera->setCamViewMode(m_camera->Default);
 	if (GetAsyncKeyState('3'))m_camera->setCamViewMode(m_camera->UpperCamMode);
 
-	static POINT MousePos;
 	GetCursorPos(&MousePos);
+
+	switch (m_Phase)
+	{
+	case GameScene_Class::StartPhase:
+	{
+		break;
+	}
+	case GameScene_Class::SelectPhase:
+	{
+		break;
+	}
+	case GameScene_Class::SetPhase:
+	{
+		break;
+	}
+	case GameScene_Class::EndPhase:
+	{
+		break;
+	}
+	default:
+		break;
+	}
 	MousePos.y += 0.05;
 	if (m_camera)
 	{
@@ -84,23 +106,18 @@ void GameScene_Class::Update()
 			std::list<KdCollider::CollisionResult>result;
 
 			m_bord->Intersects(rayInfo, &result);
-			m_sky->Intersects(rayInfo, &result);
 
 			if (result.size())
 			{
-				for (KdCollider::CollisionResult result : result)
+				for (KdCollider::CollisionResult resulted : result)
 				{
-					/*
-					printf("cameraPos(%f,%f,%f)\n", m_camera->GetPos().x, m_camera->GetPos().y, m_camera->GetPos().z);
-					printf("hit(%f,%f,%f)\n", result.m_hitPos.x, result.m_hitPos.y, result.m_hitPos.z);
-					*/
 					for (int h = 0; h < 8; h++)
 					{
 						for (int w = 0; w < 8; w++)
 						{
-							Math::Vector3 massPos = { h * 1.0f - 3.5f,0.0f,w * 1.0f - 3.5f };
+							Math::Vector3 massPos = { h * 1.0f - 3.5f,0.2f,w * 1.0f - 3.5f };
 							//-3.5開始地点
-							if ((Math::Vector3::Distance(massPos, result.m_hitPos) <= 0.75f))
+							if ((Math::Vector3::Distance(massPos, resulted.m_hitPos) <= 0.75f))
 							{
 								m_selectBord->SetSelecting(true);
 								m_selectBord->SetPos(massPos);
@@ -121,7 +138,7 @@ void GameScene_Class::Update()
 												m_selectObject = true;
 											}
 										}
-										else if(gameObject == m_bord)
+										else if (gameObject == m_bord)
 										{
 											if (m_selectObject)
 											{

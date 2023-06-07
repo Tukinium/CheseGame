@@ -4,7 +4,5 @@ class BordObject_Class : public BaseObject_Class
 {
 public:
 	void Init()override;
-	
 private:
-
 };

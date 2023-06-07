@@ -282,6 +282,9 @@
     <ClInclude Include="Src\Application\Object\PieceObject\PawnPiece\PawnPieceObject.h">
       <Filter>Src\Application\Object\Model\PieceObject\Pawn</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\PieceObject\PawnPiece\KnightPieceObject_Class.h">
+      <Filter>Src\Application\Object\Model\PieceObject\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\PieceObject\PawnPiece\PawnPieceObject.cpp">
       <Filter>Src\Application\Object\Model\PieceObject\Pawn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\PieceObject\PawnPiece\KnightPieceObject_Class.cpp">
+      <Filter>Src\Application\Object\Model\PieceObject\Knight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
