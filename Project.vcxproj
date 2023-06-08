@@ -148,8 +148,9 @@
     <ClInclude Include="Src\Application\Object\BaseObject\BaseObject.h" />
     <ClInclude Include="Src\Application\Object\BordObject\BordObject.h" />
     <ClInclude Include="Src\Application\Object\CameraObject\Camera.h" />
+    <ClInclude Include="Src\Application\Object\PieceObject\BishopPiece\BishopPieceObject.h" />
     <ClInclude Include="Src\Application\Object\PieceObject\KingPiece\KingPieceObject.h" />
-    <ClInclude Include="Src\Application\Object\PieceObject\PawnPiece\KnightPieceObject_Class.h" />
+    <ClInclude Include="Src\Application\Object\PieceObject\PawnPiece\KnightPieceObject.h" />
     <ClInclude Include="Src\Application\Object\PieceObject\PawnPiece\PawnPieceObject.h" />
     <ClInclude Include="Src\Application\Object\PieceObject\PieceBaseObject\PieceBaseObject.h" />
     <ClInclude Include="Src\Application\Object\PieceObject\QueenPiece\QueenPieceObject.h" />
@@ -199,8 +200,9 @@
     <ClCompile Include="Src\Application\Object\BaseObject\BaseObject.cpp" />
     <ClCompile Include="Src\Application\Object\BordObject\BordObject.cpp" />
     <ClCompile Include="Src\Application\Object\CameraObject\Camera.cpp" />
+    <ClCompile Include="Src\Application\Object\PieceObject\BishopPiece\BishopPieceObject.cpp" />
     <ClCompile Include="Src\Application\Object\PieceObject\KingPiece\KingPieceObject.cpp" />
-    <ClCompile Include="Src\Application\Object\PieceObject\PawnPiece\KnightPieceObject_Class.cpp" />
+    <ClCompile Include="Src\Application\Object\PieceObject\PawnPiece\KnightPieceObject.cpp" />
     <ClCompile Include="Src\Application\Object\PieceObject\PawnPiece\PawnPieceObject.cpp" />
     <ClCompile Include="Src\Application\Object\PieceObject\PieceBaseObject\PieceBaseObject.cpp" />
     <ClCompile Include="Src\Application\Object\PieceObject\QueenPiece\QueenPieceObject.cpp" />

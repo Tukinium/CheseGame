@@ -1,12 +1,12 @@
-#include "KnightPieceObject_Class.h"
+#include"BishopPieceObject.h"
 
-void KnightPieceObject_Class::Init()
+void BishopPieceObject_Class::Init()
 {
 	m_type = Model;
-	fillPass = "Asset/Model/Piece/Queen/Queen.gltf";
+	fillPass = "Asset/Model/Piece/Bishop/Bishop.gltf";
 	SetAsset(m_type, fillPass);
 	m_scale = Defalut_Scale_Const;
-	printf("QueenPiece Init CheckOut\n");
+	
 	if (m_colorType == White)
 	{
 		m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };
@@ -19,7 +19,7 @@ void KnightPieceObject_Class::Init()
 	}
 }
 
-void KnightPieceObject_Class::SetDefaultPos(int n)
+void BishopPieceObject_Class::SetDefaultPos(int n)
 {
 	switch (n)
 	{
