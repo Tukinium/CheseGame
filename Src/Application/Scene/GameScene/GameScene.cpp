@@ -21,19 +21,19 @@ void GameScene_Class::SetSharedPtr()
 	m_baseObjList.push_back(m_bord);
 
 	if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
-	m_kingWhite->SetColor(White);
+	m_kingWhite->SetColor(kWhiteColor);
 	m_baseObjList.push_back(m_kingWhite);
 
 	if (!m_kingBlack)m_kingBlack = std::make_shared<KingPieceObject_Class>();
-	m_kingBlack->SetColor(Black);
+	m_kingBlack->SetColor(kBlackColor);
 	m_baseObjList.push_back(m_kingBlack);
 
 	if (!m_queenBlack)m_queenBlack = std::make_shared<QueenPieceObject_Class>();
-	m_queenBlack->SetColor(Black);
+	m_queenBlack->SetColor(kBlackColor);
 	m_baseObjList.push_back(m_queenBlack);
 
 	if (!m_queenWhite)m_queenWhite = std::make_shared<QueenPieceObject_Class>();
-	m_queenWhite->SetColor(White);
+	m_queenWhite->SetColor(kWhiteColor);
 	m_baseObjList.push_back(m_queenWhite);
 
 	if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
@@ -48,16 +48,57 @@ void GameScene_Class::SetSharedPtr()
 	for (int n = 0; n < 8; n++)
 	{
 		if (!m_pawnBkack[n])m_pawnBkack[n] = std::make_shared<PawnPieceObject_Class>();
-		m_pawnBkack[n]->SetColor(Black);
+		m_pawnBkack[n]->SetColor(kBlackColor);
 		m_pawnBkack[n]->SetDefaultPos(n);
 		m_baseObjList.push_back(m_pawnBkack[n]);
 
 		if (!m_pawnWhite[n])m_pawnWhite[n] = std::make_shared<PawnPieceObject_Class>();
-		m_pawnWhite[n]->SetColor(White);
+		m_pawnWhite[n]->SetColor(kWhiteColor);
 		m_pawnWhite[n]->SetDefaultPos(n);
 		m_baseObjList.push_back(m_pawnWhite[n]);
 	}
 
+	for (int n = 0; n < 2; n++)
+	{
+		if (!m_rookBlack[n])m_rookBlack[n] = std::make_shared<RookPieceObject_Class>();
+		m_rookBlack[n]->SetColor(kBlackColor);
+		m_rookBlack[n]->SetDefaultPos(n);
+		m_baseObjList.push_back(m_rookBlack[n]);
+
+		if (!m_rookWhite[n])m_rookWhite[n] = std::make_shared<RookPieceObject_Class>();
+		m_rookWhite[n]->SetColor(kWhiteColor);
+		m_rookWhite[n]->SetDefaultPos(n);
+		m_baseObjList.push_back(m_rookWhite[n]);
+		
+	}
+
+	for (int n = 0; n < 2; n++)
+	{
+		if (!m_knightBlack[n])m_knightBlack[n] = std::make_shared<KnightPieceObject_Class>();
+		m_knightBlack[n]->SetColor(kBlackColor);
+		m_knightBlack[n]->SetDefaultPos(n);
+		m_baseObjList.push_back(m_knightBlack[n]);
+
+		if (!m_knightWhite[n])m_knightWhite[n] = std::make_shared<KnightPieceObject_Class>();
+		m_knightWhite[n]->SetColor(kWhiteColor);
+		m_knightWhite[n]->SetDefaultPos(n);
+		m_baseObjList.push_back(m_knightWhite[n]);
+
+	}
+
+	for (int n = 0; n < 2; n++)
+	{
+		if (!m_bishopBlack[n])m_bishopBlack[n] = std::make_shared<BishopPieceObject_Class>();
+		m_bishopBlack[n]->SetColor(kBlackColor);
+		m_bishopBlack[n]->SetDefaultPos(n);
+		m_baseObjList.push_back(m_bishopBlack[n]);
+
+		if (!m_bishopWhite[n])m_bishopWhite[n] = std::make_shared<BishopPieceObject_Class>();
+		m_bishopWhite[n]->SetColor(kWhiteColor);
+		m_bishopWhite[n]->SetDefaultPos(n);
+		m_baseObjList.push_back(m_bishopWhite[n]);
+
+	}
 	printf("GameScene SetSharedPtr checkOut\n");
 }
 

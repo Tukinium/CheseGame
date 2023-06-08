@@ -39,6 +39,10 @@ public:
 	{
 		m_Alive = _alive;
 	}
+	void SetColor(const Math::Color _color)
+	{
+		m_color = _color;
+	}
 protected:
 	const float Defalut_Scale_Const = 1.0f;
 
@@ -68,6 +72,8 @@ protected:
 	std::shared_ptr<KdModelWork>m_model = nullptr;
 
 	std::string fillPass;
+
+	Math::Color m_color = kNormalColor;
 };
 
 //記述を楽にするためのマクロ #define

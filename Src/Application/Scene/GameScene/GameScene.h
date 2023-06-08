@@ -10,7 +10,7 @@ class KingPieceObject_Class;
 class PawnPieceObject_Class;
 class QueenPieceObject_Class;
 class RookPieceObject_Class;
-class RookPieceObject_Class;
+class KnightPieceObject_Class;
 
 #include"Application/Scene/BaseScene/BaseScene.h"
 
@@ -21,12 +21,6 @@ public:
 	 void Update()override;
 	 void PreUpdate()override;
 	 void PreDraw()override;
-	 enum Color
-	 {
-		 None,
-		 White,
-		 Black,
-	 };
 	 enum Phase
 	 {
 		 StartPhase,
@@ -51,6 +45,15 @@ private:
 
 	std::shared_ptr<PawnPieceObject_Class>m_pawnWhite[8];
 	std::shared_ptr<PawnPieceObject_Class>m_pawnBkack[8];
+
+	std::shared_ptr<RookPieceObject_Class>m_rookWhite[2];
+	std::shared_ptr<RookPieceObject_Class>m_rookBlack[2];
+
+	std::shared_ptr<KnightPieceObject_Class>m_knightWhite[2];
+	std::shared_ptr<KnightPieceObject_Class>m_knightBlack[2];
+
+	std::shared_ptr<BishopPieceObject_Class>m_bishopWhite[2];
+	std::shared_ptr<BishopPieceObject_Class>m_bishopBlack[2];
 
 	int m_Phase;
 

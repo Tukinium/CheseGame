@@ -7,12 +7,12 @@ void BishopPieceObject_Class::Init()
 	SetAsset(m_type, fillPass);
 	m_scale = Defalut_Scale_Const;
 	
-	if (m_colorType == White)
+	if (m_color == kWhiteColor)
 	{
 		m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };
 		m_color = kWhiteColor;
 	}
-	else if (m_colorType == Black)
+	else if (m_color == kBlackColor)
 	{
 		m_pos = { BlackDefaultPosX,0,BlackDefaultPosZ };
 		m_color = kBlackColor;
@@ -25,12 +25,12 @@ void BishopPieceObject_Class::SetDefaultPos(int n)
 	{
 	case 0:
 	{
-		if (m_colorType == White)
+		if (m_color == kWhiteColor)
 		{
 			m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };
 			m_color = kWhiteColor;
 		}
-		else if (m_colorType == Black)
+		else if (m_color == kBlackColor)
 		{
 			m_pos = { BlackDefaultPosX,0,BlackDefaultPosZ };
 			m_color = kBlackColor;
@@ -39,12 +39,12 @@ void BishopPieceObject_Class::SetDefaultPos(int n)
 	}
 	case 1:
 	{
-		if (m_colorType == White)
+		if (m_color == kWhiteColor)
 		{
 			m_pos = { WhiteDefaultPosX2,0,WhiteDefaultPosZ2 };
 			m_color = kWhiteColor;
 		}
-		else if (m_colorType == Black)
+		else if (m_color == kBlackColor)
 		{
 			m_pos = { BlackDefaultPosX2,0,BlackDefaultPosZ2 };
 			m_color = kBlackColor;

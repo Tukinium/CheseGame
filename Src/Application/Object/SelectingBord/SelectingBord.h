@@ -9,10 +9,6 @@ public:
 	}
 	void Init()override;
 	void DrawLit()override;
-	void SetColor(const Math::Color _color)
-	{
-		m_color = _color;
-	}
 private:
 	bool m_Selecting = false;
 	Math::Color m_color;
