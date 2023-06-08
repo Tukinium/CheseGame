@@ -124,6 +124,9 @@
     <Filter Include="Src\Application\Scene\SceneManager">
       <UniqueIdentifier>{bd511219-124a-4f4a-b3aa-cb3d1685dbc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\TitleScene">
+      <UniqueIdentifier>{a0b97175-3aa5-4909-9879-8804891ed64d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -297,6 +300,9 @@
     <ClInclude Include="Src\Application\Scene\SceneManager\SceneManager.h">
       <Filter>Src\Application\Scene\SceneManager</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
+      <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -445,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\SceneManager\SceneManager.cpp">
       <Filter>Src\Application\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
+      <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,4 +20,5 @@ public:
 	virtual void SetSharedPtr();
 protected:
 	std::list<std::shared_ptr<BaseObject_Class>>m_baseObjList;
+
 };

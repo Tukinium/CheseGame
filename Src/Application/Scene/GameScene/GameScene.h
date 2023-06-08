@@ -65,4 +65,13 @@ private:
 	bool m_selectObject = false;
 	bool meTrun = true;
 	POINT MousePos;
+private:
+	GameScene_Class();
+
+public:
+	static GameScene_Class& Instance() {
+		static GameScene_Class Instance;
+		return Instance;
+	}
+
 };
