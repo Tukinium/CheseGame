@@ -28,6 +28,10 @@ public:
 		 SetPhase,
 		 EndPhase,
 	 };
+	 void AddObjList(std::shared_ptr<BaseObject_Class>& _obj)
+	 {
+		 m_baseObjList.push_back(_obj);
+	 }
 private:
 	std::shared_ptr<SkyBox_Class>m_sky;
 	std::shared_ptr<Camera_Class>m_camera;

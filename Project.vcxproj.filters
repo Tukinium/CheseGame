@@ -121,6 +121,9 @@
     <Filter Include="Src\Application\Object\Model\PieceObject\Rook">
       <UniqueIdentifier>{0882b844-9484-426b-98b2-f7821bf69b42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\SceneManager">
+      <UniqueIdentifier>{bd511219-124a-4f4a-b3aa-cb3d1685dbc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -291,6 +294,9 @@
     <ClInclude Include="Src\Application\Object\PieceObject\KnightPiece\KnightPieceObject.h">
       <Filter>Src\Application\Object\Model\PieceObject\Knight</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\SceneManager\SceneManager.h">
+      <Filter>Src\Application\Scene\SceneManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -436,6 +442,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\PieceObject\KnightPiece\KnightPieceObject.cpp">
       <Filter>Src\Application\Object\Model\PieceObject\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\SceneManager\SceneManager.cpp">
+      <Filter>Src\Application\Scene\SceneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

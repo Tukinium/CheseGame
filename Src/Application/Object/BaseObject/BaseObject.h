@@ -39,7 +39,7 @@ public:
 	{
 		m_Alive = _alive;
 	}
-	void SetColor(const Math::Color _color)
+	void SetColor(const Math::Color& _color)
 	{
 		m_color = _color;
 	}

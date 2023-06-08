@@ -1,6 +1,7 @@
 ﻿#include "main.h"
 #include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/GameScene/GameScene.h"
+#include"Application/Scene/SceneManager/SceneManager.h"
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 // エントリーポイント
 // アプリケーションはこの関数から進行する
@@ -325,6 +326,8 @@ void Application::Release()
 	DestoryCons();
 	// ウィンドウ削除
 	m_window.Release();
+
+	
 }
 
 
