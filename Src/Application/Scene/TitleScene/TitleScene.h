@@ -5,7 +5,7 @@ class TitleScene_Class : public BaseScene_Class
 {
 public:
 
-
+	void Init()override;
 private:
 
 };
