@@ -66,7 +66,6 @@ private:
 	bool meTrun = true;
 	POINT MousePos;
 private:
-	GameScene_Class();
 
 public:
 	static GameScene_Class& Instance() {
