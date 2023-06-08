@@ -6,7 +6,6 @@ void QueenPieceObject_Class::Init()
 	fillPass = "Asset/Model/Piece/Queen/Queen.gltf";
 	SetAsset(m_type, fillPass);
 	m_scale = Defalut_Scale_Const;
-	printf("QueenPiece Init CheckOut\n");
 	if (m_colorType == White)
 	{
 		m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };

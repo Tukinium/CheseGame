@@ -4,7 +4,7 @@ class RookPieceObject_Class : public PieceBaseObject_Class
 {
 public:
 	void Init()override;
-
+	void SetDefaultPos(int n)override;
 private:
 	const float BlackDefaultPosX = 0.5 - 0;
 	const float BlackDefaultPosZ = 0.5 - 4;

@@ -6,7 +6,7 @@ void PawnPieceObject_Class::Init()
 	fillPass = "Asset/Model/Piece/Pawn/Pawn.gltf";
 	SetAsset(m_type, fillPass);
 	m_scale = Defalut_Scale_Const;
-	printf("QueenPiece Init CheckOut\n");
+
 }
 
 void PawnPieceObject_Class::SetDefaultPos(int n)
