@@ -1,17 +1,21 @@
 #include"GameScene.h"
-#include"Application/Object/BordObject/BordObject.h"
-#include"Application/Object/CameraObject/Camera.h"
-#include"Application/Object/PieceObject/KingPiece/KingPieceObject.h"
-#include"Application/Object/PieceObject/QueenPiece/QueenPieceObject.h"
+
+//Include数が多いため分割する
+
+//ピース用Includeヘッダファイル
+#include"Application/Object/PieceObject/Piece_Include_Config.h"
+
 #include"Application/Object/SkyBox/SkyBox.h"
 #include"Application/Object/SelectingBord/SelectingBord.h"
+#include"Application/Object/BordObject/BordObject.h"
+#include"Application/Object/CameraObject/Camera.h"
 #include"Application/UI/PieceSelectingUI/PieceSelectingUI.h"
-#include"Application/Object/PieceObject/PawnPiece/PawnPieceObject.h"
 
 void GameScene_Class::SetSharedPtr()
 {
 	if (!m_camera)m_camera = std::make_shared<Camera_Class>();
 	m_camera->Init();
+	m_baseObjList.push_back(m_camera);
 
 	if (!m_bord)m_bord = std::make_shared<BordObject_Class>();
 	m_baseObjList.push_back(m_bord);

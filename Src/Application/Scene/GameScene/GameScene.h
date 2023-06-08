@@ -1,13 +1,19 @@
 #pragma once
 class BordObject_Class;
 class Camera_Class;
-class KingPieceObject_Class;
-class QueenPieceObject_Class;
 class SkyBox_Class;
 class SelectingBord_Class;
 class PieceSelectingUI_Class;
+
+class BishopPieceObject_Class;
+class KingPieceObject_Class;
 class PawnPieceObject_Class;
+class QueenPieceObject_Class;
+class RookPieceObject_Class;
+class RookPieceObject_Class;
+
 #include"Application/Scene/BaseScene/BaseScene.h"
+
 class GameScene_Class : public BaseScene_Class
 {
 public:
@@ -15,15 +21,12 @@ public:
 	 void Update()override;
 	 void PreUpdate()override;
 	 void PreDraw()override;
-
-
 	 enum Color
 	 {
 		 None,
 		 White,
 		 Black,
 	 };
-
 	 enum Phase
 	 {
 		 StartPhase,
