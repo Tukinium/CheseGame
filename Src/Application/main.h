@@ -1,7 +1,5 @@
 ﻿#pragma once
-class BaseObject_Class;
-class GameScene_Class;
-#include"Application/Object/BordObject/BordObject.h"
+
 //============================================================
 // アプリケーションクラス
 //	APP.～ でどこからでもアクセス可能
@@ -68,17 +66,9 @@ public:
 //=====================================================
 private:
 	FILE* fp;
-	std::shared_ptr<GameScene_Class>m_gameScene;
-	int m_nowScene = 1;
 public:
 	//コンソール
 	void CreateCons();
 	void DestoryCons();
-	//スマートポインタのセット(本来Initに書くべきだが可読性を上げるために関数化)
-	void SetSharedPtr();
-	enum CamViewType
-	{
-		Default = 0,
-		GameMode,
-	};
+
 };

@@ -44,7 +44,7 @@ void Application::PreUpdate()
 
 	KdShaderManager::Instance().WorkAmbientController().PreUpdate();
 
-	if (m_nowScene == GameMode)m_gameScene->PreUpdate();
+	SceneManager::instance().PreUpdate();
 
 }
 
@@ -53,7 +53,7 @@ void Application::PreUpdate()
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 void Application::Update()
 {
-	if (m_nowScene == GameMode)m_gameScene->Update();
+	SceneManager::instance().Update();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -63,7 +63,7 @@ void Application::PostUpdate()
 {
 	// 3DSoundListnerの行列を更新
 	KdAudioManager::Instance().SetListnerMatrix(KdShaderManager::Instance().GetCameraCB().mView.Invert());
-	if (m_nowScene == GameMode)m_gameScene->PostUpdate();
+	SceneManager::instance().PostUpdate();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -77,7 +77,7 @@ void Application::PreDraw()
 
 	KdShaderManager::Instance().m_postProcessShader.PreDraw();
 
-	if(m_nowScene == GameMode)m_gameScene->PreDraw();
+	SceneManager::instance().PreDraw();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -90,7 +90,7 @@ void Application::Draw()
 		// 光を遮るオブジェクト(不透明な物体や2Dキャラ)はBeginとEndの間にまとめてDrawする
 		KdShaderManager::Instance().m_HD2DShader.BeginGenerateDepthMapFromLight();
 		{
-			if (m_nowScene == GameMode)m_gameScene->GenerateDepthMapFromLight();
+			SceneManager::instance().GenerateDepthMapFromLight();
 		}
 		KdShaderManager::Instance().m_HD2DShader.EndGenerateDepthMapFromLight();
 
@@ -99,9 +99,7 @@ void Application::Draw()
 		// 陰影のあるオブジェクト(不透明な物体や2Dキャラ)はBeginとEndの間にまとめてDrawする
 		KdShaderManager::Instance().m_HD2DShader.BeginLit();
 		{
-
-			if (m_nowScene == GameMode)m_gameScene->DrawLit();
-			
+			SceneManager::instance().DrawLit();
 		}
 		KdShaderManager::Instance().m_HD2DShader.EndLit();
 
@@ -110,7 +108,7 @@ void Application::Draw()
 		// 陰影のないオブジェクト(透明な部分を含む物体やエフェクト)はBeginとEndの間にまとめてDrawする
 		KdShaderManager::Instance().m_HD2DShader.BeginUnLit();
 		{
-			if (m_nowScene == GameMode)m_gameScene->DrawUnLit();
+			SceneManager::instance().DrawUnLit();
 		}
 		KdShaderManager::Instance().m_HD2DShader.EndUnLit();
 
@@ -119,7 +117,7 @@ void Application::Draw()
 		// 光源オブジェクト(自ら光るオブジェクトやエフェクト)はBeginとEndの間にまとめてDrawする
 		KdShaderManager::Instance().m_postProcessShader.BeginBright();
 		{
-			if (m_nowScene == GameMode)m_gameScene->DrawBright();
+			SceneManager::instance().DrawBright();
 		}
 		KdShaderManager::Instance().m_postProcessShader.EndBright();
 	}
@@ -132,7 +130,7 @@ void Application::PostDraw()
 {
 	// 画面のぼかしや被写界深度処理の実施
 	KdShaderManager::Instance().m_postProcessShader.PostEffectProcess();
-	if (m_nowScene == GameMode)m_gameScene->PostDraw();
+	SceneManager::instance().PostDraw();
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -144,7 +142,7 @@ void Application::DrawSprite()
 	// 2Dの描画はこの間で行う
 	KdShaderManager::Instance().m_spriteShader.Begin();
 	{
-		if (m_nowScene == GameMode)m_gameScene->DrawSprite();
+		SceneManager::instance().DrawSprite();
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
 }
@@ -201,13 +199,12 @@ bool Application::Init(int w, int h)
 		KdShaderManager::Instance().Init();
 
 		KdAudioManager::Instance().Init();
+
+		SceneManager::instance().Init();
 	}
 	CreateCons();
 
 	//カメラセット
-	SetSharedPtr();
-	m_gameScene->Init();
-
 
 	return true;
 }
@@ -334,10 +331,6 @@ void Application::Release()
 //=====================================================
 // ユーザー追加
 //=====================================================
-void Application::SetSharedPtr()
-{
-	m_gameScene = std::make_shared<GameScene_Class>();
-}
 
 void Application::CreateCons()
 {

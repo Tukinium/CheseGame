@@ -164,7 +164,7 @@ void GameScene_Class::Update()
 					{
 						for (int w = 0; w < 8; w++)
 						{
-							Math::Vector3 massPos = { h * 1.0f - 3.5f,0.2f,w * 1.0f - 3.5f };
+							Math::Vector3 massPos = { h * 1.0f - 3.5f,0.01f,w * 1.0f - 3.5f };
 							//-3.5開始地点
 							if ((Math::Vector3::Distance(massPos, resulted.m_hitPos) <= 0.75f))
 							{
