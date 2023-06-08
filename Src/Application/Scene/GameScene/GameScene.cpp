@@ -71,18 +71,22 @@ void GameScene_Class::Update()
 	{
 	case GameScene_Class::StartPhase:
 	{
+
 		break;
 	}
 	case GameScene_Class::SelectPhase:
 	{
+
 		break;
 	}
 	case GameScene_Class::SetPhase:
 	{
+
 		break;
 	}
 	case GameScene_Class::EndPhase:
 	{
+
 		break;
 	}
 	default:
@@ -123,7 +127,9 @@ void GameScene_Class::Update()
 								m_selectBord->SetPos(massPos);
 								if (GetAsyncKeyState(VK_LBUTTON))
 								{
+									//連続入力による誤選択防止用
 									static int sec;
+
 									//リスト内検索
 									for (std::shared_ptr<BaseObject_Class> gameObject : m_baseObjList)
 									{
@@ -138,21 +144,19 @@ void GameScene_Class::Update()
 												m_selectObject = true;
 											}
 										}
+
+										//触れたオブジェクトが板だった場合かつ
 										else if (gameObject == m_bord)
 										{
-											if (m_selectObject)
+											if (m_selectObject && sec <= 0)
 											{
-												if (sec <= 0)
-												{
-													m_selectObject = false;
-												}
+												m_selectObject = false;
 											}
 										}
 									}
 									if (m_selectBord)
 									{
 										sec -= 1;
-										printf("n");
 									}
 								}
 							}
@@ -166,7 +170,6 @@ void GameScene_Class::Update()
 			}
 		}
 	}
-
 	if (m_selectObject)
 	{
 		m_pieceSelectUI->SetAlive(true);

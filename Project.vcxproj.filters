@@ -94,17 +94,8 @@
     <Filter Include="Src\Application\Object\Model\PieceObject">
       <UniqueIdentifier>{871e2400-b974-41e8-b341-07359e6be37d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Model\PieceObject\KingPieceObject">
-      <UniqueIdentifier>{e7753d9c-ed2e-445b-a873-3f0142c5cb4f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\Model\PieceObject\PieceBaseObject">
       <UniqueIdentifier>{697fc163-d7a9-4837-9539-6d659569a17a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Model\PieceObject\QueenPieceObject">
-      <UniqueIdentifier>{ba1d10a4-0bf8-443e-8454-3aadc2429452}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Model\PieceObject\RookPieceObject">
-      <UniqueIdentifier>{0882b844-9484-426b-98b2-f7821bf69b42}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Application\Object\UI">
       <UniqueIdentifier>{537864e1-60b0-4133-9209-e02a5dff0fc9}</UniqueIdentifier>
@@ -120,6 +111,15 @@
     </Filter>
     <Filter Include="Src\Application\Object\Model\PieceObject\Pawn">
       <UniqueIdentifier>{476c3982-0e41-408d-b693-9660d812bbd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Model\PieceObject\King">
+      <UniqueIdentifier>{e7753d9c-ed2e-445b-a873-3f0142c5cb4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Model\PieceObject\Queen">
+      <UniqueIdentifier>{ba1d10a4-0bf8-443e-8454-3aadc2429452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Model\PieceObject\Rook">
+      <UniqueIdentifier>{0882b844-9484-426b-98b2-f7821bf69b42}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -259,16 +259,16 @@
       <Filter>Src\Application\Scene\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\PieceObject\KingPiece\KingPieceObject.h">
-      <Filter>Src\Application\Object\Model\PieceObject\KingPieceObject</Filter>
+      <Filter>Src\Application\Object\Model\PieceObject\King</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\PieceObject\PieceBaseObject\PieceBaseObject.h">
       <Filter>Src\Application\Object\Model\PieceObject\PieceBaseObject</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\PieceObject\QueenPiece\QueenPieceObject.h">
-      <Filter>Src\Application\Object\Model\PieceObject\QueenPieceObject</Filter>
+      <Filter>Src\Application\Object\Model\PieceObject\Queen</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\PieceObject\RookPiece\RookPieceObject.h">
-      <Filter>Src\Application\Object\Model\PieceObject\RookPieceObject</Filter>
+      <Filter>Src\Application\Object\Model\PieceObject\Rook</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\SkyBox\SkyBox.h">
       <Filter>Src\Application\Object\Model\SkyBox</Filter>
@@ -402,16 +402,16 @@
       <Filter>Src\Application\Scene\GameScene</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\PieceObject\KingPiece\KingPieceObject.cpp">
-      <Filter>Src\Application\Object\Model\PieceObject\KingPieceObject</Filter>
+      <Filter>Src\Application\Object\Model\PieceObject\King</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\PieceObject\PieceBaseObject\PieceBaseObject.cpp">
       <Filter>Src\Application\Object\Model\PieceObject\PieceBaseObject</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\PieceObject\QueenPiece\QueenPieceObject.cpp">
-      <Filter>Src\Application\Object\Model\PieceObject\QueenPieceObject</Filter>
+      <Filter>Src\Application\Object\Model\PieceObject\Queen</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\PieceObject\RookPiece\RookPieceObject.cpp">
-      <Filter>Src\Application\Object\Model\PieceObject\RookPieceObject</Filter>
+      <Filter>Src\Application\Object\Model\PieceObject\Rook</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\SkyBox\SkyBox.cpp">
       <Filter>Src\Application\Object\Model\SkyBox</Filter>
