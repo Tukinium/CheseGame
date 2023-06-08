@@ -190,8 +190,6 @@ void GameScene_Class::PreUpdate()
 	BaseScene_Class::PreUpdate();
 
 	m_camera->PreUpdate();
-	KingPieceBlack.piecePos = m_kingBlack->GetPos();
-	KingPieceWhite.piecePos = m_kingWhite->GetPos();
 }
 
 void GameScene_Class::PreDraw()

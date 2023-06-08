@@ -53,11 +53,6 @@ private:
 	std::shared_ptr<PawnPieceObject_Class>m_pawnBkack[8];
 
 	int m_Phase;
-	struct Piece
-	{
-		Math::Vector3 piecePos;
-	};
-	Piece KingPieceWhite,KingPieceBlack,QueenPieceWhite,QueenPieceBlack;
 
 	Math::Vector3 selectPos;
 	bool m_selectObject = false;
