@@ -11,6 +11,7 @@ void BaseObject_Class::Init()
 	SetAsset(m_type, fillPass);
 	m_scale = Defalut_Scale_Const;
 	m_Alive = true;
+	m_objID = generateRandomID(5);
 }
 
 void BaseObject_Class::DrawLit()
@@ -39,7 +40,7 @@ void BaseObject_Class::DrawSprite()
 	//このインスタンスはPolygonタイプかチェック＆中身が作成されてるかチェック
 	if (!m_thisSprite || !m_Alive)return;
 	KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
-	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex,0,0);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex,0,0/*,& m_rc*/);
 }
 
 void BaseObject_Class::PreUpdate()

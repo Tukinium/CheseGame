@@ -557,3 +557,29 @@ void KdDirect3D::ClearBackBuffer()
 	m_pDeviceContext->ClearDepthStencilView(m_zBuffer->WorkDSView(),
 		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
+
+void KdDirect3D::ConvertWorldToScreen(const KdCamera& _camera, const Math::Vector3& _pos, Math::Vector3& _resultPos)
+{
+	//ビューポートを取得
+	Math::Viewport viewPort;
+	CopyViewportInfo(viewPort);
+
+	//ワールド変換行列 x ビュー行列 x 射影行列
+	Math::Matrix worldMat = Math::Matrix::CreateTranslation(_pos);
+	Math::Matrix worldViewPort = worldMat * _camera.GetCameraMatrix().Invert() * _camera.GetProjMatrix();
+
+	//奥行情報
+	worldViewPort._41 /= worldViewPort._44;
+	worldViewPort._42 /= worldViewPort._44;
+	worldViewPort._43 /= worldViewPort._44;
+
+	//射影座標系での2D座標
+	Math::Vector3 localPos = worldViewPort.Translation();
+
+	//ウィンドウサイズを考慮して計算する
+	_resultPos.x = localPos.x * (viewPort.width * 0.5f);
+	_resultPos.y = localPos.y * (viewPort.height * 0.5f);
+	_resultPos.z = worldViewPort._44;
+
+	return;
+}

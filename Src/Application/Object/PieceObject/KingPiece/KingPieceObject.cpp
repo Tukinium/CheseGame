@@ -2,10 +2,8 @@
 
 void KingPieceObject_Class::Init()
 {
-	m_type = Model;
 	fillPass = "Asset/Model/Piece/King/King.gltf";
-	SetAsset(m_type, fillPass);
-	m_scale = Defalut_Scale_Const;
+	PieceBaseObject_Class::Init();
 	if (m_color == kWhiteColor)
 	{
 		m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };

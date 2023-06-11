@@ -10,6 +10,13 @@
 #include"Application/Object/BordObject/BordObject.h"
 #include"Application/Object/CameraObject/Camera.h"
 #include"Application/UI/PieceSelectingUI/PieceSelectingUI.h"
+#include"Application/UI/PieceSelectingUI/SelectingPieceTypeName_UI.h"
+
+void GameScene_Class::Init()
+{
+	CreateCons();
+	BaseScene_Class::Init();
+}
 
 void GameScene_Class::SetSharedPtr()
 {
@@ -22,19 +29,23 @@ void GameScene_Class::SetSharedPtr()
 
 	if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
 	m_kingWhite->SetColor(kWhiteColor);
+	m_pieceId[0][0] = m_kingWhite->GetId();
 	m_baseObjList.push_back(m_kingWhite);
 
 	if (!m_kingBlack)m_kingBlack = std::make_shared<KingPieceObject_Class>();
 	m_kingBlack->SetColor(kBlackColor);
+	m_pieceId[0][1] = m_kingBlack->GetId();
 	m_baseObjList.push_back(m_kingBlack);
-
-	if (!m_queenBlack)m_queenBlack = std::make_shared<QueenPieceObject_Class>();
-	m_queenBlack->SetColor(kBlackColor);
-	m_baseObjList.push_back(m_queenBlack);
 
 	if (!m_queenWhite)m_queenWhite = std::make_shared<QueenPieceObject_Class>();
 	m_queenWhite->SetColor(kWhiteColor);
+	m_pieceId[1][0] = m_queenWhite->GetId();
 	m_baseObjList.push_back(m_queenWhite);
+
+	if (!m_queenBlack)m_queenBlack = std::make_shared<QueenPieceObject_Class>();
+	m_queenBlack->SetColor(kBlackColor);
+	m_pieceId[1][1] = m_queenBlack->GetId();
+	m_baseObjList.push_back(m_queenBlack);
 
 	if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
 	m_baseObjList.push_back(m_sky);
@@ -44,62 +55,85 @@ void GameScene_Class::SetSharedPtr()
 
 	if (!m_pieceSelectUI)m_pieceSelectUI = std::make_shared<PieceSelectingUI_Class>();
 	m_baseObjList.push_back(m_pieceSelectUI);
+	//m_pieceSelectUI->SetCamera(m_camera);
+
+	if (!m_selectPieceTypeUI)m_selectPieceTypeUI = std::make_shared<SelectingPieceTypeNameUI>();
+	m_baseObjList.push_back(m_selectPieceTypeUI);
+	//m_selectPieceUI->SetCamera(m_camera);
+
 
 	for (int n = 0; n < 8; n++)
 	{
-		if (!m_pawnBkack[n])m_pawnBkack[n] = std::make_shared<PawnPieceObject_Class>();
-		m_pawnBkack[n]->SetColor(kBlackColor);
-		m_pawnBkack[n]->SetDefaultPos(n);
-		m_baseObjList.push_back(m_pawnBkack[n]);
-
 		if (!m_pawnWhite[n])m_pawnWhite[n] = std::make_shared<PawnPieceObject_Class>();
 		m_pawnWhite[n]->SetColor(kWhiteColor);
 		m_pawnWhite[n]->SetDefaultPos(n);
+		m_pieceId[8 + n][0] = m_pawnWhite[n]->GetId();
 		m_baseObjList.push_back(m_pawnWhite[n]);
+
+		if (!m_pawnBlack[n])m_pawnBlack[n] = std::make_shared<PawnPieceObject_Class>();
+		m_pawnBlack[n]->SetColor(kBlackColor);
+		m_pawnBlack[n]->SetDefaultPos(n);
+		m_pieceId[8 + n][1] = m_pawnBlack[n]->GetId();
+		m_baseObjList.push_back(m_pawnBlack[n]);
 	}
 
 	for (int n = 0; n < 2; n++)
 	{
-		if (!m_rookBlack[n])m_rookBlack[n] = std::make_shared<RookPieceObject_Class>();
-		m_rookBlack[n]->SetColor(kBlackColor);
-		m_rookBlack[n]->SetDefaultPos(n);
-		m_baseObjList.push_back(m_rookBlack[n]);
-
 		if (!m_rookWhite[n])m_rookWhite[n] = std::make_shared<RookPieceObject_Class>();
 		m_rookWhite[n]->SetColor(kWhiteColor);
 		m_rookWhite[n]->SetDefaultPos(n);
+		m_pieceId[6 + n][0] = m_rookWhite[n]->GetId();
 		m_baseObjList.push_back(m_rookWhite[n]);
-		
+
+		if (!m_rookBlack[n])m_rookBlack[n] = std::make_shared<RookPieceObject_Class>();
+		m_rookBlack[n]->SetColor(kBlackColor);
+		m_rookBlack[n]->SetDefaultPos(n);
+		m_pieceId[6 + n][1] = m_rookBlack[n]->GetId();
+		m_baseObjList.push_back(m_rookBlack[n]);
+
 	}
 
 	for (int n = 0; n < 2; n++)
 	{
-		if (!m_knightBlack[n])m_knightBlack[n] = std::make_shared<KnightPieceObject_Class>();
-		m_knightBlack[n]->SetColor(kBlackColor);
-		m_knightBlack[n]->SetDefaultPos(n);
-		m_baseObjList.push_back(m_knightBlack[n]);
-
 		if (!m_knightWhite[n])m_knightWhite[n] = std::make_shared<KnightPieceObject_Class>();
 		m_knightWhite[n]->SetColor(kWhiteColor);
 		m_knightWhite[n]->SetDefaultPos(n);
+		m_pieceId[4 + n][1] = m_knightWhite[n]->GetId();
 		m_baseObjList.push_back(m_knightWhite[n]);
+
+		if (!m_knightBlack[n])m_knightBlack[n] = std::make_shared<KnightPieceObject_Class>();
+		m_knightBlack[n]->SetColor(kBlackColor);
+		m_knightBlack[n]->SetDefaultPos(n);
+		m_pieceId[4 + n][1] = m_knightBlack[n]->GetId();
+		m_baseObjList.push_back(m_knightBlack[n]);
 
 	}
 
 	for (int n = 0; n < 2; n++)
 	{
-		if (!m_bishopBlack[n])m_bishopBlack[n] = std::make_shared<BishopPieceObject_Class>();
-		m_bishopBlack[n]->SetColor(kBlackColor);
-		m_bishopBlack[n]->SetDefaultPos(n);
-		m_baseObjList.push_back(m_bishopBlack[n]);
 
 		if (!m_bishopWhite[n])m_bishopWhite[n] = std::make_shared<BishopPieceObject_Class>();
 		m_bishopWhite[n]->SetColor(kWhiteColor);
 		m_bishopWhite[n]->SetDefaultPos(n);
+		m_pieceId[2 + n][1] = m_bishopWhite[n]->GetId();
 		m_baseObjList.push_back(m_bishopWhite[n]);
 
+		if (!m_bishopBlack[n])m_bishopBlack[n] = std::make_shared<BishopPieceObject_Class>();
+		m_bishopBlack[n]->SetColor(kBlackColor);
+		m_bishopBlack[n]->SetDefaultPos(n);
+		m_pieceId[2 + n][1] = m_bishopBlack[n]->GetId();
+		m_baseObjList.push_back(m_bishopBlack[n]);
+
 	}
-	printf("GameScene SetSharedPtr checkOut\n");
+	std::cout << "GameScene SetSharedPtr checkOut" << std::endl;
+
+	for (int w = 0; w < 16; w++)
+	{
+		for (int h = 0;h < 2; h++)
+		{
+			std::cout << m_pieceId[w][h] << w << h << std::endl;
+		}
+	}
 }
 
 void GameScene_Class::Update()
@@ -115,6 +149,11 @@ void GameScene_Class::Update()
 	switch (m_Phase)
 	{
 	case GameScene_Class::StartPhase:
+	{
+
+		break;
+	}
+	case GameScene_Class::CheckPhase:
 	{
 
 		break;
@@ -218,10 +257,34 @@ void GameScene_Class::Update()
 	if (m_selectObject)
 	{
 		m_pieceSelectUI->SetAlive(true);
+		m_selectPieceTypeUI->SetAlive(true);
+		for (std::shared_ptr<BaseObject_Class> obj : m_baseObjList)
+		{
+			if ((1 <= Math::Vector3::Distance(selectPos, obj->GetPos()) && obj->thisPiece()))
+			{
+				if (obj->GetId() == m_pieceId[0][0])
+				{
+					printf("thisWhiteKing\n");
+				}
+				if (obj->GetId() == m_pieceId[0][1])
+				{
+					printf("thisBlackKing\n");
+				}
+				if (obj->GetId() == m_pieceId[1][0])
+				{
+
+				}
+				if (obj->GetId() == m_pieceId[1][1])
+				{
+
+				}
+			}
+		}
 	}
 	else
 	{
 		m_pieceSelectUI->SetAlive(false);
+		m_selectPieceTypeUI->SetAlive(false);
 	}
 
 }
@@ -238,5 +301,21 @@ void GameScene_Class::PreDraw()
 	BaseScene_Class::PreDraw();
 
 	m_camera->PreDraw();
+}
+
+void GameScene_Class::Release()
+{
+	DestoryCons();
+}
+
+void GameScene_Class::CreateCons()
+{
+	AllocConsole();
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+}
+
+void GameScene_Class::DestoryCons()
+{
+	FreeConsole();
 }
 

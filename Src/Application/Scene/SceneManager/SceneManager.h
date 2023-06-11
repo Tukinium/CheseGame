@@ -1,11 +1,12 @@
 #pragma once
 class BaseScene_Class;
 class GameScene_Class;
-class SceneManager
+class TitleScene_Class;
+class SceneManager_Class
 {
 public:
-	SceneManager() {};
-	~SceneManager() {};
+	SceneManager_Class() {};
+	~SceneManager_Class() {};
 	void Update();
 	void Init();
 	void Draw();
@@ -19,11 +20,9 @@ public:
 	void PreUpdate();
 	void PostUpdate();
 	void SetSharedPtr();
+	void Release();
+	void SetScene(const std::shared_ptr<BaseScene_Class> _scene);
 
-	void SetScene(const std::shared_ptr<BaseScene_Class> _scene)
-	{
-		m_nowScene = _scene;
-	}
 private:
 	enum Scene
 	{
@@ -33,11 +32,12 @@ private:
 	int m_Scene = GameScene;
 	std::shared_ptr<BaseScene_Class>m_nowScene;
 	std::shared_ptr<GameScene_Class>m_gameScene;
+	std::shared_ptr<TitleScene_Class>m_titleScene;
 public:
 
-	static SceneManager& instance()
+	static SceneManager_Class& instance()
 	{
-		static SceneManager instance;
+		static SceneManager_Class instance;
 		return instance;
 	}
 };

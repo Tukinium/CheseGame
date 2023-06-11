@@ -303,6 +303,12 @@
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\UI\PieceSelectingUI\SelectingPieceTypeName_UI.h">
+      <Filter>Src\Application\Object\UI\PieceSelectingUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\UI\UIBaseObject.h">
+      <Filter>Src\Application\Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -454,6 +460,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\UI\PieceSelectingUI\SelectingPieceTypeName_UI.cpp">
+      <Filter>Src\Application\Object\UI\PieceSelectingUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\UI\UIBaseObject.cpp">
+      <Filter>Src\Application\Object\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

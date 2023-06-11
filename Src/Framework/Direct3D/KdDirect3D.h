@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+class KdCamera;
 class KdTexture;
 
 // サンプラステート
@@ -133,7 +133,7 @@ public:
 
 	void SetBackBufferColor(const Math::Color& col) { m_backBafferClearColor = col; }
 	void ClearBackBuffer();
-
+	void ConvertWorldToScreen(const KdCamera& _camera, const Math::Vector3& _pos, Math::Vector3& _resultPos);
 private:
 
 	//==============================================================

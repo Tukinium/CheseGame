@@ -2,11 +2,8 @@
 
 void PawnPieceObject_Class::Init()
 {
-	m_type = Model;
 	fillPass = "Asset/Model/Piece/Pawn/Pawn.gltf";
-	SetAsset(m_type, fillPass);
-	m_scale = Defalut_Scale_Const;
-
+	PieceBaseObject_Class::Init();
 }
 
 void PawnPieceObject_Class::SetDefaultPos(int n)

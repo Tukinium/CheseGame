@@ -2,6 +2,7 @@
 
 void Camera_Class::PreDraw()
 {
+	
 	m_cam->SetToShader();
 }
 
@@ -35,17 +36,14 @@ void Camera_Class::PreUpdate()
 	default:
 		break;
 	}
-	m_transMat = Math::Matrix::CreateTranslation(m_pos);
-	m_scaleMat = Math::Matrix::CreateScale(1);
-	m_rotateX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(m_rotateVec.x));
-	m_rotateY = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_rotateVec.y));
-	m_rotateZ = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(m_rotateVec.z));
-	m_rotateMat = m_rotateX * m_rotateY * m_rotateZ;
-
-	//s—ñ‚Ì‡¬ = Šgk x ‰ñ“] x ˆÚ“®
-	m_mWorld = m_scaleMat * m_rotateMat * m_transMat;
+	MathMatrix();
 
 	m_cam->SetCameraMatrix(m_mWorld);
+	if (GetAsyncKeyState('D'))
+	{
+		if (!m_cam)printf("Camera Err\n");
+		printf("CameraMatrix\nPos = {%f ,%f, %f}\nRotate = {%f ,%f, %f}\nScale = %f\n", m_pos.x, m_pos.y, m_pos.z, m_rotateVec.x, m_rotateVec.z, m_rotateVec.z, m_scale);
+	}
 }
 
 void Camera_Class::Init()

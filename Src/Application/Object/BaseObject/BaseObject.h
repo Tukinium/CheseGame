@@ -17,6 +17,32 @@ public:
 	virtual void PreUpdate()override;
 	virtual void PostUpdate()override;
 	virtual void MathMatrix();
+	virtual bool thisPiece() { return false; }
+
+	//入力された桁の乱数を返す
+	std::string generateRandomID(int length) 
+	{
+		static const std::string alphanumericChars =
+			"0123456789"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			"abcdefghijklmnopqrstuvwxyz";
+
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dis(0, alphanumericChars.size() - 1);
+
+		std::string result;
+		for (int i = 0; i < length; ++i) {
+			result += alphanumericChars[dis(gen)];
+		}
+		
+		return result;
+	}
+
+	std::string GetId()
+	{
+		return m_objID;
+	}
 
 	// テクスチャ、ポリゴン、モデルいずれかを作成してテクスチャをセットする
 	// 実行と同時にスマートポインタが作成されるため注意
@@ -43,6 +69,19 @@ public:
 	{
 		m_color = _color;
 	}
+	
+
+	enum PieceType
+	{
+		Pawn = 0,
+		Bishop,
+		Knight,
+		Rook,
+		Queen,
+		King,
+	};
+
+
 protected:
 	const float Defalut_Scale_Const = 1.0f;
 
@@ -74,6 +113,10 @@ protected:
 	std::string fillPass;
 
 	Math::Color m_color = kNormalColor;
+
+	std::string m_objID;
+
+	Math::Rectangle m_rc;
 };
 
 //記述を楽にするためのマクロ #define

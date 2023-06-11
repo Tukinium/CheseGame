@@ -2,10 +2,8 @@
 
 void KnightPieceObject_Class::Init()
 {
-	m_type = Model;
 	fillPass = "Asset/Model/Piece/Knight/Knight.gltf";
-	SetAsset(m_type, fillPass);
-	m_scale = Defalut_Scale_Const;
+	PieceBaseObject_Class::Init();
 
 }
 

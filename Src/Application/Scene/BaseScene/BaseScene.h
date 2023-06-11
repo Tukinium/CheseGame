@@ -1,5 +1,6 @@
 #pragma once
 class BaseObject_Class;
+class UIBaseObject_Class;
 class BaseScene_Class
 {
 public:
@@ -18,7 +19,12 @@ public:
 	virtual void PreUpdate();
 	virtual void PostUpdate();
 	virtual void SetSharedPtr();
+	virtual void Release() {};
+	bool LeaveScene()
+	{
+		return m_sceneNow;
+	}
 protected:
 	std::list<std::shared_ptr<BaseObject_Class>>m_baseObjList;
-
+	bool m_sceneNow;
 };

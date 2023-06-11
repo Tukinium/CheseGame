@@ -2,6 +2,7 @@
 #include"Application/Object/BaseObject/BaseObject.h"
 void TitleScene_Class::Init()
 {
+	/*
 	class temp : public BaseObject_Class
 	{
 	public:
@@ -22,8 +23,17 @@ void TitleScene_Class::Init()
 		std::shared_ptr<KdTexture>m_tex;
 		
 	};
+	
 
 	std::shared_ptr<temp>a = std::make_shared<temp>();
 	a->setTexture("");
 	m_baseObjList.push_back(a);
+	*/
+	BaseScene_Class::Init();
+}
+
+void TitleScene_Class::Update()
+{
+	BaseScene_Class::Update();
+	if (GetAsyncKeyState(VK_RETURN))m_nowScene = false;
 }

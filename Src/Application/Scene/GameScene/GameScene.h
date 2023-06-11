@@ -3,7 +3,6 @@ class BordObject_Class;
 class Camera_Class;
 class SkyBox_Class;
 class SelectingBord_Class;
-class PieceSelectingUI_Class;
 
 class BishopPieceObject_Class;
 class KingPieceObject_Class;
@@ -12,18 +11,24 @@ class QueenPieceObject_Class;
 class RookPieceObject_Class;
 class KnightPieceObject_Class;
 
+class PieceSelectingUI_Class;
+class SelectingPieceTypeNameUI;
+
 #include"Application/Scene/BaseScene/BaseScene.h"
 
 class GameScene_Class : public BaseScene_Class
 {
 public:
+	 void Init()override;
 	 void SetSharedPtr()override;
 	 void Update()override;
 	 void PreUpdate()override;
 	 void PreDraw()override;
+	 void Release()override;
 	 enum Phase
 	 {
 		 StartPhase,
+		 CheckPhase,
 		 SelectPhase,
 		 SetPhase,
 		 EndPhase,
@@ -32,6 +37,10 @@ public:
 	 {
 		 m_baseObjList.push_back(_obj);
 	 }
+
+	 void CreateCons();
+	 void DestoryCons();
+
 private:
 	std::shared_ptr<SkyBox_Class>m_sky;
 	std::shared_ptr<Camera_Class>m_camera;
@@ -40,6 +49,7 @@ private:
 	std::shared_ptr<SelectingBord_Class>m_selectBord;
 
 	std::shared_ptr<PieceSelectingUI_Class>m_pieceSelectUI;
+	std::shared_ptr<SelectingPieceTypeNameUI>m_selectPieceTypeUI;
 
 	std::shared_ptr<KingPieceObject_Class>m_kingBlack;
 	std::shared_ptr<KingPieceObject_Class>m_kingWhite;
@@ -48,7 +58,7 @@ private:
 	std::shared_ptr<QueenPieceObject_Class>m_queenBlack;
 
 	std::shared_ptr<PawnPieceObject_Class>m_pawnWhite[8];
-	std::shared_ptr<PawnPieceObject_Class>m_pawnBkack[8];
+	std::shared_ptr<PawnPieceObject_Class>m_pawnBlack[8];
 
 	std::shared_ptr<RookPieceObject_Class>m_rookWhite[2];
 	std::shared_ptr<RookPieceObject_Class>m_rookBlack[2];
@@ -65,12 +75,11 @@ private:
 	bool m_selectObject = false;
 	bool meTrun = true;
 	POINT MousePos;
-private:
 
-public:
-	static GameScene_Class& Instance() {
-		static GameScene_Class Instance;
-		return Instance;
-	}
-
+	//ピースのID情報
+	//[x][0] = 白,[x][1] = 黒
+	//キング[0]、クイーン[1]、ビショップ[2][3]、ナイト[4][5]、ルーク[6][7]、ポーン[8][9][10][11][12][13][14][15]の順番で格納すること
+	std::string m_pieceId[16][2];
+	bool m_selectingPieceId[16][2];
+	FILE* fp;
 };
