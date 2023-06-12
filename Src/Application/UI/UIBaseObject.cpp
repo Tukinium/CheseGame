@@ -5,6 +5,7 @@ void UIBaseObject_Class::Init()
 	m_type = Sprite;
 	SetAsset(m_type, fillPass);
 	m_scale = Defalut_Scale_Const;
+	m_Alive = false;
 }
 
 void UIBaseObject_Class::DrawSprite()

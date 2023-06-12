@@ -21,11 +21,14 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"BordSelecting",
+			"name":"\u30de\u30c6\u30ea\u30a2\u30eb.001",
 			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":0
-				},
+				"baseColorFactor":[
+					0.800000011920929,
+					0.800000011920929,
+					0.800000011920929,
+					1
+				],
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -45,19 +48,6 @@
 					"material":0
 				}
 			]
-		}
-	],
-	"textures":[
-		{
-			"sampler":0,
-			"source":0
-		}
-	],
-	"images":[
-		{
-			"mimeType":"image/png",
-			"name":"BordSelectingTex",
-			"uri":"BordSelectingTex.png"
 		}
 	],
 	"accessors":[
@@ -120,12 +110,6 @@
 			"byteLength":72,
 			"byteOffset":384,
 			"target":34963
-		}
-	],
-	"samplers":[
-		{
-			"magFilter":9729,
-			"minFilter":9987
 		}
 	],
 	"buffers":[

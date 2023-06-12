@@ -25,6 +25,8 @@ public:
 	 void PreUpdate()override;
 	 void PreDraw()override;
 	 void Release()override;
+
+	 void Test();
 	 enum Phase
 	 {
 		 StartPhase,
@@ -40,13 +42,14 @@ public:
 
 	 void CreateCons();
 	 void DestoryCons();
-
 private:
 	std::shared_ptr<SkyBox_Class>m_sky;
 	std::shared_ptr<Camera_Class>m_camera;
 	std::shared_ptr<BordObject_Class>m_bord;
 
 	std::shared_ptr<SelectingBord_Class>m_selectBord;
+	std::shared_ptr<SelectingBord_Class>m_beforeSelectBord;
+	std::shared_ptr<SelectingBord_Class>m_afterSelectBord;
 
 	std::shared_ptr<PieceSelectingUI_Class>m_pieceSelectUI;
 	std::shared_ptr<SelectingPieceTypeNameUI>m_selectPieceTypeUI;
@@ -82,4 +85,8 @@ private:
 	std::string m_pieceId[16][2];
 	bool m_selectingPieceId[16][2];
 	FILE* fp;
+
+	int selectBordMode;
+	Math::Vector3 m_beforeSelectPos;
+	Math::Vector3 m_afterSelectPos;
 };
