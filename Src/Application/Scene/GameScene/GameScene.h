@@ -84,6 +84,25 @@ private:
 	//キング[0]、クイーン[1]、ビショップ[2][3]、ナイト[4][5]、ルーク[6][7]、ポーン[8][9][10][11][12][13][14][15]の順番で格納すること
 	std::string m_pieceId[16][2];
 	bool m_selectingPieceId[16][2];
+	enum PieceName
+	{
+		King,
+		Queen,
+		Bishop1,
+		Bishop2,
+		Knight1,
+		Knight2,
+		Rook1,
+		Rook2,
+		Pawn1,
+		Pawn2,
+		Pawn3,
+		Pawn4,
+		Pawn5,
+		Pawn6,
+		Pawn7,
+		Pawn8,
+	};
 	FILE* fp;
 
 	int selectBordMode;

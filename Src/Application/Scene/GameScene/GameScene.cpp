@@ -263,21 +263,23 @@ void GameScene_Class::Update()
 			{
 				if ((0.01 >= Math::Vector3::Distance(selectPos, obj->GetPos()) && obj->thisPiece()))
 				{
-					if (obj->GetId() == m_pieceId[0][0])
+					for (int w = 0; w < 16; w++)
 					{
-
-					}
-					if (obj->GetId() == m_pieceId[0][1])
-					{
-
-					}
-					if (obj->GetId() == m_pieceId[1][0])
-					{
-
-					}
-					if (obj->GetId() == m_pieceId[1][1])
-					{
-
+						for (int h = 0; h < 2; h++)
+						{
+							std::string str;
+							if (obj->GetId() == m_pieceId[w][h])
+							{
+								if (h == 1)
+								{
+									str = "Black";
+								}
+								else
+								{
+									str = "White";
+								}
+							}
+						}
 					}
 				}
 			}
@@ -366,23 +368,16 @@ void GameScene_Class::Test()
 								{
 									m_selectBord->SetAlive(true);
 									m_selectBord->SetPos(massPos);
-									if ((Math::Vector3::Distance(gameObject->GetPos(), massPos) <= 0.5f) && !m_selectObject && sec <= 0 && gameObject->thisPiece())
+									if ((Math::Vector3::Distance(gameObject->GetPos(), massPos) < 0.5f) && !m_selectObject && sec <= 0 && gameObject->thisPiece())
 									{
 										if (GetAsyncKeyState(VK_LBUTTON))
 										{
-
 											//˜A‘±“ü—Í‚É‚æ‚éŒë‘I‘ð–hŽ~—p
 											sec = 10;
 											selectPos = massPos;
 											m_selectObject = true;
-
 										}
 									}
-									if ((Math::Vector3::Distance(gameObject->GetPos(), massPos) <= 0.5f) && m_selectObject && sec <= 0 &&  !(gameObject->thisPiece()))
-									{
-										m_selectObject = false;
-									}
-
 									if (sec >= 0)
 									{
 										sec--;
