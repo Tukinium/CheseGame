@@ -41,7 +41,11 @@ public:
 
 	std::string GetId()
 	{
-		return m_objID;
+		return m_id;
+	}
+	void SetId(std::string _id)
+	{
+		m_id = _id;
 	}
 
 	// テクスチャ、ポリゴン、モデルいずれかを作成してテクスチャをセットする
@@ -114,9 +118,9 @@ protected:
 
 	Math::Color m_color = kNormalColor;
 
-	std::string m_objID;
-
 	Math::Rectangle m_rc;
+
+	std::string m_id;
 };
 
 //記述を楽にするためのマクロ #define

@@ -26,11 +26,15 @@ public:
 	 void PreDraw()override;
 	 void Release()override;
 
-	 void Test();
+	 //ボード上にあるマウス判定の座標を返す
+	 Math::Vector3 BordOnMouse();
+
+	 void PieceCanMoveMassView();
+
 	 enum Phase
 	 {
 		 StartPhase,
-		 CheckPhase,
+		 StandByPhase,
 		 SelectPhase,
 		 SetPhase,
 		 EndPhase,
@@ -39,7 +43,7 @@ public:
 	 {
 		 m_baseObjList.push_back(_obj);
 	 }
-
+	 void SelectPieceUIActive();
 	 void CreateCons();
 	 void DestoryCons();
 private:
@@ -47,9 +51,11 @@ private:
 	std::shared_ptr<Camera_Class>m_camera;
 	std::shared_ptr<BordObject_Class>m_bord;
 
-	std::shared_ptr<SelectingBord_Class>m_selectBord;
+	std::shared_ptr<SelectingBord_Class>m_nowSelectBord;
 	std::shared_ptr<SelectingBord_Class>m_beforeSelectBord;
 	std::shared_ptr<SelectingBord_Class>m_afterSelectBord;
+
+	std::shared_ptr<SelectingBord_Class>m_selectPieceCanMoveBord[16][16];
 
 	std::shared_ptr<PieceSelectingUI_Class>m_pieceSelectUI;
 	std::shared_ptr<SelectingPieceTypeNameUI>m_selectPieceTypeUI;
@@ -82,30 +88,11 @@ private:
 	//ピースのID情報
 	//[x][0] = 白,[x][1] = 黒
 	//キング[0]、クイーン[1]、ビショップ[2][3]、ナイト[4][5]、ルーク[6][7]、ポーン[8][9][10][11][12][13][14][15]の順番で格納すること
-	std::string m_pieceId[16][2];
-	bool m_selectingPieceId[16][2];
-	enum PieceName
-	{
-		King,
-		Queen,
-		Bishop1,
-		Bishop2,
-		Knight1,
-		Knight2,
-		Rook1,
-		Rook2,
-		Pawn1,
-		Pawn2,
-		Pawn3,
-		Pawn4,
-		Pawn5,
-		Pawn6,
-		Pawn7,
-		Pawn8,
-	};
+	
 	FILE* fp;
-
 	int selectBordMode;
 	Math::Vector3 m_beforeSelectPos;
 	Math::Vector3 m_afterSelectPos;
+
+	int waitTime = 0;
 };

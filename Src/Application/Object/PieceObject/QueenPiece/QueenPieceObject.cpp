@@ -13,6 +13,5 @@ void QueenPieceObject_Class::Init()
 		m_pos = { BlackDefaultPosX,0,BlackDefaultPosZ };
 		m_color = kBlackColor;
 	}
-	m_objID = generateRandomID(5);
 	PieceBaseObject_Class::Init();
 }

@@ -6,12 +6,9 @@ void BaseObject_Class::Update()
 
 void BaseObject_Class::Init()
 {
-	m_type = None;
-	fillPass = "";
 	SetAsset(m_type, fillPass);
 	m_scale = Defalut_Scale_Const;
 	m_Alive = true;
-	m_objID = generateRandomID(5);
 }
 
 void BaseObject_Class::DrawLit()
