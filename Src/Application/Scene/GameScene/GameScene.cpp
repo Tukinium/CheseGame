@@ -274,9 +274,46 @@ void GameScene_Class::Update()
 								{
 									str = "Black";
 								}
-								else
+								if(h == 0)
 								{
 									str = "White";
+								}
+								switch (w)
+								{
+								case GameScene_Class::King:
+									break;
+								case GameScene_Class::Queen:
+									break;
+								case GameScene_Class::Bishop1:
+									break;
+								case GameScene_Class::Bishop2:
+									break;
+								case GameScene_Class::Knight1:
+									break;
+								case GameScene_Class::Knight2:
+									break;
+								case GameScene_Class::Rook1:
+									break;
+								case GameScene_Class::Rook2:
+									break;
+								case GameScene_Class::Pawn1:
+									break;
+								case GameScene_Class::Pawn2:
+									break;
+								case GameScene_Class::Pawn3:
+									break;
+								case GameScene_Class::Pawn4:
+									break;
+								case GameScene_Class::Pawn5:
+									break;
+								case GameScene_Class::Pawn6:
+									break;
+								case GameScene_Class::Pawn7:
+									break;
+								case GameScene_Class::Pawn8:
+									break;
+								default:
+									break;
 								}
 							}
 						}
