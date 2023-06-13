@@ -47,19 +47,12 @@ void BaseObject_Class::PreUpdate()
 
 void BaseObject_Class::PostUpdate()
 {
+	//MathMatrix();
 }
 
 void BaseObject_Class::MathMatrix()
 {
-	m_transMat = Math::Matrix::CreateTranslation(m_pos);
-	m_scaleMat = Math::Matrix::CreateScale(m_scale);
-	m_rotateX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(m_rotateVec.x));
-	m_rotateY = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_rotateVec.y));
-	m_rotateZ = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(m_rotateVec.z));
-	m_rotateMat = m_rotateX * m_rotateY * m_rotateZ;
-
-	//çsóÒÇÃçáê¨ = ägèk x âÒì] x à⁄ìÆ
-	m_mWorld = m_scaleMat * m_rotateMat * m_transMat;
+	m_mWorld = Math::Matrix::CreateTranslation(m_pos);
 }
 
 void BaseObject_Class::SetAsset(int _type, std::string _filePass)

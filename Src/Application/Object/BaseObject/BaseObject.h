@@ -18,27 +18,14 @@ public:
 	virtual void PostUpdate()override;
 	virtual void MathMatrix();
 	virtual bool thisPiece() { return false; }
-
-	//入力された桁の乱数を返す
-	std::string generateRandomID(int length) 
+	bool GetfirstMoved()
 	{
-		static const std::string alphanumericChars =
-			"0123456789"
-			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-			"abcdefghijklmnopqrstuvwxyz";
-
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_int_distribution<> dis(0, alphanumericChars.size() - 1);
-
-		std::string result;
-		for (int i = 0; i < length; ++i) {
-			result += alphanumericChars[dis(gen)];
-		}
-		
-		return result;
+		return m_firstMoved;
 	}
-
+	void SetfirstMoved(bool _moved)
+	{
+		m_firstMoved = _moved;
+	}
 	std::string GetId()
 	{
 		return m_id;
@@ -47,7 +34,14 @@ public:
 	{
 		m_id = _id;
 	}
-
+	Math::Vector3 GetPos2()
+	{
+		return m_pos;
+	}
+	void SetPos2(Math::Vector3 _pos)
+	{
+		m_pos = _pos;
+	}
 	// テクスチャ、ポリゴン、モデルいずれかを作成してテクスチャをセットする
 	// 実行と同時にスマートポインタが作成されるため注意
 	// _type  そのモデルのタイプ(Enum ModelType参照)
@@ -73,7 +67,10 @@ public:
 	{
 		m_color = _color;
 	}
-	
+	Math::Color GetColor()
+	{
+		return m_color;
+	}
 
 	enum PieceType
 	{
@@ -119,6 +116,8 @@ protected:
 	Math::Color m_color = kNormalColor;
 
 	Math::Rectangle m_rc;
+
+	bool m_firstMoved = false;
 
 	std::string m_id;
 };

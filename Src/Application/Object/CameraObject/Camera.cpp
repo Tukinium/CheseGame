@@ -36,7 +36,15 @@ void Camera_Class::PreUpdate()
 	default:
 		break;
 	}
-	MathMatrix();
+	m_transMat = Math::Matrix::CreateTranslation(m_pos);
+	m_scaleMat = Math::Matrix::CreateScale(m_scale);
+	m_rotateX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(m_rotateVec.x));
+	m_rotateY = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_rotateVec.y));
+	m_rotateZ = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(m_rotateVec.z));
+	m_rotateMat = m_rotateX * m_rotateY * m_rotateZ;
+
+	//s—ñ‚Ì‡¬ = Šgk x ‰ñ“] x ˆÚ“®
+	m_mWorld = m_scaleMat * m_rotateMat * m_transMat;
 
 	m_cam->SetCameraMatrix(m_mWorld);
 	if (GetAsyncKeyState('D'))

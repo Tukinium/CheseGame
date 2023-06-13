@@ -53,5 +53,4 @@ private:
 
 	const float WhiteDefaultPosX8 = 0.5 - 4;
 	const float WhiteDefaultPosZ8 = 0.5 + 2;
-
 };

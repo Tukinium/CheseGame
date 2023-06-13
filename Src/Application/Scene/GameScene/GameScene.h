@@ -23,27 +23,41 @@ public:
 	 void SetSharedPtr()override;
 	 void Update()override;
 	 void PreUpdate()override;
+	 void PostUpdate()override;
 	 void PreDraw()override;
+
 	 void Release()override;
+
+	 //ピースの再配置
+	 void SetToDefault();
 
 	 //ボード上にあるマウス判定の座標を返す
 	 Math::Vector3 BordOnMouse();
 
+	 //ピース選択中にピースの移動できる位置を表示および定義
 	 void PieceCanMoveMassView();
+
+	 //ピース選択中のUI
+	 void SelectPieceUIActive();
 
 	 enum Phase
 	 {
+		 //ゲーム開始
 		 StartPhase,
+
+		 //プレイヤーターン開始
 		 StandByPhase,
+
+		 //ピース選択
 		 SelectPhase,
+
+		 //ピース配置
 		 SetPhase,
+
+		 //諸々のリザルト
 		 EndPhase,
 	 };
-	 void AddObjList(std::shared_ptr<BaseObject_Class>& _obj)
-	 {
-		 m_baseObjList.push_back(_obj);
-	 }
-	 void SelectPieceUIActive();
+
 	 void CreateCons();
 	 void DestoryCons();
 private:
@@ -84,15 +98,14 @@ private:
 	bool m_selectObject = false;
 	bool meTrun = true;
 	POINT MousePos;
-
-	//ピースのID情報
-	//[x][0] = 白,[x][1] = 黒
-	//キング[0]、クイーン[1]、ビショップ[2][3]、ナイト[4][5]、ルーク[6][7]、ポーン[8][9][10][11][12][13][14][15]の順番で格納すること
+	bool m_pieceMoved;
 	
 	FILE* fp;
 	int selectBordMode;
 	Math::Vector3 m_beforeSelectPos;
 	Math::Vector3 m_afterSelectPos;
 
-	int waitTime = 0;
+	int m_waitTime = 0;
+
+	const int waitTime = 10;
 };

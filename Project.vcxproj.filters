@@ -127,6 +127,9 @@
     <Filter Include="Src\Application\Scene\TitleScene">
       <UniqueIdentifier>{a0b97175-3aa5-4909-9879-8804891ed64d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\ContinueClickUI">
+      <UniqueIdentifier>{e4112c5d-97ba-4033-ae31-70266c780ab0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -309,6 +312,9 @@
     <ClInclude Include="Src\Application\UI\UIBaseObject.h">
       <Filter>Src\Application\Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ContinueClick.h">
+      <Filter>Src\Application\Object\UI\ContinueClickUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -466,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\UI\UIBaseObject.cpp">
       <Filter>Src\Application\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueClick.cpp">
+      <Filter>Src\Application\Object\UI\ContinueClickUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

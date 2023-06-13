@@ -3,7 +3,7 @@
 class QueenPieceObject_Class : public PieceBaseObject_Class
 {
 public:
-
+	void SetDefaultPos(int n)override;
 	void Init()override;
 private:
 	const float BlackDefaultPosX = 0.5 - 0;
