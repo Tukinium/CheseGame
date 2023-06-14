@@ -15,13 +15,13 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Bord"
+			"name":"\u30ca\u30a4\u30c8.001"
 		}
 	],
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"BordMatrial",
+			"name":"KnightBlackMatrial",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -33,7 +33,7 @@
 	],
 	"meshes":[
 		{
-			"name":"\u5e73\u9762.004",
+			"name":"\u5186.016",
 			"primitives":[
 				{
 					"attributes":{
@@ -56,69 +56,69 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"BordTex",
-			"uri":"BordTex.png"
+			"name":"KnightTexBlack",
+			"uri":"KnightTexBlack.png"
 		}
 	],
 	"accessors":[
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":979,
+			"count":516,
 			"max":[
-				4.231714725494385,
-				0.1422046571969986,
-				6.995273113250732
+				0.43404608964920044,
+				1.5078142881393433,
+				0.43404608964920044
 			],
 			"min":[
-				-4.235980987548828,
-				-0.14619868993759155,
-				-6.995273113250732
+				-0.4919723868370056,
+				0,
+				-0.43404608964920044
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":979,
+			"count":516,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":979,
+			"count":516,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":2232,
+			"count":2592,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":11748,
+			"byteLength":6192,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":7832,
-			"byteOffset":11748,
+			"byteLength":4128,
+			"byteOffset":6192,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":11748,
-			"byteOffset":19580,
+			"byteLength":6192,
+			"byteOffset":10320,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":4464,
-			"byteOffset":31328,
+			"byteLength":5184,
+			"byteOffset":16512,
 			"target":34963
 		}
 	],
@@ -130,8 +130,8 @@
 	],
 	"buffers":[
 		{
-			"byteLength":35792,
-			"uri":"Bord.bin"
+			"byteLength":21696,
+			"uri":"Knight.bin"
 		}
 	]
 }

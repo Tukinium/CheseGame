@@ -40,21 +40,25 @@ void GameScene_Class::SetSharedPtr()
 	if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
 	m_kingWhite->SetColor(kWhiteColor);
 	m_kingWhite->SetId("KingWhite");
+	m_kingWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/King/King.gltf");
 	m_baseObjList.push_back(m_kingWhite);
 
 	if (!m_kingBlack)m_kingBlack = std::make_shared<KingPieceObject_Class>();
 	m_kingBlack->SetColor(kBlackColor);
 	m_kingBlack->SetId("KingBlack");
+	m_kingBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/King/King.gltf");
 	m_baseObjList.push_back(m_kingBlack);
 
 	if (!m_queenWhite)m_queenWhite = std::make_shared<QueenPieceObject_Class>();
 	m_queenWhite->SetColor(kWhiteColor);
 	m_queenWhite->SetId("QueenWhite");
+	m_queenWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Queen/Queen.gltf");
 	m_baseObjList.push_back(m_queenWhite);
 
 	if (!m_queenBlack)m_queenBlack = std::make_shared<QueenPieceObject_Class>();
 	m_queenBlack->SetColor(kBlackColor);
 	m_queenBlack->SetId("QueenBlack");
+	m_queenBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Queen/Queen.gltf");
 	m_baseObjList.push_back(m_queenBlack);
 
 	if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
@@ -92,6 +96,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_pawnWhite[n])m_pawnWhite[n] = std::make_shared<PawnPieceObject_Class>();
 		m_pawnWhite[n]->SetColor(kWhiteColor);
 		m_pawnWhite[n]->SetId(str);
+		m_pawnWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Pawn/Pawn.gltf");
 		m_baseObjList.push_back(m_pawnWhite[n]);
 
 		str = "PawnBlack";
@@ -99,6 +104,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_pawnBlack[n])m_pawnBlack[n] = std::make_shared<PawnPieceObject_Class>();
 		m_pawnBlack[n]->SetColor(kBlackColor);
 		m_pawnBlack[n]->SetId(str);
+		m_pawnBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Pawn/Pawn.gltf");
 		m_baseObjList.push_back(m_pawnBlack[n]);
 	}
 
@@ -110,6 +116,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_rookWhite[n])m_rookWhite[n] = std::make_shared<RookPieceObject_Class>();
 		m_rookWhite[n]->SetColor(kWhiteColor);
 		m_rookWhite[n]->SetId(str);
+		m_rookWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Rook/Rook.gltf");
 		m_baseObjList.push_back(m_rookWhite[n]);
 
 		str2 = std::to_string(n);
@@ -118,6 +125,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_rookBlack[n])m_rookBlack[n] = std::make_shared<RookPieceObject_Class>();
 		m_rookBlack[n]->SetColor(kBlackColor);
 		m_rookBlack[n]->SetId(str);
+		m_rookBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Rook/Rook.gltf");
 		m_baseObjList.push_back(m_rookBlack[n]);
 
 	}
@@ -130,6 +138,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_knightWhite[n])m_knightWhite[n] = std::make_shared<KnightPieceObject_Class>();
 		m_knightWhite[n]->SetColor(kWhiteColor);
 		m_knightWhite[n]->SetId(str);
+		m_knightWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Knight/Knight.gltf");
 		m_baseObjList.push_back(m_knightWhite[n]);
 
 		str2 = std::to_string(n);
@@ -138,6 +147,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_knightBlack[n])m_knightBlack[n] = std::make_shared<KnightPieceObject_Class>();
 		m_knightBlack[n]->SetColor(kBlackColor);
 		m_knightBlack[n]->SetId(str);
+		m_knightBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Knight/Knight.gltf");
 		m_baseObjList.push_back(m_knightBlack[n]);
 
 	}
@@ -150,6 +160,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_bishopWhite[n])m_bishopWhite[n] = std::make_shared<BishopPieceObject_Class>();
 		m_bishopWhite[n]->SetColor(kWhiteColor);
 		m_bishopWhite[n]->SetId(str);
+		m_bishopWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Bishop/Bishop.gltf");
 		m_baseObjList.push_back(m_bishopWhite[n]);
 
 		str2 = std::to_string(n);
@@ -158,6 +169,7 @@ void GameScene_Class::SetSharedPtr()
 		if (!m_bishopBlack[n])m_bishopBlack[n] = std::make_shared<BishopPieceObject_Class>();
 		m_bishopBlack[n]->SetColor(kBlackColor);
 		m_bishopBlack[n]->SetId(str);
+		m_bishopBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Bishop/Bishop.gltf");
 		m_baseObjList.push_back(m_bishopBlack[n]);
 
 	}
@@ -256,7 +268,7 @@ void GameScene_Class::Update()
 			}
 			case GameScene_Class::SetPhase:
 			{
-				if (obj->thisPiece())
+				if (obj->thisPiece() && obj->GetColor() == kBlackColor)
 				{
 
 					if (0.5f > Math::Vector3::Distance(m_beforeSelectPos, obj->GetPos2()))
@@ -303,8 +315,10 @@ void GameScene_Class::Update()
 		case GameScene_Class::Enemy:
 		{
 
+			break;
 		}
-
+		default:
+			break;
 		}
 	}
 	if (m_waitTime >= 0)
@@ -555,23 +569,25 @@ void GameScene_Class::PieceCanMoveMassView()
 						m_selectPieceCanMoveBord[0][1]->SetPos({ m_beforeSelectPos.x + 1,m_beforeSelectPos.y,m_beforeSelectPos.z + 2, });
 						m_selectPieceCanMoveBord[0][1]->SetAlive(true);
 
-						m_selectPieceCanMoveBord[0][2]->SetPos({ m_beforeSelectPos.x - 1,m_beforeSelectPos.y,m_beforeSelectPos.z - 2, });
+						m_selectPieceCanMoveBord[0][2]->SetPos({ m_beforeSelectPos.x - 2,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, });
 						m_selectPieceCanMoveBord[0][2]->SetAlive(true);
 
-						m_selectPieceCanMoveBord[0][3]->SetPos({ m_beforeSelectPos.x - 2,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, });
+						m_selectPieceCanMoveBord[0][3]->SetPos({ m_beforeSelectPos.x - 1,m_beforeSelectPos.y,m_beforeSelectPos.z - 2, });
 						m_selectPieceCanMoveBord[0][3]->SetAlive(true);
 
-						m_selectPieceCanMoveBord[1][0]->SetPos({ m_beforeSelectPos.x + 2,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, });
+						
+						m_selectPieceCanMoveBord[1][0]->SetPos({ m_beforeSelectPos.x - 2,m_beforeSelectPos.y,m_beforeSelectPos.z + 1, });
 						m_selectPieceCanMoveBord[1][0]->SetAlive(true);
 
-						m_selectPieceCanMoveBord[1][1]->SetPos({ m_beforeSelectPos.x + 1,m_beforeSelectPos.y,m_beforeSelectPos.z - 2, });
+						m_selectPieceCanMoveBord[1][1]->SetPos({ m_beforeSelectPos.x - 1,m_beforeSelectPos.y,m_beforeSelectPos.z  +2, });
 						m_selectPieceCanMoveBord[1][1]->SetAlive(true);
 
-						m_selectPieceCanMoveBord[1][2]->SetPos({ m_beforeSelectPos.x + 1,m_beforeSelectPos.y,m_beforeSelectPos.z - 2, });
+						m_selectPieceCanMoveBord[1][2]->SetPos({ m_beforeSelectPos.x + 2,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, });
 						m_selectPieceCanMoveBord[1][2]->SetAlive(true);
 
-						m_selectPieceCanMoveBord[1][3]->SetPos({ m_beforeSelectPos.x + 2,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, });
+						m_selectPieceCanMoveBord[1][3]->SetPos({ m_beforeSelectPos.x + 1,m_beforeSelectPos.y,m_beforeSelectPos.z - 2, });
 						m_selectPieceCanMoveBord[1][3]->SetAlive(true);
+						
 					}
 				}
 				for (int h = 0; h < 16; h++)
