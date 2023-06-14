@@ -58,6 +58,12 @@ public:
 		 EndPhase,
 	 };
 
+	 enum Turn
+	 {
+		 Player,
+		 Enemy,
+	 };
+
 	 void CreateCons();
 	 void DestoryCons();
 private:
@@ -96,7 +102,7 @@ private:
 
 	Math::Vector3 selectPos;
 	bool m_selectObject = false;
-	bool meTrun = true;
+	bool m_Trun = true;
 	POINT MousePos;
 	bool m_pieceMoved;
 	

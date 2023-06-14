@@ -21,6 +21,7 @@ void GameScene_Class::Init()
 	{
 		obj->Init();
 	}
+	m_Trun = Player;
 	SetToDefault();
 }
 
@@ -179,109 +180,140 @@ void GameScene_Class::Update()
 {
 	GetCursorPos(&MousePos);
 	m_camera->setCamViewMode(m_camera->UpperCamMode);
+	BordOnMouse();
 	PieceCanMoveMassView();
 	SelectPieceUIActive();
-	m_nowSelectBord->SetAlive(true);
-	m_nowSelectBord->SetPos(BordOnMouse());
-	BordOnMouse();
 
 	for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
 	{
-
-		switch (m_Phase)
+		switch (m_Trun)
 		{
-		case GameScene_Class::StartPhase:
+		case GameScene_Class::Player:
 		{
-			if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+			switch (m_Phase)
 			{
-				m_Phase = StandByPhase;
-				std::cout << "StartPhaseEnd" << std::endl;
-				m_waitTime = waitTime;
-			}
-			break;
-		}
-		case GameScene_Class::StandByPhase:
-		{
-			if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+			case GameScene_Class::StartPhase:
 			{
-				if (obj->thisPiece())
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
-					if (0.5f > (Math::Vector3::Distance(obj->GetPos2(), BordOnMouse())))
+					m_Phase = StandByPhase;
+					std::cout << "StartPhaseEnd" << std::endl;
+					m_waitTime = waitTime;
+				}
+				break;
+			}
+			case GameScene_Class::StandByPhase:
+			{
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+				{
+					if (obj->thisPiece() && obj->GetColor() == kBlackColor)
 					{
-						m_beforeSelectPos = BordOnMouse();
-						m_selectObject = true;
-						m_Phase = SelectPhase;
-						std::cout << "StandByPhaseEnd" << std::endl;
-						m_waitTime = waitTime;
+						if (0.5f > (Math::Vector3::Distance(obj->GetPos2(), BordOnMouse())))
+						{
+							m_beforeSelectPos = BordOnMouse();
+							m_selectObject = true;
+							m_Phase = SelectPhase;
+							std::cout << "StandByPhaseEnd" << std::endl;
+							m_waitTime = waitTime;
+						}
+					}
+					if (!(obj->thisPiece()) && m_selectObject)
+					{
+						m_selectObject = false;
 					}
 				}
-				if (!(obj->thisPiece()) && m_selectObject)
-				{
-					m_selectObject = false;
-				}
+				break;
 			}
-			break;
-		}
-		case GameScene_Class::SelectPhase:
-		{
-			if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+			case GameScene_Class::SelectPhase:
 			{
-				for (int h = 0; h < 16; h++)
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
-					for (int w = 0; w < 16; w++)
+					for (int h = 0; h < 16; h++)
 					{
-						if (0.5f > (Math::Vector3::Distance(m_selectPieceCanMoveBord[h][w]->GetPos(), BordOnMouse())))
+						for (int w = 0; w < 16; w++)
 						{
-							if (m_selectPieceCanMoveBord[h][w]->GetAlive())
+							if (0.5f > (Math::Vector3::Distance(m_selectPieceCanMoveBord[h][w]->GetPos(), BordOnMouse())))
 							{
-								m_selectObject = true;
-								m_afterSelectPos = BordOnMouse();
-								m_Phase = SetPhase;
-								m_waitTime = waitTime;
+								if (m_selectPieceCanMoveBord[h][w]->GetAlive())
+								{
+									m_selectObject = true;
+									m_afterSelectPos = BordOnMouse();
+
+									m_Phase = SetPhase;
+									m_waitTime = waitTime;
+								}
 							}
+							
 						}
 					}
 				}
-			}
-			break;
-		}
-		case GameScene_Class::SetPhase:
-		{
-			if (obj->thisPiece())
-			{
-				if (0.5f > Math::Vector3::Distance(m_beforeSelectPos, obj->GetPos2()))
+				if (GetAsyncKeyState(VK_RBUTTON))
 				{
-					obj->SetPos2(m_afterSelectPos);
 					m_selectObject = false;
-					m_Phase = EndPhase;
-					m_waitTime = waitTime;
+					m_Phase = StandByPhase;
 				}
+				break;
 			}
-			break;
-		}
-		case GameScene_Class::EndPhase:
-		{
-			if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+			case GameScene_Class::SetPhase:
 			{
-				m_Phase = StandByPhase;
-				m_waitTime = waitTime;
+				if (obj->thisPiece())
+				{
+
+					if (0.5f > Math::Vector3::Distance(m_beforeSelectPos, obj->GetPos2()))
+					{
+						obj->SetPos2(m_afterSelectPos);
+
+
+						std::string pieceType = obj->GetId().substr(0, 4);
+						if (pieceType == "Pawn")
+						{
+							if (!obj->GetfirstMoved())
+							{
+
+								obj->SetfirstMoved(true);
+
+							}
+						}
+
+						m_selectObject = false;
+						m_Phase = EndPhase;
+						m_waitTime = waitTime;
+					}
+				}
+				break;
+			}
+			case GameScene_Class::EndPhase:
+			{
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+				{
+					m_Phase = StandByPhase;
+					m_waitTime = waitTime;
+					//m_Trun = Enemy;
+				}
+
+
+				break;
+			}
+			default:
+				break;
 			}
 
-
 			break;
 		}
-		default:
-			break;
+		case GameScene_Class::Enemy:
+		{
+
 		}
 
+		}
 	}
-
 	if (m_waitTime >= 0)
 	{
 		m_waitTime--;
 	}
 
 	BaseScene_Class::Update();
+
 }
 
 void GameScene_Class::PreUpdate()
@@ -465,6 +497,25 @@ void GameScene_Class::PieceCanMoveMassView()
 								}
 							}
 						}
+						else
+						{
+							if (obj->GetColor() == kBlackColor)
+							{
+
+								Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z + 1 , };
+								m_selectPieceCanMoveBord[1][0]->SetPos(SetPos);
+								m_selectPieceCanMoveBord[1][0]->SetAlive(true);
+
+							}
+							if (obj->GetColor() == kWhiteColor)
+							{
+
+								Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, };
+								m_selectPieceCanMoveBord[1][0]->SetPos(SetPos);
+								m_selectPieceCanMoveBord[1][0]->SetAlive(true);
+
+							}
+						}
 					}
 					if (pieceType == "Rook")
 					{
@@ -523,6 +574,16 @@ void GameScene_Class::PieceCanMoveMassView()
 						m_selectPieceCanMoveBord[1][3]->SetAlive(true);
 					}
 				}
+				for (int h = 0; h < 16; h++)
+				{
+					for (int w = 0; w < 16; w++)
+					{
+						if (0.5f > Math::Vector3::Distance(obj->GetPos(), m_selectPieceCanMoveBord[h][w]->GetPos()))
+						{
+							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -530,6 +591,8 @@ void GameScene_Class::PieceCanMoveMassView()
 
 void GameScene_Class::SelectPieceUIActive()
 {
+	m_nowSelectBord->SetAlive(true);
+	m_nowSelectBord->SetPos(BordOnMouse());
 	if (m_selectObject)
 	{
 		m_beforeSelectBord->SetPos(m_beforeSelectPos);
