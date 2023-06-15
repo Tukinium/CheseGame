@@ -41,7 +41,7 @@ public:
 	{
 		const Math::Vector3 m_pos = { 0,10,0 };
 		const float m_scale = 1.0f;
-		const Math::Vector3 m_rotateVec = { 90,0,0 };
+		const Math::Vector3 m_rotateVec = { 90,180,0 };
 	};
 	struct UpperCamModeCam upperCamModeCam;
 

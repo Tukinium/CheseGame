@@ -31,6 +31,26 @@ public:
 	 //ピースの再配置
 	 void SetToDefault();
 
+	 float fRandom(float min, float max)
+	 {
+		 std::random_device rand;
+		 std::mt19937 gen(rand());
+		 std::uniform_real_distribution<>dis(min, max);
+		 int r = dis(gen);
+		 return r;
+	 }
+
+	 int iRandom(int min, int max)
+	 {
+		 std::random_device rand;
+		 std::mt19937 gen(rand());
+		 std::uniform_int_distribution<>dis(min, max);
+		 int r = dis(gen);
+		 return r;
+	 }
+
+	 void CheseAI();
+
 	 //ボード上にあるマウス判定の座標を返す
 	 Math::Vector3 BordOnMouse();
 
@@ -63,6 +83,7 @@ public:
 		 Player,
 		 Enemy,
 	 };
+	 int m_FirstTurn;
 
 	 void CreateCons();
 	 void DestoryCons();
@@ -76,7 +97,7 @@ private:
 	std::shared_ptr<SelectingBord_Class>m_afterSelectBord;
 
 	std::shared_ptr<SelectingBord_Class>m_selectPieceCanMoveBord[16][16];
-
+	
 	std::shared_ptr<PieceSelectingUI_Class>m_pieceSelectUI;
 	std::shared_ptr<SelectingPieceTypeNameUI>m_selectPieceTypeUI;
 
@@ -114,4 +135,15 @@ private:
 	int m_waitTime = 0;
 
 	const int waitTime = 10;
+
+	enum PieceType
+	{
+		Pawn,
+		Knight,
+		Bishop,
+		Rook,
+		Queen,
+		King,
+	};
+	float m_aiScore;
 };
