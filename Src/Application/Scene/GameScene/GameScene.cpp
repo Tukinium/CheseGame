@@ -250,7 +250,7 @@ void GameScene_Class::Update()
 									m_canMoveBordInfo[h][w] = obj->CanMoveBordInfo(h, w);
 									printf("%d", m_canMoveBordInfo[h][w]);
 								}
-								("\n");
+								
 							}
 							m_beforeSelectPos = BordOnMouse();
 							m_selectObject = true;
