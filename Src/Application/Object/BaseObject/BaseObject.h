@@ -74,9 +74,9 @@ public:
 
 	enum PieceType
 	{
-		Pawn = 0,
+		WhitePawn = 0,
 		Bishop,
-		Knight,
+		WhiteKnight,
 		Rook,
 		Queen,
 		King,

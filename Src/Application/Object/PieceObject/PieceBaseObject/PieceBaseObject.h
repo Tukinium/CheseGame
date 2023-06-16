@@ -8,6 +8,5 @@ public:
 	virtual void SetDefaultPos(int n) {}
 	virtual void DrawLit()override;
 	virtual void Init()override;
-
 protected:
 };

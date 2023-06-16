@@ -22,7 +22,7 @@ void GameScene_Class::Init()
 		obj->Init();
 	}
 	m_Trun = Player;
-	SetToDefault();
+	PieceSetDefalut();
 }
 
 void GameScene_Class::SetSharedPtr()
@@ -296,6 +296,16 @@ void GameScene_Class::Update()
 			}
 			case GameScene_Class::EndPhase:
 			{
+				if (obj->thisPiece() && obj->GetColor() == kBlackColor)
+				{
+					if (0.5f > Math::Vector3::Distance(m_afterSelectPos, obj->GetPos()))
+					{
+						obj->SetAlive(false);
+						m_waitTime = waitTime;
+						m_Phase = StartPhase;
+						m_Trun = Enemy;
+					}
+				}
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
 					m_Phase = StandByPhase;
@@ -458,25 +468,37 @@ void GameScene_Class::Release()
 	DestoryCons();
 }
 
-void GameScene_Class::SetToDefault()
+void GameScene_Class::PieceSetDefalut()
 {
 	m_kingBlack->SetDefaultPos(0);
+	m_kingBlack->SetAlive(true);
 	m_kingWhite->SetDefaultPos(0);
+	m_kingWhite->SetAlive(true);
 	m_queenBlack->SetDefaultPos(0);
+	m_queenBlack->SetAlive(true);
 	m_queenWhite->SetDefaultPos(0);
+	m_queenWhite->SetAlive(true);
 	for (int n = 0; n < 8; n++)
 	{
 		m_pawnWhite[n]->SetDefaultPos(n);
+		m_pawnBlack[n]->SetAlive(true);
 		m_pawnBlack[n]->SetDefaultPos(n);
+		m_pawnWhite[n]->SetAlive(true);
 	}
 	for (int n = 0; n < 2; n++)
 	{
 		m_bishopWhite[n]->SetDefaultPos(n);
+		m_bishopWhite[n]->SetAlive(true);
 		m_bishopBlack[n]->SetDefaultPos(n);
+		m_bishopBlack[n]->SetAlive(true);
 		m_knightBlack[n]->SetDefaultPos(n);
+		m_knightBlack[n]->SetAlive(true);
 		m_knightWhite[n]->SetDefaultPos(n);
+		m_knightWhite[n]->SetAlive(true);
 		m_rookBlack[n]->SetDefaultPos(n);
+		m_rookBlack[n]->SetAlive(true);
 		m_rookWhite[n]->SetDefaultPos(n);
+		m_rookWhite[n]->SetAlive(true);
 	}
 }
 
@@ -505,7 +527,7 @@ void GameScene_Class::CheseAI()
 		{
 			std::string pieceType;
 			pieceType = obj->GetId().substr(0, 4);
-			
+
 			if (pieceType == "King")
 			{
 
@@ -529,17 +551,6 @@ void GameScene_Class::CheseAI()
 			if (pieceType == "Knig")
 			{
 
-			}
-
-			for (int h = 0; h < 16; h++)
-			{
-				for (int w = 0; w < 16; w++)
-				{
-					if (0.5f > Math::Vector3::Distance(obj->GetPos(), m_selectPieceCanMoveBord[h][w]->GetPos()))
-					{
-						m_selectPieceCanMoveBord[h][w]->SetAlive(false);
-					}
-				}
 			}
 		}
 	}
@@ -594,6 +605,7 @@ Math::Vector3 GameScene_Class::BordOnMouse()
 	return { 12345,12345,12345 };
 }
 
+
 void GameScene_Class::PieceCanMoveMassView()
 {
 	std::string pieceType;
@@ -606,6 +618,7 @@ void GameScene_Class::PieceCanMoveMassView()
 			{
 				if (0.05f > Math::Vector3::Distance(obj->GetPos(), m_beforeSelectPos))
 				{
+					//各ピース毎に移動できる範囲の定義
 					pieceType = obj->GetId().substr(0, 4);
 					if (pieceType == "King")
 					{
@@ -768,9 +781,30 @@ void GameScene_Class::PieceCanMoveMassView()
 				{
 					for (int w = 0; w < 16; w++)
 					{
+						//移動可能先に味方ピースがある場合除外
 						if (0.5f > Math::Vector3::Distance(obj->GetPos(), m_selectPieceCanMoveBord[h][w]->GetPos()))
 						{
-							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+							switch (m_Trun)
+							{
+							case Player:
+							{
+								if (obj->GetColor() == kWhiteColor)
+								{
+									m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+								}
+								break;
+							}
+							case Enemy:
+							{
+								if (obj->GetColor() == kBlackColor)
+								{
+									m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+								}
+								break;
+							}
+							default:
+								break;
+							}
 						}
 					}
 				}

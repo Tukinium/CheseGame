@@ -29,7 +29,7 @@ public:
 	 void Release()override;
 
 	 //ピースの再配置
-	 void SetToDefault();
+	 void PieceSetDefalut();
 
 	 float fRandom(float min, float max)
 	 {
@@ -123,9 +123,8 @@ private:
 
 	Math::Vector3 selectPos;
 	bool m_selectObject = false;
-	bool m_Trun = true;
+	int m_Trun = Player;
 	POINT MousePos;
-	bool m_pieceMoved;
 	
 	FILE* fp;
 	int selectBordMode;
@@ -135,15 +134,33 @@ private:
 	int m_waitTime = 0;
 
 	const int waitTime = 10;
-
-	enum PieceType
-	{
-		Pawn,
-		Knight,
-		Bishop,
-		Rook,
-		Queen,
-		King,
-	};
 	float m_aiScore;
+
+	enum PiceType
+	{
+		None,
+		WhitePawn,  //1
+		WhiteKnight,//2
+		WhiteRook,  //3
+		WhiteBishop,//4
+		WhiteQueen, //5
+		WhiteKing,  //6
+		BlackPawn,  //7
+		BlackKnight,//8
+		BlackRook,  //9
+		BlackBishop,//10
+		BlackQueen,//11
+		BlackKing,//12
+	};
+	int m_bordInfo[8][8] =
+	{
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	};
 };
