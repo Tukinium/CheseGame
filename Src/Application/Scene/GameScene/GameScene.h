@@ -29,7 +29,7 @@ public:
 	 void Release()override;
 
 	 //ピースの再配置
-	 void PieceSetDefalut();
+	 void PieceSet();
 
 	 float fRandom(float min, float max)
 	 {
@@ -53,9 +53,6 @@ public:
 
 	 //ボード上にあるマウス判定の座標を返す
 	 Math::Vector3 BordOnMouse();
-
-	 //ピース選択中にピースの移動できる位置を表示および定義
-	 void PieceCanMoveMassView();
 
 	 //ピース選択中のUI
 	 void SelectPieceUIActive();
@@ -96,7 +93,7 @@ private:
 	std::shared_ptr<SelectingBord_Class>m_beforeSelectBord;
 	std::shared_ptr<SelectingBord_Class>m_afterSelectBord;
 
-	std::shared_ptr<SelectingBord_Class>m_selectPieceCanMoveBord[16][16];
+	std::shared_ptr<SelectingBord_Class>m_selectPieceCanMoveBord[8][8];
 	
 	std::shared_ptr<PieceSelectingUI_Class>m_pieceSelectUI;
 	std::shared_ptr<SelectingPieceTypeNameUI>m_selectPieceTypeUI;
@@ -139,18 +136,38 @@ private:
 	enum PiceType
 	{
 		None,
-		WhitePawn,  //1
-		WhiteKnight,//2
-		WhiteRook,  //3
-		WhiteBishop,//4
-		WhiteQueen, //5
-		WhiteKing,  //6
-		BlackPawn,  //7
-		BlackKnight,//8
-		BlackRook,  //9
-		BlackBishop,//10
-		BlackQueen,//11
-		BlackKing,//12
+		WhitePawn,  
+		WhitePawn1,  
+		WhitePawn2,  
+		WhitePawn3,  
+		WhitePawn4,  
+		WhitePawn5,  
+		WhitePawn6,  
+		WhitePawn7,  
+		WhiteKnight,
+		WhiteKnight1,
+		WhiteRook,  
+		WhiteRook1,
+		WhiteBishop,
+		WhiteBishop1,
+		WhiteQueen, 
+		WhiteKing,  
+		BlackPawn,
+		BlackPawn1,
+		BlackPawn2,
+		BlackPawn3,
+		BlackPawn4,
+		BlackPawn5,
+		BlackPawn6,
+		BlackPawn7,
+		BlackKnight,
+		BlackKnight1,
+		BlackRook,
+		BlackRook1,
+		BlackBishop,
+		BlackBishop1,
+		BlackQueen,
+		BlackKing,
 	};
 	int m_bordInfo[8][8] =
 	{
@@ -163,4 +180,33 @@ private:
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 	};
+	int m_canMoveBordInfo[8][8] =
+	{
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	};
+	int NORMAL_RULE_BORD[8][8] =
+	{
+		BlackPawn,BlackPawn1,BlackPawn2,BlackPawn3,BlackPawn4,BlackPawn5,BlackPawn6,BlackPawn7,
+		BlackRook,BlackKnight,BlackBishop,BlackQueen,BlackKing,BlackBishop1,BlackKnight1,BlackRook1,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		WhitePawn,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7,
+		WhiteRook,WhiteKnight,WhiteBishop,WhiteQueen,WhiteKing,WhiteBishop1,WhiteKnight1,WhiteRook1,
+	};
+
+public:
+	static GameScene_Class& instance()
+	{
+		static GameScene_Class instance;
+		return instance;
+	}
 };

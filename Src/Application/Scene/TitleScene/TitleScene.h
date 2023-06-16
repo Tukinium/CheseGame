@@ -16,4 +16,10 @@ public:
 	}
 private:
 	bool m_nowScene;
+
+	static TitleScene_Class& instance()
+	{
+		static TitleScene_Class instance;
+		return instance;
+	}
 };

@@ -18,6 +18,7 @@ public:
 	virtual void PostUpdate()override;
 	virtual void MathMatrix();
 	virtual bool thisPiece() { return false; }
+	virtual int CanMoveBordInfo(int h, int w) { return 0; };
 	bool GetfirstMoved()
 	{
 		return m_firstMoved;
@@ -41,6 +42,10 @@ public:
 	void SetPos2(Math::Vector3 _pos)
 	{
 		m_pos = _pos;
+	}
+	void SetBordInfo(int h, int w, int _num)
+	{
+		m_canMoveBordInfo[h][w] = _num;
 	}
 	// テクスチャ、ポリゴン、モデルいずれかを作成してテクスチャをセットする
 	// 実行と同時にスマートポインタが作成されるため注意
@@ -81,9 +86,25 @@ public:
 		Queen,
 		King,
 	};
-
+	enum Bord
+	{
+		Enpty,
+		Me,
+		CanMove,
+	};
 
 protected:
+	int m_canMoveBordInfo[8][8] =
+	{
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	};
 	const float Defalut_Scale_Const = 1.0f;
 
 	Math::Matrix m_transMat = Math::Matrix::Identity;

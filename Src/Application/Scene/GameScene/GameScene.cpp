@@ -22,7 +22,15 @@ void GameScene_Class::Init()
 		obj->Init();
 	}
 	m_Trun = Player;
-	PieceSetDefalut();
+
+	for (int h = 0; h < 8; h++)
+	{
+		for (int w = 0; w < 8; w++)
+		{
+			m_bordInfo[h][w] = NORMAL_RULE_BORD[h][w];
+		}
+	}
+	PieceSet();
 }
 
 void GameScene_Class::SetSharedPtr()
@@ -174,9 +182,9 @@ void GameScene_Class::SetSharedPtr()
 
 	}
 
-	for (int h = 0; h < 16; h++)
+	for (int h = 0; h < 8; h++)
 	{
-		for (int w = 0; w < 16; w++)
+		for (int w = 0; w < 8; w++)
 		{
 			Math::Vector3 massPos = { h * 1.0f - 3.5f,0.01f,w * 1.0f - 3.5f };
 			if (!m_selectPieceCanMoveBord[h][w])m_selectPieceCanMoveBord[h][w] = std::make_shared<SelectingBord_Class>();
@@ -190,10 +198,10 @@ void GameScene_Class::SetSharedPtr()
 
 void GameScene_Class::Update()
 {
+	PieceSet();
 	GetCursorPos(&MousePos);
 	m_camera->setCamViewMode(m_camera->UpperCamMode);
 	BordOnMouse();
-	PieceCanMoveMassView();
 	SelectPieceUIActive();
 
 	for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
@@ -208,6 +216,8 @@ void GameScene_Class::Update()
 			{
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
+					m_beforeSelectPos = { 12345,12345,12345 };
+					m_afterSelectPos = { 12345,12345,12345 };
 					m_Phase = StandByPhase;
 					std::cout << "StartPhaseEnd" << std::endl;
 					m_waitTime = waitTime;
@@ -216,12 +226,32 @@ void GameScene_Class::Update()
 			}
 			case GameScene_Class::StandByPhase:
 			{
+
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
+					
 					if (obj->thisPiece() && obj->GetColor() == kWhiteColor)
 					{
-						if (0.5f > (Math::Vector3::Distance(obj->GetPos2(), BordOnMouse())))
+						if (0.5f > (Math::Vector3::Distance(obj->GetPos(), BordOnMouse())))
 						{
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
+									//クリックしたオブジェクトに現在の盤面状況を渡す
+									//obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+								}
+							}
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
+									//オブジェクトから動ける範囲が配列で返却される
+									m_canMoveBordInfo[h][w] = obj->CanMoveBordInfo(h, w);
+									printf("%d", m_canMoveBordInfo[h][w]);
+								}
+								("\n");
+							}
 							m_beforeSelectPos = BordOnMouse();
 							m_selectObject = true;
 							m_Phase = SelectPhase;
@@ -229,35 +259,26 @@ void GameScene_Class::Update()
 							m_waitTime = waitTime;
 						}
 					}
-					if (!(obj->thisPiece()) && m_selectObject)
-					{
-						m_selectObject = false;
-					}
 				}
 				break;
 			}
 			case GameScene_Class::SelectPhase:
 			{
-				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+				for (int h = 0; h < 8; h++)
 				{
-					for (int h = 0; h < 16; h++)
+					for (int w = 0; w < 8; w++)
 					{
-						for (int w = 0; w < 16; w++)
+						//渡された情報から動ける範囲を可視化
+						Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+						if (m_canMoveBordInfo[h][w] = BaseObject_Class::CanMove)
 						{
-							if (0.5f > (Math::Vector3::Distance(m_selectPieceCanMoveBord[h][w]->GetPos(), BordOnMouse())))
-							{
-								if (m_selectPieceCanMoveBord[h][w]->GetAlive())
-								{
-									m_selectObject = true;
-									m_afterSelectPos = BordOnMouse();
-
-									m_Phase = SetPhase;
-									m_waitTime = waitTime;
-								}
-							}
-
+							m_selectPieceCanMoveBord[h][w]->SetAlive(true);
+							m_selectPieceCanMoveBord[h][w]->SetPos(massPos);
 						}
 					}
+				}
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+				{
 				}
 				if (GetAsyncKeyState(VK_RBUTTON))
 				{
@@ -268,52 +289,10 @@ void GameScene_Class::Update()
 			}
 			case GameScene_Class::SetPhase:
 			{
-				if (obj->thisPiece() && obj->GetColor() == kWhiteColor)
-				{
-
-					if (0.5f > Math::Vector3::Distance(m_beforeSelectPos, obj->GetPos2()))
-					{
-						obj->SetPos2(m_afterSelectPos);
-
-
-						std::string pieceType = obj->GetId().substr(0, 4);
-						if (pieceType == "Pawn")
-						{
-							if (!obj->GetfirstMoved())
-							{
-
-								obj->SetfirstMoved(true);
-
-							}
-						}
-
-						m_selectObject = false;
-						m_Phase = EndPhase;
-						m_waitTime = waitTime;
-					}
-				}
 				break;
 			}
 			case GameScene_Class::EndPhase:
 			{
-				if (obj->thisPiece() && obj->GetColor() == kBlackColor)
-				{
-					if (0.5f > Math::Vector3::Distance(m_afterSelectPos, obj->GetPos()))
-					{
-						obj->SetAlive(false);
-						m_waitTime = waitTime;
-						m_Phase = StartPhase;
-						m_Trun = Enemy;
-					}
-				}
-				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
-				{
-					m_Phase = StandByPhase;
-					m_waitTime = waitTime;
-					m_Trun = Enemy;
-				}
-
-
 				break;
 			}
 			default:
@@ -323,126 +302,16 @@ void GameScene_Class::Update()
 			break;
 		}
 
-		case GameScene_Class::Enemy:
-		{
-			switch (m_Phase)
-			{
-			case GameScene_Class::StartPhase:
-			{
-
-				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
-				{
-					m_Phase = StandByPhase;
-					std::cout << "StartPhaseEnd" << std::endl;
-					m_waitTime = waitTime;
-				}
-				break;
-			}
-			case GameScene_Class::StandByPhase:
-			{
-				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
-				{
-					if (obj->thisPiece() && obj->GetColor() == kBlackColor)
-					{
-						if (0.5f > (Math::Vector3::Distance(obj->GetPos2(), BordOnMouse())))
-						{
-							m_beforeSelectPos = BordOnMouse();
-							m_selectObject = true;
-							m_Phase = SelectPhase;
-							std::cout << "StandByPhaseEnd" << std::endl;
-							m_waitTime = waitTime;
-						}
-					}
-					if (!(obj->thisPiece()) && m_selectObject)
-					{
-						m_selectObject = false;
-					}
-				}
-				break;
-			}
-			case GameScene_Class::SelectPhase:
-			{
-				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
-				{
-					for (int h = 0; h < 16; h++)
-					{
-						for (int w = 0; w < 16; w++)
-						{
-							if (0.5f > (Math::Vector3::Distance(m_selectPieceCanMoveBord[h][w]->GetPos(), BordOnMouse())))
-							{
-								if (m_selectPieceCanMoveBord[h][w]->GetAlive())
-								{
-									m_selectObject = true;
-									m_afterSelectPos = BordOnMouse();
-
-									m_Phase = SetPhase;
-									m_waitTime = waitTime;
-								}
-							}
-
-						}
-					}
-				}
-				if (GetAsyncKeyState(VK_RBUTTON))
-				{
-					m_selectObject = false;
-					m_Phase = StandByPhase;
-				}
-				break;
-			}
-			case GameScene_Class::SetPhase:
-			{
-				if (obj->thisPiece() && obj->GetColor() == kBlackColor)
-				{
-
-					if (0.5f > Math::Vector3::Distance(m_beforeSelectPos, obj->GetPos2()))
-					{
-						obj->SetPos2(m_afterSelectPos);
-
-
-						std::string pieceType = obj->GetId().substr(0, 4);
-						if (pieceType == "Pawn")
-						{
-							if (!obj->GetfirstMoved())
-							{
-
-								obj->SetfirstMoved(true);
-
-							}
-						}
-
-						m_selectObject = false;
-						m_Phase = EndPhase;
-						m_waitTime = waitTime;
-					}
-				}
-				break;
-			}
-			case GameScene_Class::EndPhase:
-			{
-				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
-				{
-					m_Phase = StandByPhase;
-					m_waitTime = waitTime;
-					m_Trun = Player;
-				}
-
-
-				break;
-			}
-			default:
-				break;
-			}
 		}
-		}
-		if (m_waitTime >= 0)
-		{
-			m_waitTime--;
-		}
-
-		BaseScene_Class::Update();
-
 	}
+
+	BaseScene_Class::Update();
+
+	if (m_waitTime >= 0)
+	{
+		m_waitTime--;
+	}
+
 }
 
 void GameScene_Class::PreUpdate()
@@ -468,37 +337,118 @@ void GameScene_Class::Release()
 	DestoryCons();
 }
 
-void GameScene_Class::PieceSetDefalut()
+void GameScene_Class::PieceSet()
 {
-	m_kingBlack->SetDefaultPos(0);
-	m_kingBlack->SetAlive(true);
-	m_kingWhite->SetDefaultPos(0);
-	m_kingWhite->SetAlive(true);
-	m_queenBlack->SetDefaultPos(0);
-	m_queenBlack->SetAlive(true);
-	m_queenWhite->SetDefaultPos(0);
-	m_queenWhite->SetAlive(true);
-	for (int n = 0; n < 8; n++)
+
+	for (int h = 0; h < 8;h++)
 	{
-		m_pawnWhite[n]->SetDefaultPos(n);
-		m_pawnBlack[n]->SetAlive(true);
-		m_pawnBlack[n]->SetDefaultPos(n);
-		m_pawnWhite[n]->SetAlive(true);
-	}
-	for (int n = 0; n < 2; n++)
-	{
-		m_bishopWhite[n]->SetDefaultPos(n);
-		m_bishopWhite[n]->SetAlive(true);
-		m_bishopBlack[n]->SetDefaultPos(n);
-		m_bishopBlack[n]->SetAlive(true);
-		m_knightBlack[n]->SetDefaultPos(n);
-		m_knightBlack[n]->SetAlive(true);
-		m_knightWhite[n]->SetDefaultPos(n);
-		m_knightWhite[n]->SetAlive(true);
-		m_rookBlack[n]->SetDefaultPos(n);
-		m_rookBlack[n]->SetAlive(true);
-		m_rookWhite[n]->SetDefaultPos(n);
-		m_rookWhite[n]->SetAlive(true);
+		for (int w = 0; w < 8; w++)
+		{
+			Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+			switch (m_bordInfo[h][w])
+			{
+			case GameScene_Class::None:
+				break;
+			case GameScene_Class::WhitePawn:
+				m_pawnWhite[0]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhitePawn1:
+				m_pawnWhite[1]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhitePawn2:
+				m_pawnWhite[2]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhitePawn3:
+				m_pawnWhite[3]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhitePawn4:
+				m_pawnWhite[4]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhitePawn5:
+				m_pawnWhite[5]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhitePawn6:
+				m_pawnWhite[6]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhitePawn7:
+				m_pawnWhite[7]->SetPos(massPos);
+				break;
+			case GameScene_Class::WhiteKnight:
+				m_knightWhite[0]->SetPos2(massPos);
+				break;
+			case GameScene_Class::WhiteKnight1:
+				m_knightWhite[1]->SetPos2(massPos);
+				break;
+			case GameScene_Class::WhiteRook:
+				m_rookWhite[0]->SetPos2(massPos);
+				break;
+			case GameScene_Class::WhiteRook1:
+				m_rookWhite[1]->SetPos2(massPos);
+				break;
+			case GameScene_Class::WhiteBishop:
+				m_bishopWhite[0]->SetPos2(massPos);
+				break;
+			case GameScene_Class::WhiteBishop1:
+				m_bishopWhite[1]->SetPos2(massPos);
+				break;
+			case GameScene_Class::WhiteQueen:
+				m_queenWhite->SetPos2(massPos);
+				break;
+			case GameScene_Class::WhiteKing:
+				m_kingWhite->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn:
+				m_pawnBlack[0]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn1:
+				m_pawnBlack[1]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn2:
+				m_pawnBlack[2]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn3:
+				m_pawnBlack[3]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn4:
+				m_pawnBlack[4]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn5:
+				m_pawnBlack[5]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn6:
+				m_pawnBlack[6]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackPawn7:
+				m_pawnBlack[7]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackKnight:
+				m_knightBlack[0]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackKnight1:
+				m_knightBlack[1]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackRook:
+				m_rookBlack[0]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackRook1:
+				m_rookBlack[1]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackBishop:
+				m_bishopBlack[0]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackBishop1:
+				m_bishopBlack[1]->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackQueen:
+				m_queenBlack->SetPos2(massPos);
+				break;
+			case GameScene_Class::BlackKing:
+				m_kingBlack->SetPos2(massPos);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }
 
@@ -605,214 +555,6 @@ Math::Vector3 GameScene_Class::BordOnMouse()
 	return { 12345,12345,12345 };
 }
 
-
-void GameScene_Class::PieceCanMoveMassView()
-{
-	std::string pieceType;
-	if (m_selectObject)
-	{
-
-		for (std::shared_ptr<BaseObject_Class> obj : m_baseObjList)
-		{
-			if (obj->thisPiece())
-			{
-				if (0.05f > Math::Vector3::Distance(obj->GetPos(), m_beforeSelectPos))
-				{
-					//各ピース毎に移動できる範囲の定義
-					pieceType = obj->GetId().substr(0, 4);
-					if (pieceType == "King")
-					{
-						for (int h = 0; h < 3; h++)
-						{
-							for (int w = 0; w < 3; w++)
-							{
-								Math::Vector3 SetPos = { m_beforeSelectPos.x - 1 + h,m_beforeSelectPos.y,m_beforeSelectPos.z - 1 + w, };
-								m_selectPieceCanMoveBord[h][w]->SetPos(SetPos);
-								m_selectPieceCanMoveBord[h][w]->SetAlive(true);
-							}
-						}
-					}
-					if (pieceType == "Quee")
-					{
-						for (int w = 0; w < 16; w++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x - 8 + w,m_beforeSelectPos.y,m_beforeSelectPos.z - 8 + w, };
-							m_selectPieceCanMoveBord[w][0]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[w][0]->SetAlive(true);
-						}
-						for (int h = 0; h < 16; h++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x - 8 + h,m_beforeSelectPos.y,m_beforeSelectPos.z + 8 - h, };
-							m_selectPieceCanMoveBord[h][1]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[h][1]->SetAlive(true);
-						}
-						for (int n = 0; n < 16; n++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x - 8 + n,m_beforeSelectPos.y,m_beforeSelectPos.z, };
-							m_selectPieceCanMoveBord[n][2]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[n][2]->SetAlive(true);
-						}
-						for (int n = 0; n < 16; n++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z - 8 + n, };
-							m_selectPieceCanMoveBord[n][3]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[n][3]->SetAlive(true);
-						}
-						for (int h = 0; h < 3; h++)
-						{
-							for (int w = 0; w < 3; w++)
-							{
-								for (int n = 0; n < 10; n++)
-								{
-									Math::Vector3 SetPos = { m_beforeSelectPos.x - 1 + h,m_beforeSelectPos.y,m_beforeSelectPos.z - 1 + w, };
-									m_selectPieceCanMoveBord[n][4]->SetPos(SetPos);
-									m_selectPieceCanMoveBord[n][4]->SetAlive(true);
-								}
-							}
-						}
-					}
-					if (pieceType == "Pawn")
-					{
-						if (!obj->GetfirstMoved())
-						{
-							if (obj->GetColor() == kBlackColor)
-							{
-								for (int n = 1; n <= 2; n++)
-								{
-									Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z + n, };
-									m_selectPieceCanMoveBord[n][0]->SetPos(SetPos);
-									m_selectPieceCanMoveBord[n][0]->SetAlive(true);
-								}
-
-							}
-							if (obj->GetColor() == kWhiteColor)
-							{
-								for (int n = 1; n <= 2; n++)
-								{
-									Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z - n, };
-									m_selectPieceCanMoveBord[n][0]->SetPos(SetPos);
-									m_selectPieceCanMoveBord[n][0]->SetAlive(true);
-								}
-							}
-						}
-						else
-						{
-							if (obj->GetColor() == kBlackColor)
-							{
-
-								Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z + 1 , };
-								m_selectPieceCanMoveBord[1][0]->SetPos(SetPos);
-								m_selectPieceCanMoveBord[1][0]->SetAlive(true);
-
-							}
-							if (obj->GetColor() == kWhiteColor)
-							{
-
-								Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, };
-								m_selectPieceCanMoveBord[1][0]->SetPos(SetPos);
-								m_selectPieceCanMoveBord[1][0]->SetAlive(true);
-
-							}
-						}
-
-						Math::Vector3 PosA = { m_beforeSelectPos.x + 1,m_beforeSelectPos.y,m_beforeSelectPos.z + 1 };
-						Math::Vector3 PosB = { m_beforeSelectPos.x - 1,m_beforeSelectPos.y,m_beforeSelectPos.z + 1 };
-					}
-					if (pieceType == "Rook")
-					{
-						for (int h = 0; h < 16; h++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x - 8 + h,m_beforeSelectPos.y,m_beforeSelectPos.z, };
-							m_selectPieceCanMoveBord[h][0]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[h][0]->SetAlive(true);
-						}
-						for (int w = 0; w < 16; w++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x,m_beforeSelectPos.y,m_beforeSelectPos.z - 8 + w, };
-							m_selectPieceCanMoveBord[0][w]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[0][w]->SetAlive(true);
-						}
-					}
-					if (pieceType == "Bish")
-					{
-						for (int w = 0; w < 16; w++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x - 8 + w,m_beforeSelectPos.y,m_beforeSelectPos.z - 8 + w, };
-							m_selectPieceCanMoveBord[0][w]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[0][w]->SetAlive(true);
-						}
-						for (int h = 0; h < 16; h++)
-						{
-							Math::Vector3 SetPos = { m_beforeSelectPos.x - 8 + h,m_beforeSelectPos.y,m_beforeSelectPos.z + 8 - h, };
-							m_selectPieceCanMoveBord[h][0]->SetPos(SetPos);
-							m_selectPieceCanMoveBord[h][0]->SetAlive(true);
-						}
-					}
-					if (pieceType == "Knig")
-					{
-						m_selectPieceCanMoveBord[0][0]->SetPos({ m_beforeSelectPos.x + 2,m_beforeSelectPos.y,m_beforeSelectPos.z + 1, });
-						m_selectPieceCanMoveBord[0][0]->SetAlive(true);
-
-						m_selectPieceCanMoveBord[0][1]->SetPos({ m_beforeSelectPos.x + 1,m_beforeSelectPos.y,m_beforeSelectPos.z + 2, });
-						m_selectPieceCanMoveBord[0][1]->SetAlive(true);
-
-						m_selectPieceCanMoveBord[0][2]->SetPos({ m_beforeSelectPos.x - 2,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, });
-						m_selectPieceCanMoveBord[0][2]->SetAlive(true);
-
-						m_selectPieceCanMoveBord[0][3]->SetPos({ m_beforeSelectPos.x - 1,m_beforeSelectPos.y,m_beforeSelectPos.z - 2, });
-						m_selectPieceCanMoveBord[0][3]->SetAlive(true);
-
-
-						m_selectPieceCanMoveBord[1][0]->SetPos({ m_beforeSelectPos.x - 2,m_beforeSelectPos.y,m_beforeSelectPos.z + 1, });
-						m_selectPieceCanMoveBord[1][0]->SetAlive(true);
-
-						m_selectPieceCanMoveBord[1][1]->SetPos({ m_beforeSelectPos.x - 1,m_beforeSelectPos.y,m_beforeSelectPos.z + 2, });
-						m_selectPieceCanMoveBord[1][1]->SetAlive(true);
-
-						m_selectPieceCanMoveBord[1][2]->SetPos({ m_beforeSelectPos.x + 2,m_beforeSelectPos.y,m_beforeSelectPos.z - 1, });
-						m_selectPieceCanMoveBord[1][2]->SetAlive(true);
-
-						m_selectPieceCanMoveBord[1][3]->SetPos({ m_beforeSelectPos.x + 1,m_beforeSelectPos.y,m_beforeSelectPos.z - 2, });
-						m_selectPieceCanMoveBord[1][3]->SetAlive(true);
-
-					}
-				}
-				for (int h = 0; h < 16; h++)
-				{
-					for (int w = 0; w < 16; w++)
-					{
-						//移動可能先に味方ピースがある場合除外
-						if (0.5f > Math::Vector3::Distance(obj->GetPos(), m_selectPieceCanMoveBord[h][w]->GetPos()))
-						{
-							switch (m_Trun)
-							{
-							case Player:
-							{
-								if (obj->GetColor() == kWhiteColor)
-								{
-									m_selectPieceCanMoveBord[h][w]->SetAlive(false);
-								}
-								break;
-							}
-							case Enemy:
-							{
-								if (obj->GetColor() == kBlackColor)
-								{
-									m_selectPieceCanMoveBord[h][w]->SetAlive(false);
-								}
-								break;
-							}
-							default:
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
 void GameScene_Class::SelectPieceUIActive()
 {
 	m_nowSelectBord->SetAlive(true);
@@ -825,9 +567,9 @@ void GameScene_Class::SelectPieceUIActive()
 	}
 	else
 	{
-		for (int h = 0; h < 16; h++)
+		for (int h = 0; h < 8; h++)
 		{
-			for (int w = 0; w < 16; w++)
+			for (int w = 0; w < 8; w++)
 			{
 				Math::Vector3 massPos = { h * 1.0f - 3.5f,0.01f,w * 1.0f - 3.5f };
 				m_selectPieceCanMoveBord[h][w]->SetPos(massPos);
