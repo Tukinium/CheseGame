@@ -45,7 +45,7 @@ public:
 	}
 	void SetBordInfo(int h, int w, int _num)
 	{
-		m_canMoveBordInfo[h][w] = _num;
+		m_nowBordInfo[h][w] = _num;
 	}
 	// テクスチャ、ポリゴン、モデルいずれかを作成してテクスチャをセットする
 	// 実行と同時にスマートポインタが作成されるため注意
@@ -55,7 +55,7 @@ public:
 
 	enum ModelType
 	{
-		None = 0,
+		NoneM = 0,
 		Sprite = 1,
 		Polygon,
 		Model,
@@ -91,25 +91,64 @@ public:
 			}
 		}
 	}
-	enum PieceType
-	{
-		WhitePawn0 = 0,
-		Bishop,
-		WhiteKnight0,
-		Rook,
-		Queen,
-		King,
-	};
 	enum Bord
 	{
-		Enpty,
+		Empty,
 		Me,
 		CanMove,
 		Select,
 	};
 
+	enum PiceType
+	{
+		None,
+		WhitePawn0,
+		WhitePawn1,
+		WhitePawn2,
+		WhitePawn3,
+		WhitePawn4,
+		WhitePawn5,
+		WhitePawn6,
+		WhitePawn7,
+		WhiteKnight0,
+		WhiteKnight1,
+		WhiteRook0,
+		WhiteRook1,
+		WhiteBishop0,
+		WhiteBishop1,
+		WhiteQueen,
+		WhiteKing,
+		BlackPawn0,
+		BlackPawn1,
+		BlackPawn2,
+		BlackPawn3,
+		BlackPawn4,
+		BlackPawn5,
+		BlackPawn6,
+		BlackPawn7,
+		BlackKnight0,
+		BlackKnight1,
+		BlackRook0,
+		BlackRook1,
+		BlackBishop0,
+		BlackBishop1,
+		BlackQueen,
+		BlackKing,
+	};
+
 protected:
 	int m_canMoveBordInfo[8][8] =
+	{
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,
+	};
+	int m_nowBordInfo[8][8] =
 	{
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
@@ -136,7 +175,7 @@ protected:
 
 	bool m_Alive = false;
 
-	int m_type = None;
+	int m_type = NoneM;
 
 	bool m_thisSprite = false;
 	KdTexture m_tex;

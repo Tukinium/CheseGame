@@ -58,25 +58,25 @@ void GameScene_Class::SetSharedPtr()
 
 	if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
 	m_kingWhite->SetColor(kWhiteColor);
-	m_kingWhite->SetId(WhiteKing);
+	m_kingWhite->SetId(BaseObject_Class::WhiteKing);
 	m_kingWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/King/King.gltf");
 	m_baseObjList.push_back(m_kingWhite);
 
 	if (!m_kingBlack)m_kingBlack = std::make_shared<KingPieceObject_Class>();
 	m_kingBlack->SetColor(kBlackColor);
-	m_kingBlack->SetId(BlackKing);
+	m_kingBlack->SetId(BaseObject_Class::BlackKing);
 	m_kingBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/King/King.gltf");
 	m_baseObjList.push_back(m_kingBlack);
 
 	if (!m_queenWhite)m_queenWhite = std::make_shared<QueenPieceObject_Class>();
 	m_queenWhite->SetColor(kWhiteColor);
-	m_queenWhite->SetId(WhiteQueen);
+	m_queenWhite->SetId(BaseObject_Class::WhiteQueen);
 	m_queenWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Queen/Queen.gltf");
 	m_baseObjList.push_back(m_queenWhite);
 
 	if (!m_queenBlack)m_queenBlack = std::make_shared<QueenPieceObject_Class>();
 	m_queenBlack->SetColor(kBlackColor);
-	m_queenBlack->SetId(BlackQueen);
+	m_queenBlack->SetId(BaseObject_Class::BlackQueen);
 	m_queenBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Queen/Queen.gltf");
 	m_baseObjList.push_back(m_queenBlack);
 
@@ -111,13 +111,13 @@ void GameScene_Class::SetSharedPtr()
 	{
 		if (!m_pawnWhite[n])m_pawnWhite[n] = std::make_shared<PawnPieceObject_Class>();
 		m_pawnWhite[n]->SetColor(kWhiteColor);
-		m_pawnWhite[n]->SetId(WhitePawn0 + n);
+		m_pawnWhite[n]->SetId(BaseObject_Class::WhitePawn0 + n);
 		m_pawnWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Pawn/Pawn.gltf");
 		m_baseObjList.push_back(m_pawnWhite[n]);
 
 		if (!m_pawnBlack[n])m_pawnBlack[n] = std::make_shared<PawnPieceObject_Class>();
 		m_pawnBlack[n]->SetColor(kBlackColor);
-		m_pawnBlack[n]->SetId(BlackPawn0 + n);
+		m_pawnBlack[n]->SetId(BaseObject_Class::BlackPawn0 + n);
 		m_pawnBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Pawn/Pawn.gltf");
 		m_baseObjList.push_back(m_pawnBlack[n]);
 
@@ -129,14 +129,14 @@ void GameScene_Class::SetSharedPtr()
 
 		if (!m_rookWhite[n])m_rookWhite[n] = std::make_shared<RookPieceObject_Class>();
 		m_rookWhite[n]->SetColor(kWhiteColor);
-		m_rookWhite[n]->SetId(WhiteRook0 + n);
+		m_rookWhite[n]->SetId(BaseObject_Class::WhiteRook0 + n);
 		m_rookWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Rook/Rook.gltf");
 		m_baseObjList.push_back(m_rookWhite[n]);
 
 
 		if (!m_rookBlack[n])m_rookBlack[n] = std::make_shared<RookPieceObject_Class>();
 		m_rookBlack[n]->SetColor(kBlackColor);
-		m_rookBlack[n]->SetId(BlackRook0 + n);
+		m_rookBlack[n]->SetId(BaseObject_Class::BlackRook0 + n);
 		m_rookBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Rook/Rook.gltf");
 		m_baseObjList.push_back(m_rookBlack[n]);
 
@@ -147,7 +147,7 @@ void GameScene_Class::SetSharedPtr()
 
 		if (!m_knightWhite[n])m_knightWhite[n] = std::make_shared<KnightPieceObject_Class>();
 		m_knightWhite[n]->SetColor(kWhiteColor);
-		m_knightWhite[n]->SetId(WhiteKnight0 + n);
+		m_knightWhite[n]->SetId(BaseObject_Class::WhiteKnight0 + n);
 		m_knightWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Knight/Knight.gltf");
 		m_baseObjList.push_back(m_knightWhite[n]);
 
@@ -156,7 +156,7 @@ void GameScene_Class::SetSharedPtr()
 		str.append(str2);
 		if (!m_knightBlack[n])m_knightBlack[n] = std::make_shared<KnightPieceObject_Class>();
 		m_knightBlack[n]->SetColor(kBlackColor);
-		m_knightBlack[n]->SetId(BlackKnight0 + n);
+		m_knightBlack[n]->SetId(BaseObject_Class::BlackKnight0 + n);
 		m_knightBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Knight/Knight.gltf");
 		m_baseObjList.push_back(m_knightBlack[n]);
 
@@ -167,13 +167,13 @@ void GameScene_Class::SetSharedPtr()
 
 		if (!m_bishopWhite[n])m_bishopWhite[n] = std::make_shared<BishopPieceObject_Class>();
 		m_bishopWhite[n]->SetColor(kWhiteColor);
-		m_bishopWhite[n]->SetId(WhiteBishop0 + n);
+		m_bishopWhite[n]->SetId(BaseObject_Class::WhiteBishop0 + n);
 		m_bishopWhite[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Bishop/Bishop.gltf");
 		m_baseObjList.push_back(m_bishopWhite[n]);
 
 		if (!m_bishopBlack[n])m_bishopBlack[n] = std::make_shared<BishopPieceObject_Class>();
 		m_bishopBlack[n]->SetColor(kBlackColor);
-		m_bishopBlack[n]->SetId(BlackBishop0 + n);
+		m_bishopBlack[n]->SetId(BaseObject_Class::BlackBishop0 + n);
 		m_bishopBlack[n]->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Bishop/Bishop.gltf");
 		m_baseObjList.push_back(m_bishopBlack[n]);
 
@@ -231,14 +231,17 @@ void GameScene_Class::Update()
 					{
 						if (0.5f > (Math::Vector3::Distance(obj->GetPos(), BordOnMouse())))
 						{
+							m_movePieceID = obj->GetId();
 							std::cout << obj->GetId() << std::endl;
 							for (int h = 0; h < 8; h++)
 							{
 								for (int w = 0; w < 8; w++)
 								{
 									//クリックしたオブジェクトに現在の盤面状況を渡す
-									//obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+									obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+									//printf("%d_", m_bordInfo[h][w]);
 								}
+								//printf("\n");
 							}
 							for (int h = 0; h < 8; h++)
 							{
@@ -249,15 +252,6 @@ void GameScene_Class::Update()
 
 								}
 
-							}
-							for (int w = 0; w < 8; w++)
-							{
-								for (int h = 0; h < 8; h++)
-								{
-									printf("%d_", m_canMoveBordInfo[w][h]);
-
-								}
-								printf("\n");
 							}
 							m_beforeSelectPos = BordOnMouse();
 							m_selectObject = true;
@@ -282,6 +276,7 @@ void GameScene_Class::Update()
 							m_selectPieceCanMoveBord[h][w]->SetAlive(true);
 							m_selectPieceCanMoveBord[h][w]->SetPos2(massPos);
 							m_waitTime = waitTime;
+							std::cout << "SelectPhaseEnd" << std::endl;
 							m_Phase = SetPhase;
 						}
 					}
@@ -309,55 +304,28 @@ void GameScene_Class::Update()
 								{
 									m_canMoveBordInfo[h][w] = BaseObject_Class::Select;
 
-									m_bordInfo[h][w] = obj->GetId();
-									std::cout << obj->GetId() << std::endl;
-									std::cout << m_bordInfo[h][w] << std::endl;
-									std::cout << "テスト" << std::endl;
-									
+									m_bordInfo[h][w] = m_movePieceID;
+
 								}
-								if (0.5 > (Math::Vector3::Distance(m_beforeSelectPos, { h * 1 - 3.5f,0,w * 1 - 3.5f })))
-								{
-									m_bordInfo[h][w] = None;
-								}
+							}
+							if (0.5 > (Math::Vector3::Distance(m_beforeSelectPos, { h * 1 - 3.5f,0,w * 1 - 3.5f })))
+							{
+								m_bordInfo[h][w] = BaseObject_Class::None;
 							}
 							m_Phase = EndPhase;
 
 						}
 					}
-					std::cout << "移動情報" << std::endl;
-					for (int w = 0; w < 8; w++)
-					{
-						for (int h = 0; h < 8; h++)
-						{
-							printf("%d_", m_canMoveBordInfo[w][h]);
-
-						}
-						printf("\n");
-					}
-					std::cout << "ボード情報" << std::endl;
-					for (int w = 0; w < 8; w++)
-					{
-						for (int h = 0; h < 8; h++)
-						{
-							printf("%d_", m_bordInfo[w][h]);
-
-						}
-						printf("\n");
-					}
-
-
-
 				}
 				break;
 			}
 			case GameScene_Class::EndPhase:
 			{
-				for (int h = 0; h < 8; h++)
-				{
-					for (int w = 0; w < 8; w++)
-					{
-					}
-				}
+				m_Trun = Player;
+				m_waitTime = waitTime;
+				m_selectObject = false;
+				std::cout << "EndPhaseEnd" << std::endl;
+				m_Phase = StartPhase;
 				break;
 			}
 			default:
@@ -412,102 +380,102 @@ void GameScene_Class::PieceSet()
 			Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
 			switch (m_bordInfo[h][w])
 			{
-			case GameScene_Class::None:
+			case BaseObject_Class::None:
 				break;
-			case GameScene_Class::WhitePawn0:
+			case BaseObject_Class::WhitePawn0:
 				m_pawnWhite[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhitePawn1:
+			case BaseObject_Class::WhitePawn1:
 				m_pawnWhite[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhitePawn2:
+			case BaseObject_Class::WhitePawn2:
 				m_pawnWhite[2]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhitePawn3:
+			case BaseObject_Class::WhitePawn3:
 				m_pawnWhite[3]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhitePawn4:
+			case BaseObject_Class::WhitePawn4:
 				m_pawnWhite[4]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhitePawn5:
+			case BaseObject_Class::WhitePawn5:
 				m_pawnWhite[5]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhitePawn6:
+			case BaseObject_Class::WhitePawn6:
 				m_pawnWhite[6]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhitePawn7:
+			case BaseObject_Class::WhitePawn7:
 				m_pawnWhite[7]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteKnight0:
+			case BaseObject_Class::WhiteKnight0:
 				m_knightWhite[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteKnight1:
+			case BaseObject_Class::WhiteKnight1:
 				m_knightWhite[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteRook0:
+			case BaseObject_Class::WhiteRook0:
 				m_rookWhite[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteRook1:
+			case BaseObject_Class::WhiteRook1:
 				m_rookWhite[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteBishop0:
+			case BaseObject_Class::WhiteBishop0:
 				m_bishopWhite[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteBishop1:
+			case BaseObject_Class::WhiteBishop1:
 				m_bishopWhite[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteQueen:
+			case BaseObject_Class::WhiteQueen:
 				m_queenWhite->SetPos2(massPos);
 				break;
-			case GameScene_Class::WhiteKing:
+			case BaseObject_Class::WhiteKing:
 				m_kingWhite->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn0:
+			case BaseObject_Class::BlackPawn0:
 				m_pawnBlack[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn1:
+			case BaseObject_Class::BlackPawn1:
 				m_pawnBlack[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn2:
+			case BaseObject_Class::BlackPawn2:
 				m_pawnBlack[2]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn3:
+			case BaseObject_Class::BlackPawn3:
 				m_pawnBlack[3]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn4:
+			case BaseObject_Class::BlackPawn4:
 				m_pawnBlack[4]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn5:
+			case BaseObject_Class::BlackPawn5:
 				m_pawnBlack[5]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn6:
+			case BaseObject_Class::BlackPawn6:
 				m_pawnBlack[6]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackPawn7:
+			case BaseObject_Class::BlackPawn7:
 				m_pawnBlack[7]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackKnight0:
+			case BaseObject_Class::BlackKnight0:
 				m_knightBlack[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackKnight1:
+			case BaseObject_Class::BlackKnight1:
 				m_knightBlack[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackRook0:
+			case BaseObject_Class::BlackRook0:
 				m_rookBlack[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackRook1:
+			case BaseObject_Class::BlackRook1:
 				m_rookBlack[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackBishop0:
+			case BaseObject_Class::BlackBishop0:
 				m_bishopBlack[0]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackBishop1:
+			case BaseObject_Class::BlackBishop1:
 				m_bishopBlack[1]->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackQueen:
+			case BaseObject_Class::BlackQueen:
 				m_queenBlack->SetPos2(massPos);
 				break;
-			case GameScene_Class::BlackKing:
+			case BaseObject_Class::BlackKing:
 				m_kingBlack->SetPos2(massPos);
 				break;
 			default:

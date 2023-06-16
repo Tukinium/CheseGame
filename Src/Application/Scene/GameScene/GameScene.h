@@ -13,7 +13,7 @@ class KnightPieceObject_Class;
 
 class PieceSelectingUI_Class;
 class SelectingPieceTypeNameUI;
-
+#include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/BaseScene/BaseScene.h"
 
 class GameScene_Class : public BaseScene_Class
@@ -84,6 +84,7 @@ public:
 
 	 void CreateCons();
 	 void DestoryCons();
+
 private:
 	std::shared_ptr<SkyBox_Class>m_sky;
 	std::shared_ptr<Camera_Class>m_camera;
@@ -133,42 +134,8 @@ private:
 	const int waitTime = 10;
 	float m_aiScore;
 
-	enum PiceType
-	{
-		None,
-		WhitePawn0,  
-		WhitePawn1,  
-		WhitePawn2,  
-		WhitePawn3,  
-		WhitePawn4,  
-		WhitePawn5,  
-		WhitePawn6,  
-		WhitePawn7,  
-		WhiteKnight0,
-		WhiteKnight1,
-		WhiteRook0,  
-		WhiteRook1,
-		WhiteBishop0,
-		WhiteBishop1,
-		WhiteQueen, 
-		WhiteKing,  
-		BlackPawn0,
-		BlackPawn1,
-		BlackPawn2,
-		BlackPawn3,
-		BlackPawn4,
-		BlackPawn5,
-		BlackPawn6,
-		BlackPawn7,
-		BlackKnight0,
-		BlackKnight1,
-		BlackRook0,
-		BlackRook1,
-		BlackBishop0,
-		BlackBishop1,
-		BlackQueen,
-		BlackKing,
-	};
+	int m_movePieceID;
+
 	int m_bordInfo[8][8] =
 	{
 		0,0,0,0,0,0,0,0,
@@ -193,14 +160,14 @@ private:
 	};
 	int NORMAL_RULE_BORD[8][8] =
 	{
-		BlackPawn0,BlackPawn1,BlackPawn2,BlackPawn3,BlackPawn4,BlackPawn5,BlackPawn6,BlackPawn7,
-		BlackRook0,BlackKnight0,BlackBishop0,BlackQueen,BlackKing,BlackBishop1,BlackKnight1,BlackRook1,
+		BaseObject_Class::BlackRook0,BaseObject_Class::BlackKnight0,BaseObject_Class::BlackBishop0,BaseObject_Class::BlackQueen,BaseObject_Class::BlackKing,BaseObject_Class::BlackBishop1,BaseObject_Class::BlackKnight1,BaseObject_Class::BlackRook1,
+		BaseObject_Class::BlackPawn0,BaseObject_Class::BlackPawn1,BaseObject_Class::BlackPawn2,BaseObject_Class::BlackPawn3,BaseObject_Class::BlackPawn4,BaseObject_Class::BlackPawn5,BaseObject_Class::BlackPawn6,BaseObject_Class::BlackPawn7,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
-		WhitePawn0,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7,
-		WhiteRook0,WhiteKnight0,WhiteBishop0,WhiteQueen,WhiteKing,WhiteBishop1,WhiteKnight1,WhiteRook1,
+		BaseObject_Class::WhitePawn0,BaseObject_Class::WhitePawn1,BaseObject_Class::WhitePawn2,BaseObject_Class::WhitePawn3,BaseObject_Class::WhitePawn4,BaseObject_Class::WhitePawn5,BaseObject_Class::WhitePawn6,BaseObject_Class::WhitePawn7,
+		BaseObject_Class::WhiteRook0,BaseObject_Class::WhiteKnight0,BaseObject_Class::WhiteBishop0,BaseObject_Class::WhiteQueen,BaseObject_Class::WhiteKing,BaseObject_Class::WhiteBishop1,BaseObject_Class::WhiteKnight1,BaseObject_Class::WhiteRook1,
 	};
 
 public:
