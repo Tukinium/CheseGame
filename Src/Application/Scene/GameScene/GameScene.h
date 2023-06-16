@@ -136,7 +136,7 @@ private:
 	enum PiceType
 	{
 		None,
-		WhitePawn,  
+		WhitePawn0,  
 		WhitePawn1,  
 		WhitePawn2,  
 		WhitePawn3,  
@@ -144,15 +144,15 @@ private:
 		WhitePawn5,  
 		WhitePawn6,  
 		WhitePawn7,  
-		WhiteKnight,
+		WhiteKnight0,
 		WhiteKnight1,
-		WhiteRook,  
+		WhiteRook0,  
 		WhiteRook1,
-		WhiteBishop,
+		WhiteBishop0,
 		WhiteBishop1,
 		WhiteQueen, 
 		WhiteKing,  
-		BlackPawn,
+		BlackPawn0,
 		BlackPawn1,
 		BlackPawn2,
 		BlackPawn3,
@@ -160,11 +160,11 @@ private:
 		BlackPawn5,
 		BlackPawn6,
 		BlackPawn7,
-		BlackKnight,
+		BlackKnight0,
 		BlackKnight1,
-		BlackRook,
+		BlackRook0,
 		BlackRook1,
-		BlackBishop,
+		BlackBishop0,
 		BlackBishop1,
 		BlackQueen,
 		BlackKing,
@@ -193,14 +193,14 @@ private:
 	};
 	int NORMAL_RULE_BORD[8][8] =
 	{
-		BlackPawn,BlackPawn1,BlackPawn2,BlackPawn3,BlackPawn4,BlackPawn5,BlackPawn6,BlackPawn7,
-		BlackRook,BlackKnight,BlackBishop,BlackQueen,BlackKing,BlackBishop1,BlackKnight1,BlackRook1,
+		BlackPawn0,BlackPawn1,BlackPawn2,BlackPawn3,BlackPawn4,BlackPawn5,BlackPawn6,BlackPawn7,
+		BlackRook0,BlackKnight0,BlackBishop0,BlackQueen,BlackKing,BlackBishop1,BlackKnight1,BlackRook1,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
-		WhitePawn,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7,
-		WhiteRook,WhiteKnight,WhiteBishop,WhiteQueen,WhiteKing,WhiteBishop1,WhiteKnight1,WhiteRook1,
+		WhitePawn0,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7,
+		WhiteRook0,WhiteKnight0,WhiteBishop0,WhiteQueen,WhiteKing,WhiteBishop1,WhiteKnight1,WhiteRook1,
 	};
 
 public:

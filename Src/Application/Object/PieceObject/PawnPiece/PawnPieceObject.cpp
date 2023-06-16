@@ -135,28 +135,8 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 
 int PawnPieceObject_Class::CanMoveBordInfo(int h, int w)
 {
-	int centerH;
-	int centerW;
-	for (int h = 0; h < 8; h++)
-	{
-		for (int w = 0; w < 8; w++)
-		{
-			Math::Vector3 massPos = { h * 1 - 3.5f,0,h * 1 - 3.5f };
-			if (0.5f < Math::Vector3::Distance(massPos, m_pos))
-			{
-				centerH = h;
-				centerW = w;
-			}
-		}
-	}
-
-	for (int h = 0; h < 9; h++)
-	{
-		for (int w = 0; w < 9; w++)
-		{
-			m_canMoveBordInfo[centerH - 1 + h][centerW - 1 + w] = CanMove;
-		}
-	}
+	GetMassCenter();
+	m_canMoveBordInfo[centerH - 1][centerW] = CanMove;
 	m_canMoveBordInfo[centerH][centerW] = Me;
 	return m_canMoveBordInfo[h][w];
 }

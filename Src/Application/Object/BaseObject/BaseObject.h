@@ -27,11 +27,11 @@ public:
 	{
 		m_firstMoved = _moved;
 	}
-	std::string GetId()
+	int GetId()
 	{
 		return m_id;
 	}
-	void SetId(std::string _id)
+	void SetId(int _id)
 	{
 		m_id = _id;
 	}
@@ -76,12 +76,26 @@ public:
 	{
 		return m_color;
 	}
-
+	void GetMassCenter()
+	{
+		for (int h = 0; h < 8; h++)
+		{
+			for (int w = 0; w < 8; w++)
+			{
+				Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+				if (Math::Vector3::Distance(massPos, GetPos()) < 0.5)
+				{
+					centerH = h;
+					centerW = w;
+				}
+			}
+		}
+	}
 	enum PieceType
 	{
-		WhitePawn = 0,
+		WhitePawn0 = 0,
 		Bishop,
-		WhiteKnight,
+		WhiteKnight0,
 		Rook,
 		Queen,
 		King,
@@ -91,6 +105,7 @@ public:
 		Enpty,
 		Me,
 		CanMove,
+		Select,
 	};
 
 protected:
@@ -140,7 +155,10 @@ protected:
 
 	bool m_firstMoved = false;
 
-	std::string m_id;
+	int m_id;
+
+	int centerH = 0;
+	int centerW = 0;
 };
 
 //記述を楽にするためのマクロ #define
