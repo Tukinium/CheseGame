@@ -9,6 +9,4 @@ void SkyBox_Class::Init()
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("SkyBox", m_model, KdCollider::TypeGround);
-
-	printf("BordObject Init CheckOut\n");
 }

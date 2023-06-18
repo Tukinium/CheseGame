@@ -9,5 +9,4 @@ void BordObject_Class::Init()
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("Bord", m_model, KdCollider::TypeGround);
-	printf("BordObject Init CheckOut\n");
 }

@@ -5,6 +5,7 @@ class BishopPieceObject_Class : public PieceBaseObject_Class
 public:
 	void Init()override;
 	void SetDefaultPos(int n)override;
+	int CanMoveBordInfo(int h, int w)override;
 private:
 	const float BlackDefaultPosX = 0.5 - 2;
 	const float BlackDefaultPosZ = 0.5 - 4;

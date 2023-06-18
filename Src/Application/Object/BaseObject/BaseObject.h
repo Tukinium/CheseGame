@@ -192,8 +192,11 @@ protected:
 
 	Math::Rectangle m_rc;
 
+	//ポーン用、最初の2マス動いたかどうか
 	bool m_firstMoved = false;
 
+
+	//IDだヨ
 	int m_id;
 
 	int centerH = 0;

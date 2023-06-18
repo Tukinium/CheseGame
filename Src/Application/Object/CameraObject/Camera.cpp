@@ -47,15 +47,9 @@ void Camera_Class::PreUpdate()
 	m_mWorld = m_scaleMat * m_rotateMat * m_transMat;
 
 	m_cam->SetCameraMatrix(m_mWorld);
-	if (GetAsyncKeyState('D'))
-	{
-		if (!m_cam)printf("Camera Err\n");
-		printf("CameraMatrix\nPos = {%f ,%f, %f}\nRotate = {%f ,%f, %f}\nScale = %f\n", m_pos.x, m_pos.y, m_pos.z, m_rotateVec.x, m_rotateVec.z, m_rotateVec.z, m_scale);
-	}
 }
 
 void Camera_Class::Init()
 {
-	printf("Camera Init CheckOut\n");
 	if (!m_cam)m_cam = std::make_shared<KdCamera>();
 }

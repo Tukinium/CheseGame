@@ -79,7 +79,6 @@ void BaseObject_Class::SetAsset(int _type, std::string _filePass)
 		m_model = std::make_shared<KdModelWork>();
 		m_model->SetModelData(_filePass);
 		m_thisModel = true;
-		printf("SetModel\n");
 		return;
 	}
 	}

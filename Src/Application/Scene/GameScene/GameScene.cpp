@@ -31,16 +31,6 @@ void GameScene_Class::Init()
 
 		}
 	}
-
-	for (int h = 0; h < 8; h++)
-	{
-		for (int w = 0; w < 8; w++)
-		{
-			printf("%d", m_canMoveBordInfo[h][w]);
-
-		}
-		printf("\n");
-	}
 	PieceSet();
 }
 
@@ -213,8 +203,6 @@ void GameScene_Class::Update()
 			{
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
-					m_beforeSelectPos = { 12345,12345,12345 };
-					m_afterSelectPos = { 12345,12345,12345 };
 					m_Phase = StandByPhase;
 					std::cout << "StartPhaseEnd" << std::endl;
 					m_waitTime = waitTime;
@@ -232,16 +220,13 @@ void GameScene_Class::Update()
 						if (0.5f > (Math::Vector3::Distance(obj->GetPos(), BordOnMouse())))
 						{
 							m_movePieceID = obj->GetId();
-							std::cout << obj->GetId() << std::endl;
 							for (int h = 0; h < 8; h++)
 							{
 								for (int w = 0; w < 8; w++)
 								{
 									//クリックしたオブジェクトに現在の盤面状況を渡す
 									obj->SetBordInfo(h, w, m_bordInfo[h][w]);
-									//printf("%d_", m_bordInfo[h][w]);
 								}
-								//printf("\n");
 							}
 							for (int h = 0; h < 8; h++)
 							{
@@ -249,10 +234,12 @@ void GameScene_Class::Update()
 								{
 									//オブジェクトから動ける範囲が配列で返却される
 									m_canMoveBordInfo[h][w] = obj->CanMoveBordInfo(h, w);
-
+									printf("%d_",m_canMoveBordInfo[h][w]);
 								}
+								printf("\n");
 
 							}
+							obj->SetfirstMoved(true);
 							m_beforeSelectPos = BordOnMouse();
 							m_selectObject = true;
 							m_Phase = SelectPhase;
@@ -305,13 +292,13 @@ void GameScene_Class::Update()
 									m_canMoveBordInfo[h][w] = BaseObject_Class::Select;
 
 									m_bordInfo[h][w] = m_movePieceID;
-
 								}
 							}
 							if (0.5 > (Math::Vector3::Distance(m_beforeSelectPos, { h * 1 - 3.5f,0,w * 1 - 3.5f })))
 							{
 								m_bordInfo[h][w] = BaseObject_Class::None;
 							}
+
 							m_Phase = EndPhase;
 
 						}
@@ -321,10 +308,25 @@ void GameScene_Class::Update()
 			}
 			case GameScene_Class::EndPhase:
 			{
+
 				m_Trun = Player;
 				m_waitTime = waitTime;
 				m_selectObject = false;
 				std::cout << "EndPhaseEnd" << std::endl;
+
+				m_beforeSelectPos = { 12345,12345,12345 };
+				m_afterSelectPos = { 12345,12345,12345 };
+				for (int h = 0; h < 8; h++)
+				{
+					for (int w = 0; w < 8; w++)
+					{
+						m_canMoveBordInfo[h][w] = 0;
+						m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+					}
+				}
+
+				m_movePieceID = -1;
+
 				m_Phase = StartPhase;
 				break;
 			}
