@@ -2,6 +2,7 @@
 #include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/GameScene/GameScene.h"
 #include"Application/Scene/SceneManager/SceneManager.h"
+#include"Application/Loader/AssetLoader.h"
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 // エントリーポイント
 // アプリケーションはこの関数から進行する

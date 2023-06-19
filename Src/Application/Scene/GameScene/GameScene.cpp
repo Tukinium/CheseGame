@@ -11,7 +11,6 @@
 #include"Application/Object/CameraObject/Camera.h"
 
 #include"Application/UI/PieceSelectingUI/PieceSelectingUI.h"
-#include"Application/UI/PieceSelectingUI/SelectingPieceTypeName_UI.h"
 
 void GameScene_Class::Init()
 {
@@ -90,10 +89,7 @@ void GameScene_Class::SetSharedPtr()
 
 	if (!m_pieceSelectUI)m_pieceSelectUI = std::make_shared<PieceSelectingUI_Class>();
 	m_baseObjList.push_back(m_pieceSelectUI);
-	//m_pieceSelectUI->SetCamera(m_camera);
 
-	if (!m_selectPieceTypeUI)m_selectPieceTypeUI = std::make_shared<SelectingPieceTypeNameUI>();
-	m_baseObjList.push_back(m_selectPieceTypeUI);
 
 
 	for (int n = 0; n < 8; n++)

@@ -20,7 +20,6 @@ void UIBaseObject_Class::DrawSprite()
 
 void UIBaseObject_Class::PreUpdate()
 {
-	
 	std::shared_ptr<Camera_Class>spCamera = m_wpCamera.lock();
 	if (spCamera)
 	{

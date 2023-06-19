@@ -144,8 +144,6 @@
     <ClInclude Include="..\Library\tinygltf\stb_image.h" />
     <ClInclude Include="..\Library\tinygltf\stb_image_write.h" />
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h" />
-    <ClInclude Include="ContinueClick.h" />
-    <ClInclude Include="Src\Application\Loader\AssetLoader.h" />
     <ClInclude Include="Src\Application\main.h" />
     <ClInclude Include="Src\Application\Object\BaseObject\BaseObject.h" />
     <ClInclude Include="Src\Application\Object\BordObject\BordObject.h" />
@@ -165,7 +163,6 @@
     <ClInclude Include="Src\Application\Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Src\Application\UI\PieceSelectingUI\PieceSelectingUI.h" />
-    <ClInclude Include="Src\Application\UI\PieceSelectingUI\SelectingPieceTypeName_UI.h" />
     <ClInclude Include="Src\Application\UI\UIBaseObject.h" />
     <ClInclude Include="Src\Framework\Direct3D\KdMaterial.h" />
     <ClInclude Include="Src\Framework\Direct3D\Polygon\KdPolygon.h" />
@@ -203,8 +200,6 @@
     <ClInclude Include="src\Framework\Window\KdWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ContinueClick.cpp" />
-    <ClCompile Include="Src\Application\Loader\AssetLoader.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
     <ClCompile Include="Src\Application\Object\BaseObject\BaseObject.cpp" />
     <ClCompile Include="Src\Application\Object\BordObject\BordObject.cpp" />
@@ -223,7 +218,6 @@
     <ClCompile Include="Src\Application\Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Src\Application\UI\PieceSelectingUI\PieceSelectingUI.cpp" />
-    <ClCompile Include="Src\Application\UI\PieceSelectingUI\SelectingPieceTypeName_UI.cpp" />
     <ClCompile Include="Src\Application\UI\UIBaseObject.cpp" />
     <ClCompile Include="Src\Framework\Direct3D\KdMaterial.cpp">
       <SubType>

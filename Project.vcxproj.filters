@@ -127,11 +127,8 @@
     <Filter Include="Src\Application\Scene\TitleScene">
       <UniqueIdentifier>{a0b97175-3aa5-4909-9879-8804891ed64d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\UI\ContinueClickUI">
-      <UniqueIdentifier>{e4112c5d-97ba-4033-ae31-70266c780ab0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Main\Loader">
-      <UniqueIdentifier>{a17e0ff6-b27a-4dbd-82e1-7565fdd6fb7f}</UniqueIdentifier>
+    <Filter Include="Src\Application\Object\UI\OnTurnViewUI">
+      <UniqueIdentifier>{db11cc25-18fa-4b21-9dd0-c155ad66f6e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -309,17 +306,8 @@
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\UI\PieceSelectingUI\SelectingPieceTypeName_UI.h">
-      <Filter>Src\Application\Object\UI\PieceSelectingUI</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\UI\UIBaseObject.h">
       <Filter>Src\Application\Object\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ContinueClick.h">
-      <Filter>Src\Application\Object\UI\ContinueClickUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Loader\AssetLoader.h">
-      <Filter>Src\Application\Main\Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -473,17 +461,8 @@
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\UI\PieceSelectingUI\SelectingPieceTypeName_UI.cpp">
-      <Filter>Src\Application\Object\UI\PieceSelectingUI</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\UI\UIBaseObject.cpp">
       <Filter>Src\Application\Object\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="ContinueClick.cpp">
-      <Filter>Src\Application\Object\UI\ContinueClickUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Loader\AssetLoader.cpp">
-      <Filter>Src\Application\Main\Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
