@@ -250,7 +250,7 @@ void GameScene_Class::Update()
 									//オブジェクトから動ける範囲が配列で返却される
 									obj->GenCanMoveBordInfo();
 									m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
-									printf("%d_",m_canMoveBordInfo[h][w]);
+									printf("%d_", m_canMoveBordInfo[h][w]);
 								}
 								printf("\n");
 
@@ -324,7 +324,7 @@ void GameScene_Class::Update()
 				{
 					m_Phase = StartPhase;
 				}
-				
+
 				break;
 			}
 			case GameScene_Class::EndPhase:
@@ -497,7 +497,162 @@ void GameScene_Class::PieceSet()
 
 void GameScene_Class::CheseAI()
 {
+	//各ピースの次の可能な一手を羅列
+	for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
+	{
+		obj->GenCanMoveBordInfo();
+		for (int h = 0; h < 8; h++)
+		{
+			for (int w = 0; w < 8; w++)
+			{
+				if (obj->GetId() == BaseObject_Class::WhiteKing)
+				{
+					WhiteKing.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhiteQueen)
+				{
+					WhiteQueen.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhiteRook0)
+				{
+					WhiteRook0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhiteRook1)
+				{
+					WhiteRook1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhiteBishop0)
+				{
+					WhiteBishop0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhiteBishop1)
+				{
+					WhiteBishop1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhiteKnight0)
+				{
+					WhiteKnight0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhiteKnight1)
+				{
+					WhiteKnight1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn0)
+				{
+					WhitePawn0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn1)
+				{
+					WhitePawn1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn2)
+				{
+					WhitePawn2.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn3)
+				{
+					WhitePawn3.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn4)
+				{
+					WhitePawn4.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn5)
+				{
+					WhitePawn5.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn6)
+				{
+					WhitePawn6.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::WhitePawn7)
+				{
+					WhitePawn7.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
 
+				if (obj->GetId() == BaseObject_Class::BlackKing)
+				{
+					BlackKing.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackQueen)
+				{
+					BlackQueen.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackRook0)
+				{
+					BlackRook0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackRook1)
+				{
+					BlackRook1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackBishop0)
+				{
+					BlackBishop0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackBishop1)
+				{
+					BlackBishop1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackKnight0)
+				{
+					BlackKnight0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackKnight1)
+				{
+					BlackKnight1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn0)
+				{
+					BlackPawn0.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn1)
+				{
+					BlackPawn1.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn2)
+				{
+					BlackPawn2.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn3)
+				{
+					BlackPawn3.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn4)
+				{
+					BlackPawn4.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn5)
+				{
+					BlackPawn5.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn6)
+				{
+					BlackPawn6.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+				if (obj->GetId() == BaseObject_Class::BlackPawn7)
+				{
+					BlackPawn7.m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+				}
+			}
+		}
+	}
+	//チェックが次のラウンドで取られるか？
+	{
+		for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
+		{
+			if (obj->GetId() == BaseObject_Class::BlackKing)
+			{
+				for (int h = 0; h < 8; h++)
+				{
+					for (int w = 0; w < 8; w++)
+					{
+						//if(0.5<Math::Vector3::Distance())
+					}
+				}
+			}
+		}
+	}
 }
 
 Math::Vector3 GameScene_Class::BordOnMouse()

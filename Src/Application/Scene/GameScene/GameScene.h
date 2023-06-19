@@ -169,7 +169,23 @@ private:
 		BaseObject_Class::WhitePawn0,BaseObject_Class::WhitePawn1,BaseObject_Class::WhitePawn2,BaseObject_Class::WhitePawn3,BaseObject_Class::WhitePawn4,BaseObject_Class::WhitePawn5,BaseObject_Class::WhitePawn6,BaseObject_Class::WhitePawn7,
 		BaseObject_Class::WhiteRook0,BaseObject_Class::WhiteKnight0,BaseObject_Class::WhiteBishop0,BaseObject_Class::WhiteQueen,BaseObject_Class::WhiteKing,BaseObject_Class::WhiteBishop1,BaseObject_Class::WhiteKnight1,BaseObject_Class::WhiteRook1,
 	};
+	struct AICheck
+	{
+		int m_canMoveBordInfo[8][8] =
+		{
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+			0,0,0,0,0,0,0,0,
+		};
 
+	};
+	AICheck WhiteKing, WhiteQueen, WhiteRook0,WhiteRook1,WhiteBishop0,WhiteBishop1,WhiteKnight0,WhiteKnight1,WhitePawn0,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7;
+	AICheck BlackKing, BlackQueen, BlackRook0, BlackRook1, BlackBishop0, BlackBishop1, BlackKnight0, BlackKnight1, BlackPawn0, BlackPawn1, BlackPawn2, BlackPawn3, BlackPawn4, BlackPawn5, BlackPawn6, BlackPawn7;
 public:
 	static GameScene_Class& instance()
 	{
