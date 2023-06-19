@@ -4,18 +4,35 @@
 #include"Application/Scene/TitleScene/TitleScene.h"
 void SceneManager_Class::Init()
 {
-	SetSharedPtr();
-	SetScene(m_gameScene);
-	//m_titleScene->ActiveTitleSceen(true);
+	m_nowScene = std::make_unique<GameScene_Class>();
 	m_nowScene->Init();
 }
 
 void SceneManager_Class::Update()
 {
 	m_nowScene->Update();
-	if (!(m_titleScene->NowSceneActive()))
+	if (GetAsyncKeyState(VK_RETURN))
 	{
-		//SetScene(m_gameScene);
+		if (m_Scene == GameScene)
+		{
+			std::cout << "TitleScene Shift" << std::endl;
+			m_nowScene.reset();
+			m_nowScene = std::make_unique<TitleScene_Class>();
+			m_nowScene->Init();
+			m_Scene = TitleScene;
+
+		}
+	}
+	if (GetAsyncKeyState(VK_UP))
+	{
+		if (m_Scene == TitleScene)
+		{
+			std::cout << "GameScene Shift" << std::endl;
+			m_nowScene.reset();
+			m_nowScene = std::make_unique<GameScene_Class>();
+			m_nowScene->Init();
+			m_Scene = GameScene;
+		}
 	}
 }
 
@@ -70,19 +87,7 @@ void SceneManager_Class::PostUpdate()
 	m_nowScene->PostUpdate();
 }
 
-void SceneManager_Class::SetSharedPtr()
-{
-	if (!m_titleScene)m_titleScene = std::make_shared<TitleScene_Class>();
-	if (!m_gameScene)m_gameScene = std::make_shared<GameScene_Class>();
-}
-
 void SceneManager_Class::Release()
 {
 	m_nowScene->Release();
-}
-
-void SceneManager_Class::SetScene(const std::shared_ptr<BaseScene_Class> _scene)
-{
-	m_nowScene = _scene;
-	m_nowScene->Init();
 }

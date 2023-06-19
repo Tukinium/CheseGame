@@ -86,7 +86,6 @@ void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
 					switch (m_nowBordInfo[h][w])
 					{
 					case BaseObject_Class::None:
-						m_canMoveBordInfo[h][w] = Empty;
 						break;
 					case BaseObject_Class::BlackPawn0:
 						m_canMoveBordInfo[h][w] = Empty;

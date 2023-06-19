@@ -19,9 +19,7 @@ public:
 	void PostDraw();
 	void PreUpdate();
 	void PostUpdate();
-	void SetSharedPtr();
 	void Release();
-	void SetScene(const std::shared_ptr<BaseScene_Class> _scene);
 
 private:
 	enum Scene
@@ -30,9 +28,7 @@ private:
 		GameScene,
 	};
 	int m_Scene = GameScene;
-	std::shared_ptr<BaseScene_Class>m_nowScene;
-	std::shared_ptr<GameScene_Class>m_gameScene;
-	std::shared_ptr<TitleScene_Class>m_titleScene;
+	std::unique_ptr<BaseScene_Class>m_nowScene;
 public:
 
 	static SceneManager_Class& instance()

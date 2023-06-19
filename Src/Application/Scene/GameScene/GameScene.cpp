@@ -201,6 +201,21 @@ void GameScene_Class::Update()
 			{
 			case GameScene_Class::StartPhase:
 			{
+				{
+					m_beforeSelectPos = { 12345,12345,12345 };
+					m_afterSelectPos = { 12345,12345,12345 };
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							m_canMoveBordInfo[h][w] = 0;
+							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+						}
+					}
+
+					m_movePieceID = -1;
+					m_selectObject = false;
+				}
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
 					m_Phase = StandByPhase;
@@ -293,6 +308,8 @@ void GameScene_Class::Update()
 									m_canMoveBordInfo[h][w] = BaseObject_Class::Select;
 
 									m_bordInfo[h][w] = m_movePieceID;
+
+									m_Phase = EndPhase;
 								}
 							}
 							if (0.5 > (Math::Vector3::Distance(m_beforeSelectPos, { h * 1 - 3.5f,0,w * 1 - 3.5f })))
@@ -300,11 +317,14 @@ void GameScene_Class::Update()
 								m_bordInfo[h][w] = BaseObject_Class::None;
 							}
 
-							m_Phase = EndPhase;
-
 						}
 					}
 				}
+				if (GetAsyncKeyState(VK_RBUTTON))
+				{
+					m_Phase = StartPhase;
+				}
+				
 				break;
 			}
 			case GameScene_Class::EndPhase:
@@ -314,19 +334,6 @@ void GameScene_Class::Update()
 				m_waitTime = waitTime;
 				m_selectObject = false;
 				std::cout << "EndPhaseEnd" << std::endl;
-
-				m_beforeSelectPos = { 12345,12345,12345 };
-				m_afterSelectPos = { 12345,12345,12345 };
-				for (int h = 0; h < 8; h++)
-				{
-					for (int w = 0; w < 8; w++)
-					{
-						m_canMoveBordInfo[h][w] = 0;
-						m_selectPieceCanMoveBord[h][w]->SetAlive(false);
-					}
-				}
-
-				m_movePieceID = -1;
 
 				m_Phase = StartPhase;
 				break;
@@ -490,23 +497,7 @@ void GameScene_Class::PieceSet()
 
 void GameScene_Class::CheseAI()
 {
-	//チェスは最初有利らしい
-	float m_FirstTurnScore;
-	switch (m_FirstTurn)
-	{
-	case Player:
-	{
-		m_FirstTurnScore = -0.5;
-		break;
-	}
-	case Enemy:
-	{
-		m_FirstTurnScore = 0.5;
-		break;
-	}
-	default:
-		break;
-	}
+
 }
 
 Math::Vector3 GameScene_Class::BordOnMouse()
