@@ -53,22 +53,22 @@ int BishopPieceObject_Class::CanMoveBordInfo(int h, int w)
 		}
 	}
 	GetMassCenter();
-	int i = 0;
-	int iH;
-	int iW;
-	for (int n = 0; iH < 8 || iW < 8; n++)
+	int n = 0; int n2 = 0;
+	bool Exit = false;
+	for (int i = 0;!Exit;i++)
 	{
-		iH = n + centerH;
-		iW = n + centerW;
-		m_canMoveBordInfo[n][n] = CanMove;
+		n = centerH + i;
+		n2 = centerW + i;
+		if (n >= 8 || n2 >= 8)
+		{
+			Exit = true;
+		}
+		m_canMoveBordInfo[n][n2] = CanMove;
+		//std::cout << m_canMoveBordInfo[n][n2] << std::endl;
 	}
-
-	for (int n = 8; n + centerH > -1 || n + centerW > -1; n--)
-	{
-		//m_canMoveBordInfo[n][n] = CanMove;
-	}
-
 	m_canMoveBordInfo[centerH][centerW] = Me;
+	
+	/*
 	for (int h = 0; h < 8; h++)
 	{
 		for (int w = 0; w < 8; w++)
@@ -165,5 +165,6 @@ int BishopPieceObject_Class::CanMoveBordInfo(int h, int w)
 			}
 		}
 	}
+	*/
 	return m_canMoveBordInfo[h][w];
 }
