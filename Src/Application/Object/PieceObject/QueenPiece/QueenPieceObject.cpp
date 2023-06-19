@@ -29,7 +29,7 @@ void QueenPieceObject_Class::Init()
 	PieceBaseObject_Class::Init();
 }
 
-int QueenPieceObject_Class::SetCanMoveBordInfo(int h, int w)
+void QueenPieceObject_Class::GenCanMoveBordInfo()
 {
 	for (int h = 0; h < 8; h++)
 	{
@@ -38,119 +38,97 @@ int QueenPieceObject_Class::SetCanMoveBordInfo(int h, int w)
 			m_canMoveBordInfo[h][w] = 0;
 		}
 	}
-	GetMassCenter();
-	if (m_color == kWhiteColor)
+	GenMassCenter();
+
+	for (int h = 0; h < 3; h++)
 	{
-		m_canMoveBordInfo[centerH - 1][centerW] = CanMove;
-		if (!m_firstMoved)
+		for (int w = 0; w < 3; w++)
 		{
-			m_canMoveBordInfo[centerH - 2][centerW] = CanMove;
+			m_canMoveBordInfo[centerH - 1 + h][centerW - 1 + w] = CanMove;
 		}
 	}
-	if (m_color == kBlackColor)
+
+	int i = 0;
+	for (int n4 = 8; n4 > -1; n4 = centerW - i)
 	{
-		m_canMoveBordInfo[centerH + 1][centerW] = CanMove;
-		if (!m_firstMoved)
+		m_canMoveBordInfo[centerH][n4] = CanMove;
+		if (n4 == 8)
 		{
-			m_canMoveBordInfo[centerH + 2][centerW] = CanMove;
+			m_canMoveBordInfo[centerH][n4] = Empty;
 		}
+		i++;
 	}
+
+	i = 0;
+	for (int n1 = 0; n1 <= 8; n1 = centerH + i)
+	{
+		i++;
+		m_canMoveBordInfo[n1][centerW] = CanMove;
+	}
+
+	i = 0;
+	for (int n2 = 8; n2 > -1; n2 = centerH - i)
+	{
+		i++;
+		m_canMoveBordInfo[n2][centerW] = CanMove;
+	}
+
+	i = 0;
+	for (int n3 = centerW; n3 < 8; n3++)
+	{
+		i++;
+		m_canMoveBordInfo[centerH][n3] = CanMove;
+	}
+
+	int w = 0;
+	int h = 0;
+	i = 0;
+	for (int n = 0; n < 8; n++)
+	{
+		h = centerH + n;
+		w = centerW + n;
+		if (h > 8 || w > 8)
+		{
+			break;
+		}
+		m_canMoveBordInfo[h][w] = CanMove;
+	}
+
+	for (int n = 0; n < 8; n++)
+	{
+		h = centerH - n;
+		w = centerW - n;
+		if (h < 0 || w < 0)
+		{
+			break;
+		}
+		m_canMoveBordInfo[h][w] = CanMove;
+	}
+
+	for (int n = 0; n < 8; n++)
+	{
+		h = centerH - n;
+		w = centerW + n;
+		if (h < 0 || w > 8)
+		{
+			break;
+		}
+		m_canMoveBordInfo[h][w] = CanMove;
+	}
+
+	for (int n = 0; n < 8; n++)
+	{
+		h = centerH + n;
+		w = centerW - n;
+		if (h > 8 || w < 0)
+		{
+			break;
+		}
+		m_canMoveBordInfo[h][w] = CanMove;
+	}
+
 	m_canMoveBordInfo[centerH][centerW] = Me;
-	for (int h = 0; h < 8; h++)
-	{
-		for (int w = 0; w < 8; w++)
-		{
-			if (m_canMoveBordInfo[h][w] == CanMove)
-			{
-				switch (m_nowBordInfo[h][w])
-				{
-				case BaseObject_Class::None:
-					break;
-				case BaseObject_Class::WhitePawn0:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhitePawn1:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhitePawn2:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhitePawn3:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhitePawn4:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhitePawn5:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhitePawn6:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhitePawn7:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteKnight0:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteKnight1:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteRook0:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteRook1:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteBishop0:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteBishop1:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteQueen:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::WhiteKing:
-					m_canMoveBordInfo[h][w] = Empty;
-					break;
-				case BaseObject_Class::BlackPawn0:
-					break;
-				case BaseObject_Class::BlackPawn1:
-					break;
-				case BaseObject_Class::BlackPawn2:
-					break;
-				case BaseObject_Class::BlackPawn3:
-					break;
-				case BaseObject_Class::BlackPawn4:
-					break;
-				case BaseObject_Class::BlackPawn5:
-					break;
-				case BaseObject_Class::BlackPawn6:
-					break;
-				case BaseObject_Class::BlackPawn7:
-					break;
-				case BaseObject_Class::BlackKnight0:
-					break;
-				case BaseObject_Class::BlackKnight1:
-					break;
-				case BaseObject_Class::BlackRook0:
-					break;
-				case BaseObject_Class::BlackRook1:
-					break;
-				case BaseObject_Class::BlackBishop0:
-					break;
-				case BaseObject_Class::BlackBishop1:
-					break;
-				case BaseObject_Class::BlackQueen:
-					break;
-				case BaseObject_Class::BlackKing:
-					break;
-				default:
-					break;
-				}
-			}
-		}
-	}
-	return m_canMoveBordInfo[h][w];
+	PieceMoveFixForTeamAreaNotMove();
 }
+
+

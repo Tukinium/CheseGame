@@ -77,7 +77,7 @@ public:
 	{
 		return m_color;
 	}
-	void GetMassCenter()
+	void GenMassCenter()
 	{
 		for (int h = 0; h < 8; h++)
 		{

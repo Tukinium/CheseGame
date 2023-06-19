@@ -46,4 +46,58 @@ void KnightPieceObject_Class::SetDefaultPos(int n)
 
 void KnightPieceObject_Class::GenCanMoveBordInfo()
 {
+	for (int h = 0; h < 8; h++)
+	{
+		for (int w = 0; w < 8; w++)
+		{
+			m_canMoveBordInfo[h][w] = 0;
+		}
+	}
+
+	GenMassCenter();
+	if (centerH + 2 < 8)
+	{
+		if (centerW + 1 < 8)
+		{
+			m_canMoveBordInfo[centerH + 2][centerW + 1] = CanMove;
+		}
+		if (centerW - 1 < 8)
+		{
+			m_canMoveBordInfo[centerH + 2][centerW - 1] = CanMove;
+		}
+	}
+	if (centerH - 2 > 0)
+	{
+		if (centerW - 1 > 0)
+		{
+			m_canMoveBordInfo[centerH - 2][centerW - 1] = CanMove;
+		}
+		if (centerW + 1 < 8)
+		{
+			m_canMoveBordInfo[centerH - 2][centerW + 1] = CanMove;
+		}
+	}
+	if (centerW + 2 < 8)
+	{
+		if (centerH - 1 > 0)
+		{
+			m_canMoveBordInfo[centerH - 1][centerW + 2] = CanMove;
+		}
+		if (centerH + 1 < 8)
+		{
+			m_canMoveBordInfo[centerH + 1][centerW + 2] = CanMove;
+		}
+	}
+	if (centerW - 2 < 8)
+	{
+		if (centerH - 1 > 0)
+		{
+			m_canMoveBordInfo[centerH - 1][centerW - 2] = CanMove;
+		}
+		if (centerH + 1 < 8)
+		{
+			m_canMoveBordInfo[centerH + 1][centerW - 2] = CanMove;
+		}
+	}
+	PieceMoveFixForTeamAreaNotMove();
 }

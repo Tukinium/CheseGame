@@ -5,6 +5,7 @@ class KnightPieceObject_Class: public PieceBaseObject_Class
 public:
 	void Init()override;
 	void SetDefaultPos(int n)override;
+	void GenCanMoveBordInfo()override;
 private:
 	const float BlackDefaultPosX = 0.5 - 3;
 	const float BlackDefaultPosZ = 0.5 - 4;

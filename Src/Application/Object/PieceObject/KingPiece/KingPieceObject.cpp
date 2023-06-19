@@ -33,24 +33,16 @@ void KingPieceObject_Class::SetDefaultPos(int n)
 	}
 }
 
-int KingPieceObject_Class::SetCanMoveBordInfo(int h,int w)
+void KingPieceObject_Class::GenCanMoveBordInfo()
 {
-	int centerH;
-	int centerW;
-	//自分の中心を求める
 	for (int h = 0; h < 8; h++)
 	{
 		for (int w = 0; w < 8; w++)
 		{
-			Math::Vector3 massPos = { h * 1 - 3.5f,0,h * 1 - 3.5f };
-			if (0.5f < Math::Vector3::Distance(massPos,m_pos))
-			{
-				centerH = h;
-				centerW = w;
-			}
+			m_canMoveBordInfo[h][w] = 0;
 		}
 	}
-
+	GenMassCenter();
 	//中心を基準に配置
 	for (int h = 0; h < 3; h++)
 	{
@@ -60,5 +52,5 @@ int KingPieceObject_Class::SetCanMoveBordInfo(int h,int w)
 		}
 	}
 	m_canMoveBordInfo[centerH][centerW] = Me;
-	return m_canMoveBordInfo[h][w];
+	PieceMoveFixForTeamAreaNotMove();
 }
