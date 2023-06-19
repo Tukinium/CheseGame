@@ -43,3 +43,7 @@ void KnightPieceObject_Class::SetDefaultPos(int n)
 		break;
 	}
 }
+
+void KnightPieceObject_Class::GenCanMoveBordInfo()
+{
+}
