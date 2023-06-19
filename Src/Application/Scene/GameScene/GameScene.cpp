@@ -94,7 +94,6 @@ void GameScene_Class::SetSharedPtr()
 
 	if (!m_selectPieceTypeUI)m_selectPieceTypeUI = std::make_shared<SelectingPieceTypeNameUI>();
 	m_baseObjList.push_back(m_selectPieceTypeUI);
-	//m_selectPieceUI->SetCamera(m_camera);
 
 
 	for (int n = 0; n < 8; n++)
