@@ -46,7 +46,9 @@ void RookPieceObject_Class::SetDefaultPos(int n)
 	}
 }
 
-int RookPieceObject_Class::CanMoveBordInfo(int h, int w)
+
+
+void RookPieceObject_Class::GenCanMoveBordInfo()
 {
 	for (int h = 0; h < 8; h++)
 	{
@@ -186,5 +188,4 @@ int RookPieceObject_Class::CanMoveBordInfo(int h, int w)
 			}
 		}
 	}
-	return m_canMoveBordInfo[h][w];
 }

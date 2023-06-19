@@ -33,7 +33,7 @@ void KingPieceObject_Class::SetDefaultPos(int n)
 	}
 }
 
-int KingPieceObject_Class::CanMoveBordInfo(int h,int w)
+int KingPieceObject_Class::SetCanMoveBordInfo(int h,int w)
 {
 	int centerH;
 	int centerW;

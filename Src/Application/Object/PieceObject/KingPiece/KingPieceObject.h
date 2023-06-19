@@ -5,7 +5,7 @@ class KingPieceObject_Class : public PieceBaseObject_Class
 public:
 	void Init()override;
 	void SetDefaultPos(int n)override;
-	int CanMoveBordInfo(int h,int w)override;
+	int SetCanMoveBordInfo(int h,int w)override;
 private:
 	
 	const float BlackDefaultPosX = 0.5 - 1;

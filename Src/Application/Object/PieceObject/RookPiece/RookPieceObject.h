@@ -5,7 +5,7 @@ class RookPieceObject_Class : public PieceBaseObject_Class
 public:
 	void Init()override;
 	void SetDefaultPos(int n)override;
-	int CanMoveBordInfo(int h, int w)override;
+	void GenCanMoveBordInfo()override;
 private:
 	const float BlackDefaultPosX = 0.5 - 4;
 	const float BlackDefaultPosZ = 0.5 - 4;

@@ -233,7 +233,8 @@ void GameScene_Class::Update()
 								for (int w = 0; w < 8; w++)
 								{
 									//オブジェクトから動ける範囲が配列で返却される
-									m_canMoveBordInfo[h][w] = obj->CanMoveBordInfo(h, w);
+									obj->GenCanMoveBordInfo();
+									m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
 									printf("%d_",m_canMoveBordInfo[h][w]);
 								}
 								printf("\n");

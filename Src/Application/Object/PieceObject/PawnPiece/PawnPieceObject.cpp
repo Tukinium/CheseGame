@@ -133,7 +133,7 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	}
 }
 
-int PawnPieceObject_Class::CanMoveBordInfo(int h, int w)
+int PawnPieceObject_Class::SetCanMoveBordInfo(int h, int w)
 {
 	for (int h = 0; h < 8; h++)
 	{

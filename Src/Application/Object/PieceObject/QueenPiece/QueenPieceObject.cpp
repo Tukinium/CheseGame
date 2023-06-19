@@ -29,7 +29,7 @@ void QueenPieceObject_Class::Init()
 	PieceBaseObject_Class::Init();
 }
 
-int QueenPieceObject_Class::CanMoveBordInfo(int h, int w)
+int QueenPieceObject_Class::SetCanMoveBordInfo(int h, int w)
 {
 	for (int h = 0; h < 8; h++)
 	{

@@ -18,7 +18,8 @@ public:
 	virtual void PostUpdate()override;
 	virtual void MathMatrix();
 	virtual bool thisPiece() { return false; }
-	virtual int CanMoveBordInfo(int h, int w) { return 0; };
+	virtual int SetCanMoveBordInfo(int h, int w) { return m_canMoveBordInfo[h][w]; };
+	virtual void GenCanMoveBordInfo() {};
 	bool GetfirstMoved()
 	{
 		return m_firstMoved;
