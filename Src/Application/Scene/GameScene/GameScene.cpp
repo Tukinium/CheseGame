@@ -74,17 +74,17 @@ void GameScene_Class::SetSharedPtr()
 	m_baseObjList.push_back(m_sky);
 
 	if (!m_nowSelectBord)m_nowSelectBord = std::make_shared<SelectingBord_Class>();
-	m_nowSelectBord->SetColor(kRedColor);
+	m_nowSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Now/Bord_NowSelecting.gltf");
 	m_nowSelectBord->SetAlive(false);
 	m_baseObjList.push_back(m_nowSelectBord);
 
 	if (!m_afterSelectBord)m_afterSelectBord = std::make_shared<SelectingBord_Class>();
-	m_afterSelectBord->SetColor(kBlueColor);
+	m_afterSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/After/Bord_AfterSelecting.gltf");
 	m_afterSelectBord->SetAlive(false);
 	m_baseObjList.push_back(m_afterSelectBord);
 
 	if (!m_beforeSelectBord)m_beforeSelectBord = std::make_shared<SelectingBord_Class>();
-	m_beforeSelectBord->SetColor({ 0,0,1,0.5f });
+	m_beforeSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Before/Bord_BeforeSelecting.gltf");
 	m_beforeSelectBord->SetAlive(false);
 	m_baseObjList.push_back(m_beforeSelectBord);
 
@@ -175,6 +175,7 @@ void GameScene_Class::SetSharedPtr()
 		{
 			Math::Vector3 massPos = { h * 1.0f - 3.5f,0.01f,w * 1.0f - 3.5f };
 			if (!m_selectPieceCanMoveBord[h][w])m_selectPieceCanMoveBord[h][w] = std::make_shared<SelectingBord_Class>();
+			m_selectPieceCanMoveBord[h][w]->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/CanSelect/Bord_CanSelecting.gltf");
 			m_selectPieceCanMoveBord[h][w]->SetPos(massPos);
 			m_selectPieceCanMoveBord[h][w]->SetAlive(false);
 			m_baseObjList.push_back(m_selectPieceCanMoveBord[h][w]);
