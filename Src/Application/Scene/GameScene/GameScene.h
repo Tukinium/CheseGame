@@ -12,7 +12,8 @@ class RookPieceObject_Class;
 class KnightPieceObject_Class;
 
 class PieceSelectingUI_Class;
-class SelectingPieceTypeNameUI;
+class OnTurnStartViewUI_Class;
+class NumUI_Class;
 #include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/BaseScene/BaseScene.h"
 
@@ -25,7 +26,16 @@ public:
 	 void PreUpdate()override;
 	 void PostUpdate()override;
 	 void PreDraw()override;
-
+	 void KillPiece(int _id)
+	 {
+		 for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
+		 {
+			 if (obj->GetId() == _id)
+			 {
+				 obj->SetAlive(false);
+			 }
+		 }
+	 }
 	 void Release()override;
 
 	 //ピースの再配置
@@ -85,6 +95,8 @@ public:
 	 void CreateCons();
 	 void DestoryCons();
 
+	 
+
 private:
 	std::shared_ptr<SkyBox_Class>m_sky;
 	std::shared_ptr<Camera_Class>m_camera;
@@ -97,7 +109,8 @@ private:
 	std::shared_ptr<SelectingBord_Class>m_selectPieceCanMoveBord[8][8];
 	
 	std::shared_ptr<PieceSelectingUI_Class>m_pieceSelectUI;
-	std::shared_ptr<SelectingPieceTypeNameUI>m_selectPieceTypeUI;
+	std::shared_ptr<OnTurnStartViewUI_Class>m_onTurnViewUI;
+	std::shared_ptr<NumUI_Class>m_numUI;
 
 	std::shared_ptr<KingPieceObject_Class>m_kingBlack;
 	std::shared_ptr<KingPieceObject_Class>m_kingWhite;
@@ -123,6 +136,10 @@ private:
 	bool m_selectObject = false;
 	int m_Trun = Player;
 	POINT MousePos;
+
+	int m_round = 0;
+	int m_deathPieceID = -1;
+	bool m_deathPiece;
 	
 	FILE* fp;
 	int selectBordMode;
@@ -135,6 +152,9 @@ private:
 	float m_aiScore;
 
 	int m_movePieceID;
+
+	bool m_startPhaseInit = false;
+	bool m_cancel;
 
 	int m_bordInfo[8][8] =
 	{

@@ -160,7 +160,7 @@ protected:
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 	};
-	const float Defalut_Scale_Const = 1.0f;
+	const float DEFAULT_SCALE = 1.0f;
 
 	Math::Matrix m_transMat = Math::Matrix::Identity;
 	Math::Vector3 m_pos = {};
@@ -172,7 +172,7 @@ protected:
 	Math::Vector3 m_rotateVec = {};
 
 	Math::Matrix m_scaleMat;
-	float m_scale = Defalut_Scale_Const;
+	float m_scale = DEFAULT_SCALE;
 
 	bool m_Alive = false;
 

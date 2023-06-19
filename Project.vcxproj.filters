@@ -130,6 +130,9 @@
     <Filter Include="Src\Application\Object\UI\OnTurnViewUI">
       <UniqueIdentifier>{db11cc25-18fa-4b21-9dd0-c155ad66f6e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\UI\NumUI">
+      <UniqueIdentifier>{32e8dd7f-0b40-4e4e-8d85-bb344afdeeca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -309,6 +312,12 @@
     <ClInclude Include="Src\Application\UI\UIBaseObject.h">
       <Filter>Src\Application\Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.h">
+      <Filter>Src\Application\Object\UI\OnTurnViewUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\UI\NumUI\NumUI_Class.h">
+      <Filter>Src\Application\Object\UI\NumUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -463,6 +472,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\UI\UIBaseObject.cpp">
       <Filter>Src\Application\Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.cpp">
+      <Filter>Src\Application\Object\UI\OnTurnViewUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\UI\NumUI\NumUI_Class.cpp">
+      <Filter>Src\Application\Object\UI\NumUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

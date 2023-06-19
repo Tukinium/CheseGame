@@ -3,6 +3,7 @@
 void PieceBaseObject_Class::DrawLit()
 {
 	if (!m_thisModel && !m_model)return;
+	if (!m_Alive)return;
 	KdHD2DShader.DrawModel(*m_model, m_mWorld);
 }
 
@@ -10,7 +11,7 @@ void PieceBaseObject_Class::Init()
 {
 	m_type = Model;
 	//SetAsset(m_type, fillPass);
-	m_scale = Defalut_Scale_Const;
+	m_scale = DEFAULT_SCALE;
 }
 
 void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
@@ -31,7 +32,7 @@ void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
 					case BaseObject_Class::WhitePawn1:
-						m_canMoveBordInfo[h][w] = Empty;
+						//m_canMoveBordInfo[h][w] = Empty;
 						break;
 					case BaseObject_Class::WhitePawn2:
 						m_canMoveBordInfo[h][w] = Empty;
@@ -74,11 +75,13 @@ void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
 						break;
 					case BaseObject_Class::WhiteKing:
 						m_canMoveBordInfo[h][w] = Empty;
+						break;
 					default:
 						break;
 					}
 				}
 			}
+			/*
 			if (GetColor() == kBlackColor)
 			{
 				if (m_canMoveBordInfo[h][w] == CanMove)
@@ -140,6 +143,7 @@ void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
 					}
 				}
 			}
+			*/
 		}
 	}
 }

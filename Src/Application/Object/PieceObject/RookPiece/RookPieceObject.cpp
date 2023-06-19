@@ -6,7 +6,7 @@ void RookPieceObject_Class::Init()
 	m_type = Model;
 	fillPass = "Asset/Model/Piece/Rook/Rook.gltf";
 	SetAsset(m_type, fillPass);
-	m_scale = Defalut_Scale_Const;
+	m_scale = DEFAULT_SCALE;
 }
 
 void RookPieceObject_Class::SetDefaultPos(int n)

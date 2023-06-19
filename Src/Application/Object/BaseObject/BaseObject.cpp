@@ -7,7 +7,7 @@ void BaseObject_Class::Update()
 void BaseObject_Class::Init()
 {
 	SetAsset(m_type, fillPass);
-	m_scale = Defalut_Scale_Const;
+	m_scale = DEFAULT_SCALE;
 	m_Alive = true;
 }
 

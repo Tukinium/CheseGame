@@ -11,6 +11,8 @@
 #include"Application/Object/CameraObject/Camera.h"
 
 #include"Application/UI/PieceSelectingUI/PieceSelectingUI.h"
+#include"Application/UI/OnTurnViewUI/OnTurnViewUI_Class.h"
+#include"Application/UI/NumUI/NumUI_Class.h"
 
 void GameScene_Class::Init()
 {
@@ -45,52 +47,59 @@ void GameScene_Class::SetSharedPtr()
 	m_bord->Init();
 	m_baseObjList.push_back(m_bord);
 
-	if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
-	m_kingWhite->SetColor(kWhiteColor);
-	m_kingWhite->SetId(BaseObject_Class::WhiteKing);
-	m_kingWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/King/King.gltf");
-	m_baseObjList.push_back(m_kingWhite);
-
-	if (!m_kingBlack)m_kingBlack = std::make_shared<KingPieceObject_Class>();
-	m_kingBlack->SetColor(kBlackColor);
-	m_kingBlack->SetId(BaseObject_Class::BlackKing);
-	m_kingBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/King/King.gltf");
-	m_baseObjList.push_back(m_kingBlack);
-
-	if (!m_queenWhite)m_queenWhite = std::make_shared<QueenPieceObject_Class>();
-	m_queenWhite->SetColor(kWhiteColor);
-	m_queenWhite->SetId(BaseObject_Class::WhiteQueen);
-	m_queenWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Queen/Queen.gltf");
-	m_baseObjList.push_back(m_queenWhite);
-
-	if (!m_queenBlack)m_queenBlack = std::make_shared<QueenPieceObject_Class>();
-	m_queenBlack->SetColor(kBlackColor);
-	m_queenBlack->SetId(BaseObject_Class::BlackQueen);
-	m_queenBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Queen/Queen.gltf");
-	m_baseObjList.push_back(m_queenBlack);
-
-	if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
-	m_baseObjList.push_back(m_sky);
-
-	if (!m_nowSelectBord)m_nowSelectBord = std::make_shared<SelectingBord_Class>();
-	m_nowSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Now/Bord_NowSelecting.gltf");
-	m_nowSelectBord->SetAlive(false);
-	m_baseObjList.push_back(m_nowSelectBord);
-
-	if (!m_afterSelectBord)m_afterSelectBord = std::make_shared<SelectingBord_Class>();
-	m_afterSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/After/Bord_AfterSelecting.gltf");
-	m_afterSelectBord->SetAlive(false);
-	m_baseObjList.push_back(m_afterSelectBord);
-
-	if (!m_beforeSelectBord)m_beforeSelectBord = std::make_shared<SelectingBord_Class>();
-	m_beforeSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Before/Bord_BeforeSelecting.gltf");
-	m_beforeSelectBord->SetAlive(false);
-	m_baseObjList.push_back(m_beforeSelectBord);
-
 	if (!m_pieceSelectUI)m_pieceSelectUI = std::make_shared<PieceSelectingUI_Class>();
 	m_baseObjList.push_back(m_pieceSelectUI);
 
+	if (!m_onTurnViewUI)m_onTurnViewUI = std::make_shared<OnTurnStartViewUI_Class>();
+	m_baseObjList.push_back(m_onTurnViewUI);
 
+	if (!m_numUI)m_numUI = std::make_shared<NumUI_Class>();
+	m_baseObjList.push_back(m_numUI);
+
+	{
+		if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
+		m_kingWhite->SetColor(kWhiteColor);
+		m_kingWhite->SetId(BaseObject_Class::WhiteKing);
+		m_kingWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/King/King.gltf");
+		m_baseObjList.push_back(m_kingWhite);
+
+		if (!m_kingBlack)m_kingBlack = std::make_shared<KingPieceObject_Class>();
+		m_kingBlack->SetColor(kBlackColor);
+		m_kingBlack->SetId(BaseObject_Class::BlackKing);
+		m_kingBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/King/King.gltf");
+		m_baseObjList.push_back(m_kingBlack);
+
+		if (!m_queenWhite)m_queenWhite = std::make_shared<QueenPieceObject_Class>();
+		m_queenWhite->SetColor(kWhiteColor);
+		m_queenWhite->SetId(BaseObject_Class::WhiteQueen);
+		m_queenWhite->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/White/Queen/Queen.gltf");
+		m_baseObjList.push_back(m_queenWhite);
+
+		if (!m_queenBlack)m_queenBlack = std::make_shared<QueenPieceObject_Class>();
+		m_queenBlack->SetColor(kBlackColor);
+		m_queenBlack->SetId(BaseObject_Class::BlackQueen);
+		m_queenBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Queen/Queen.gltf");
+		m_baseObjList.push_back(m_queenBlack);
+
+		if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
+		m_baseObjList.push_back(m_sky);
+
+		if (!m_nowSelectBord)m_nowSelectBord = std::make_shared<SelectingBord_Class>();
+		m_nowSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Now/Bord_NowSelecting.gltf");
+		m_nowSelectBord->SetAlive(false);
+		m_baseObjList.push_back(m_nowSelectBord);
+
+		if (!m_afterSelectBord)m_afterSelectBord = std::make_shared<SelectingBord_Class>();
+		m_afterSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/After/Bord_AfterSelecting.gltf");
+		m_afterSelectBord->SetAlive(false);
+		m_baseObjList.push_back(m_afterSelectBord);
+
+		if (!m_beforeSelectBord)m_beforeSelectBord = std::make_shared<SelectingBord_Class>();
+		m_beforeSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Before/Bord_BeforeSelecting.gltf");
+		m_beforeSelectBord->SetAlive(false);
+		m_baseObjList.push_back(m_beforeSelectBord);
+
+	}
 
 	for (int n = 0; n < 8; n++)
 	{
@@ -181,9 +190,9 @@ void GameScene_Class::SetSharedPtr()
 
 void GameScene_Class::Update()
 {
-	PieceSet();
 	GetCursorPos(&MousePos);
 	m_camera->setCamViewMode(m_camera->UpperCamMode);
+	PieceSet();
 	BordOnMouse();
 	SelectPieceUIActive();
 
@@ -197,7 +206,10 @@ void GameScene_Class::Update()
 			{
 			case GameScene_Class::StartPhase:
 			{
+				if (!m_startPhaseInit)
 				{
+					m_movePieceID = -1;
+					m_selectObject = false;
 					m_beforeSelectPos = { 12345,12345,12345 };
 					m_afterSelectPos = { 12345,12345,12345 };
 					for (int h = 0; h < 8; h++)
@@ -208,14 +220,20 @@ void GameScene_Class::Update()
 							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
 						}
 					}
+					m_onTurnViewUI->SetRoundNum(m_round);
+					m_onTurnViewUI->Entry();
 
-					m_movePieceID = -1;
-					m_selectObject = false;
+					m_numUI->SetNum(m_round);
+					m_numUI->SetPos2({ -150,0,0 });
+					m_numUI->SetAlive(true);
+
 				}
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
 					m_Phase = StandByPhase;
 					std::cout << "StartPhaseEnd" << std::endl;
+					m_onTurnViewUI->Leave();
+					m_numUI->SetAlive(false);
 					m_waitTime = waitTime;
 				}
 				break;
@@ -284,7 +302,8 @@ void GameScene_Class::Update()
 				if (GetAsyncKeyState(VK_RBUTTON))
 				{
 					m_selectObject = false;
-					m_Phase = StandByPhase;
+					m_startPhaseInit = false;
+					m_Phase = StartPhase;
 				}
 				break;
 			}
@@ -303,6 +322,12 @@ void GameScene_Class::Update()
 								{
 									m_canMoveBordInfo[h][w] = BaseObject_Class::Select;
 
+									if (m_bordInfo[h][w] != BaseObject_Class::None)
+									{
+										m_deathPieceID = m_bordInfo[h][w];
+										KillPiece(m_bordInfo[h][w]);
+										m_bordInfo[h][w] = BaseObject_Class::None;
+									}
 									m_bordInfo[h][w] = m_movePieceID;
 
 									m_Phase = EndPhase;
@@ -312,35 +337,33 @@ void GameScene_Class::Update()
 							{
 								m_bordInfo[h][w] = BaseObject_Class::None;
 							}
-
+							
 						}
 					}
 				}
 				if (GetAsyncKeyState(VK_RBUTTON))
 				{
+					m_startPhaseInit = false;
 					m_Phase = StartPhase;
 				}
-
 				break;
 			}
 			case GameScene_Class::EndPhase:
 			{
-
 				m_Trun = Player;
 				m_waitTime = waitTime;
 				m_selectObject = false;
 				std::cout << "EndPhaseEnd" << std::endl;
-
+				m_startPhaseInit = false;
+				m_round += 1;
 				m_Phase = StartPhase;
 				break;
 			}
 			default:
 				break;
 			}
-
 			break;
 		}
-
 		}
 	}
 

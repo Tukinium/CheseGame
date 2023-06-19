@@ -162,6 +162,8 @@
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Src\Application\Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h" />
+    <ClInclude Include="Src\Application\UI\NumUI\NumUI_Class.h" />
+    <ClInclude Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.h" />
     <ClInclude Include="Src\Application\UI\PieceSelectingUI\PieceSelectingUI.h" />
     <ClInclude Include="Src\Application\UI\UIBaseObject.h" />
     <ClInclude Include="Src\Framework\Direct3D\KdMaterial.h" />
@@ -217,6 +219,8 @@
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp" />
+    <ClCompile Include="Src\Application\UI\NumUI\NumUI_Class.cpp" />
+    <ClCompile Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.cpp" />
     <ClCompile Include="Src\Application\UI\PieceSelectingUI\PieceSelectingUI.cpp" />
     <ClCompile Include="Src\Application\UI\UIBaseObject.cpp" />
     <ClCompile Include="Src\Framework\Direct3D\KdMaterial.cpp">

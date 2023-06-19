@@ -4,7 +4,7 @@ void UIBaseObject_Class::Init()
 {
 	m_type = Sprite;
 	SetAsset(m_type, fillPass);
-	m_scale = Defalut_Scale_Const;
+	m_scale = DEFAULT_SCALE;
 	m_Alive = false;
 }
 
@@ -20,10 +20,4 @@ void UIBaseObject_Class::DrawSprite()
 
 void UIBaseObject_Class::PreUpdate()
 {
-	std::shared_ptr<Camera_Class>spCamera = m_wpCamera.lock();
-	if (spCamera)
-	{
-		KdDirect3D::Instance().ConvertWorldToScreen(*spCamera->WorkCamera(), m_pos, m_pos);
-	}
-	MathMatrix();
 }
