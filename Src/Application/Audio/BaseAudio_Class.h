@@ -1,9 +1,8 @@
 #pragma once
-class BaseAudio_Class
+#include"Application/Object/BaseObject/BaseObject.h"
+class BaseAudio_Class : public BaseObject_Class
 {
 public:
-	BaseAudio_Class() {};
-	~BaseAudio_Class() {};
 	void SetAudio(std::string _pass)
 	{
 		m_audioPass = _pass;
