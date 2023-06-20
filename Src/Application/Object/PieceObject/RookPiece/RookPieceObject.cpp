@@ -60,45 +60,45 @@ void RookPieceObject_Class::GenCanMoveBordInfo()
 	GenMassCenter();
 
 	int i = 0;
-	for (int n4 = 8; n4 > -1; n4 = centerW - i)
+	for (int n = 8; n > -1; n = centerW - i)
 	{
-		m_canMoveBordInfo[centerH][n4] = CanMove;
-		if (n4 == 8)
+		m_canMoveBordInfo[centerH][n] = CanMove;
+		if (n == 8)
 		{
-			m_canMoveBordInfo[centerH][n4] = Empty;
+			m_canMoveBordInfo[centerH][n] = Empty;
+		}
+		if (m_nowBordInfo[centerH][n] != None)
+		{
+			m_canMoveBordInfo[centerH][n + 1] = CanMove;
+			break;
 		}
 		i++;
 	}
 
 	i = 0;
-	for (int n1 = 0; n1 <= 8; n1 = centerH + i)
+	for (int n = 0; n <= 8; n = centerW + i)
 	{
 		i++;
-		m_canMoveBordInfo[n1][centerW] = CanMove;
-		if (m_nowBordInfo[n1][centerH] != None)
+		m_canMoveBordInfo[centerH][n] = CanMove;
+		if (m_nowBordInfo[centerH][n] != None)
 		{
-			//break;
+			m_canMoveBordInfo[centerH][n + 1] = CanMove;
+			break;
 		}
 	}
 
 	i = 0;
-	for (int n2 = 8; n2 > -1; n2 = centerH - i)
+	for (int n = 0; n <= 8; n = centerH + i)
 	{
 		i++;
-		m_canMoveBordInfo[n2][centerW] = CanMove;
+		m_canMoveBordInfo[n][centerW] = CanMove;
 	}
 
 	i = 0;
-	for (int n3 = centerW; n3 < 8; n3++)
+	for (int n = 8; n > -1; n = centerH - i)
 	{
 		i++;
-		m_canMoveBordInfo[centerH][n3] = CanMove;
-		if (m_nowBordInfo[centerH][n3 += 1] != None)
-		{
-			std::cout << i << "‰ñ–Ú" << std::endl;
-			//m_canMoveBordInfo[centerH][n3 += 1] = CanMove;
-			//break;
-		}
+		m_canMoveBordInfo[n][centerW] = CanMove;
 	}
 
 	m_canMoveBordInfo[centerH][centerW] = Me;
