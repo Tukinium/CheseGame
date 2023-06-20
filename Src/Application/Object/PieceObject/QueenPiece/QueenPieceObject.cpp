@@ -40,91 +40,45 @@ void QueenPieceObject_Class::GenCanMoveBordInfo()
 	}
 	GenMassCenter();
 
-	for (int h = 0; h < 3; h++)
+	for (int d = 0; centerW - d > -1; d++)
 	{
-		for (int w = 0; w < 3; w++)
+		//std::cout << centerW - d << std::endl;
+		m_canMoveBordInfo[centerH][centerW - d] = CanMove;
+		if (m_nowBordInfo[centerH][centerW - d - 1] != None)
 		{
-			m_canMoveBordInfo[centerH - 1 + h][centerW - 1 + w] = CanMove;
-		}
-	}
-
-	int i = 0;
-	for (int n4 = 8; n4 > -1; n4 = centerW - i)
-	{
-		m_canMoveBordInfo[centerH][n4] = CanMove;
-		if (n4 == 8)
-		{
-			m_canMoveBordInfo[centerH][n4] = Empty;
-		}
-		i++;
-	}
-
-	i = 0;
-	for (int n1 = 0; n1 <= 8; n1 = centerH + i)
-	{
-		i++;
-		m_canMoveBordInfo[n1][centerW] = CanMove;
-	}
-
-	i = 0;
-	for (int n2 = 8; n2 > -1; n2 = centerH - i)
-	{
-		i++;
-		m_canMoveBordInfo[n2][centerW] = CanMove;
-	}
-
-	i = 0;
-	for (int n3 = centerW; n3 < 8; n3++)
-	{
-		i++;
-		m_canMoveBordInfo[centerH][n3] = CanMove;
-	}
-
-	int w = 0;
-	int h = 0;
-	i = 0;
-	for (int n = 0; n < 8; n++)
-	{
-		h = centerH + n;
-		w = centerW + n;
-		if (h > 8 || w > 8)
-		{
+			m_canMoveBordInfo[centerH][centerW - d - 1] = CanMove;
 			break;
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
-
-	for (int n = 0; n < 8; n++)
+	for (int u = 0; centerW + u < 8; u++)
 	{
-		h = centerH - n;
-		w = centerW - n;
-		if (h < 0 || w < 0)
+		//std::cout <<"u_" << centerW + u << std::endl;
+		m_canMoveBordInfo[centerH][centerW + u] = CanMove;
+		if (m_nowBordInfo[centerH][centerW + u + 1] != None)
 		{
+			m_canMoveBordInfo[centerH][centerW + u + 1] = CanMove;
 			break;
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
-
-	for (int n = 0; n < 8; n++)
+	for (int r = 0; centerH - r > -1; r++)
 	{
-		h = centerH - n;
-		w = centerW + n;
-		if (h < 0 || w > 8)
+		//std::cout << centerH - r << std::endl;
+		m_canMoveBordInfo[centerH - r][centerW] = CanMove;
+		if (m_nowBordInfo[centerH - r - 1][centerW] != None)
 		{
+			m_canMoveBordInfo[centerH - r - 1][centerW] = CanMove;
 			break;
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
-
-	for (int n = 0; n < 8; n++)
+	for (int l = 0; centerH + l < 8; l++)
 	{
-		h = centerH + n;
-		w = centerW - n;
-		if (h > 8 || w < 0)
+		//std::cout <<"u_" << centerW + u << std::endl;
+		m_canMoveBordInfo[centerH + l][centerW] = CanMove;
+		if (m_nowBordInfo[centerH + l + 1][centerW] != None)
 		{
+			m_canMoveBordInfo[centerH + l + 1][centerW] = CanMove;
 			break;
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
 
 	m_canMoveBordInfo[centerH][centerW] = Me;

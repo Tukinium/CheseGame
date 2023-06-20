@@ -55,53 +55,58 @@ void BishopPieceObject_Class::GenCanMoveBordInfo()
 
 	GenMassCenter();
 
-	int w = 0;
-	int h = 0;
-	int i = 0;
-	for (int n = 0; n < 8; n++)
+	for (int LD = 0;  LD + centerH < 8 ||  LD + centerW < 8; LD++)
 	{
-		h = centerH + n;
-		w = centerW + n;
-		if (h > 8 || w > 8)
+		//std::cout << n + centerH << "_" << n + centerW << std::endl;
+		m_canMoveBordInfo[centerH + LD][centerW + LD] = CanMove;
+		if (m_nowBordInfo[centerH + LD + 1][centerW + LD + 1] != None)
 		{
+			m_canMoveBordInfo[centerH + LD + 1][centerW + LD + 1] = CanMove;
 			break;
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
-
-	for (int n = 0; n < 8; n++)
+	for (int RU = 0; centerH - RU > -1 || centerW - RU > -1; RU++)
 	{
-		h = centerH - n;
-		w = centerW - n;
-		if (h < 0 || w < 0)
+		//std::cout << centerH - n << "_" << centerW - n << std::endl;
+		m_canMoveBordInfo[centerH - RU][centerW - RU] = CanMove;
+		if (m_nowBordInfo[centerH - RU - 1][centerW - RU - 1] != None)
 		{
+			m_canMoveBordInfo[centerH - RU - 1][centerW - RU - 1] = CanMove;
 			break;
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
-
-	for (int n = 0; n < 8; n++)
+	//ここから下、制限機能不全
+	for (int n = 0; centerH - n > -1; n++)
 	{
-		h = centerH - n;
-		w = centerW + n;
-		if (h < 0 || w > 8)
+		for (int n2 = 0; n2 + centerW < 8; n2++)
 		{
-			break;
+			if (n == n2)
+			{
+				m_canMoveBordInfo[centerH - n][centerW + n2] = CanMove;
+				std::cout << centerH - n << "_" << centerW + n2 << std::endl;
+				if (m_nowBordInfo[centerH - n - 1][centerW + n2 + 1] != None)
+				{
+					m_canMoveBordInfo[centerH - n - 1][centerW + n2 + 1] = CanMove;
+					break;
+				}
+			}
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
-
-	for (int n = 0; n < 8; n++)
+	for (int n = 0; centerH + n < 8; n++)
 	{
-		h = centerH + n;
-		w = centerW - n;
-		if (h > 8 || w < 0)
+		for (int n2 = 0;centerW - n2 > -1; n2++)
 		{
-			break;
+			if (n == n2)
+			{
+				m_canMoveBordInfo[centerH + n][centerW - n2] = CanMove;
+				if (m_nowBordInfo[centerH + n + 1][centerW - n2 - 1] != None)
+				{
+					m_canMoveBordInfo[centerH + n + 1][centerW - n2 - 1] = CanMove;
+					break;
+				}
+			}
 		}
-		m_canMoveBordInfo[h][w] = CanMove;
 	}
-
 	m_canMoveBordInfo[centerH][centerW] = Me;
-	PieceMoveFixForTeamAreaNotMove();
+	//PieceMoveFixForTeamAreaNotMove();
 }

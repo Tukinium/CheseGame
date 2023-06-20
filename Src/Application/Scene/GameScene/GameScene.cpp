@@ -256,7 +256,9 @@ void GameScene_Class::Update()
 								{
 									//クリックしたオブジェクトに現在の盤面状況を渡す
 									obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+									printf("%d_", m_bordInfo[h][w]);
 								}
+								printf("\n");
 							}
 							for (int h = 0; h < 8; h++)
 							{
@@ -265,10 +267,18 @@ void GameScene_Class::Update()
 									//オブジェクトから動ける範囲が配列で返却される
 									obj->GenCanMoveBordInfo();
 									m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+									//printf("%d_", m_canMoveBordInfo[h][w]);
+								}
+								//printf("\n");
+
+							}
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
 									printf("%d_", m_canMoveBordInfo[h][w]);
 								}
 								printf("\n");
-
 							}
 							obj->SetfirstMoved(true);
 							m_beforeSelectPos = BordOnMouse();
@@ -359,7 +369,6 @@ void GameScene_Class::Update()
 				m_selectObject = false;
 				std::cout << "EndPhaseEnd" << std::endl;
 				m_startPhaseInit = false;
-				m_round += 1;
 				m_Phase = StartPhase;
 				break;
 			}
