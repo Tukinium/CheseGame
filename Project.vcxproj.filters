@@ -133,6 +133,9 @@
     <Filter Include="Src\Application\Object\UI\NumUI">
       <UniqueIdentifier>{32e8dd7f-0b40-4e4e-8d85-bb344afdeeca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Audio">
+      <UniqueIdentifier>{390989a4-3cb1-4e6a-83d3-0b52f3d3fbb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -318,6 +321,9 @@
     <ClInclude Include="Src\Application\UI\NumUI\NumUI_Class.h">
       <Filter>Src\Application\Object\UI\NumUI</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Audio\BaseAudio_Class.h">
+      <Filter>Src\Application\Object\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -478,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\UI\NumUI\NumUI_Class.cpp">
       <Filter>Src\Application\Object\UI\NumUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Audio\BaseAudio_Class.cpp">
+      <Filter>Src\Application\Object\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

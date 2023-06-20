@@ -33,6 +33,7 @@ void GameScene_Class::Init()
 		}
 	}
 	PieceSet();
+	m_waitTime = waitTime;
 }
 
 void GameScene_Class::SetSharedPtr()

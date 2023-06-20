@@ -37,7 +37,7 @@ void BaseObject_Class::DrawSprite()
 	//このインスタンスはPolygonタイプかチェック＆中身が作成されてるかチェック
 	if (!m_thisSprite || !m_Alive)return;
 	KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
-	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex,0,0/*,& m_rc*/);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), 0, 0/*,& m_rc*/);
 }
 
 void BaseObject_Class::PreUpdate()
@@ -61,7 +61,9 @@ void BaseObject_Class::SetAsset(int _type, std::string _filePass)
 	{
 	case Sprite:
 	{
-		m_tex.Load(_filePass);
+		if (m_tex)return;
+		m_tex = std::make_shared<KdTexture>();
+		m_tex->Load(_filePass);
 		m_thisSprite = true;
 		return;
 	}

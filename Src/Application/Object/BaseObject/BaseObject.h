@@ -179,7 +179,7 @@ protected:
 	int m_type = NoneM;
 
 	bool m_thisSprite = false;
-	KdTexture m_tex;
+	std::shared_ptr<KdTexture>m_tex = nullptr;
 
 	bool m_thisPolygon = false;
 	std::shared_ptr<KdPolygon>m_polygon = nullptr;

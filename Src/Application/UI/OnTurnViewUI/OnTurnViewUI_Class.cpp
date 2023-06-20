@@ -23,7 +23,7 @@ void OnTurnStartViewUI_Class::DrawSprite()
 	if (m_pos.z >= 0)
 	{
 		KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
-		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_tex, 0, 0 /*,&m_rc*/);
+		KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), 0, 0 /*,&m_rc*/);
 
 		Math::Matrix mat2 = Math::Matrix::CreateTranslation({0,0,0});
 		KdShaderManager::Instance().m_spriteShader.SetMatrix(mat2);
