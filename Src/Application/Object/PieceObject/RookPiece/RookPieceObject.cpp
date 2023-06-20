@@ -75,6 +75,10 @@ void RookPieceObject_Class::GenCanMoveBordInfo()
 	{
 		i++;
 		m_canMoveBordInfo[n1][centerW] = CanMove;
+		if (m_nowBordInfo[n1][centerH] != None)
+		{
+			//break;
+		}
 	}
 
 	i = 0;
@@ -89,6 +93,12 @@ void RookPieceObject_Class::GenCanMoveBordInfo()
 	{
 		i++;
 		m_canMoveBordInfo[centerH][n3] = CanMove;
+		if (m_nowBordInfo[centerH][n3 += 1] != None)
+		{
+			std::cout << i << "‰ñ–Ú" << std::endl;
+			//m_canMoveBordInfo[centerH][n3 += 1] = CanMove;
+			//break;
+		}
 	}
 
 	m_canMoveBordInfo[centerH][centerW] = Me;

@@ -325,7 +325,6 @@ void GameScene_Class::Update()
 
 									if (m_bordInfo[h][w] != BaseObject_Class::None)
 									{
-										m_deathPieceID = m_bordInfo[h][w];
 										KillPiece(m_bordInfo[h][w]);
 										m_bordInfo[h][w] = BaseObject_Class::None;
 									}
@@ -338,7 +337,7 @@ void GameScene_Class::Update()
 							{
 								m_bordInfo[h][w] = BaseObject_Class::None;
 							}
-							
+
 						}
 					}
 				}
@@ -351,6 +350,177 @@ void GameScene_Class::Update()
 			}
 			case GameScene_Class::EndPhase:
 			{
+				if (!m_kingBlack->GetAlive())
+				{
+					m_winner = Player;
+				}
+				m_Trun = Enemy;
+				m_waitTime = waitTime;
+				m_selectObject = false;
+				std::cout << "EndPhaseEnd" << std::endl;
+				m_startPhaseInit = false;
+				m_round += 1;
+				m_Phase = StartPhase;
+				break;
+			}
+			default:
+				break;
+			}
+			break;
+		}
+		case GameScene_Class::Enemy:
+		{
+			switch (m_Phase)
+			{
+			case GameScene_Class::StartPhase:
+			{
+				if (!m_startPhaseInit)
+				{
+					m_movePieceID = -1;
+					m_selectObject = false;
+					m_beforeSelectPos = { 12345,12345,12345 };
+					m_afterSelectPos = { 12345,12345,12345 };
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							m_canMoveBordInfo[h][w] = 0;
+							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+						}
+					}
+					m_onTurnViewUI->SetRoundNum(m_round);
+					m_onTurnViewUI->Entry();
+
+					m_numUI->SetNum(m_round);
+					m_numUI->SetPos2({ -150,0,0 });
+					m_numUI->SetAlive(true);
+
+				}
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+				{
+					m_Phase = StandByPhase;
+					std::cout << "StartPhaseEnd" << std::endl;
+					m_onTurnViewUI->Leave();
+					m_numUI->SetAlive(false);
+					m_waitTime = waitTime;
+				}
+				break;
+			}
+			case GameScene_Class::StandByPhase:
+			{
+
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+				{
+
+					if (obj->thisPiece() && obj->GetColor() == kBlackColor)
+					{
+						if (0.5f > (Math::Vector3::Distance(obj->GetPos(), BordOnMouse())))
+						{
+							m_movePieceID = obj->GetId();
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
+									//クリックしたオブジェクトに現在の盤面状況を渡す
+									obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+								}
+							}
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
+									//オブジェクトから動ける範囲が配列で返却される
+									obj->GenCanMoveBordInfo();
+									m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+									printf("%d_", m_canMoveBordInfo[h][w]);
+								}
+								printf("\n");
+
+							}
+							obj->SetfirstMoved(true);
+							m_beforeSelectPos = BordOnMouse();
+							m_selectObject = true;
+							m_Phase = SelectPhase;
+							std::cout << "StandByPhaseEnd" << std::endl;
+							m_waitTime = waitTime;
+						}
+					}
+				}
+				break;
+			}
+			case GameScene_Class::SelectPhase:
+			{
+				for (int h = 0; h < 8; h++)
+				{
+					for (int w = 0; w < 8; w++)
+					{
+						//渡された情報から動ける範囲を可視化
+						Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+						if (m_canMoveBordInfo[h][w] == BaseObject_Class::CanMove)
+						{
+							m_selectPieceCanMoveBord[h][w]->SetAlive(true);
+							m_selectPieceCanMoveBord[h][w]->SetPos2(massPos);
+							m_waitTime = waitTime;
+							std::cout << "SelectPhaseEnd" << std::endl;
+							m_Phase = SetPhase;
+						}
+					}
+				}
+
+				if (GetAsyncKeyState(VK_RBUTTON))
+				{
+					m_selectObject = false;
+					m_startPhaseInit = false;
+					m_Phase = StartPhase;
+				}
+				break;
+			}
+			case GameScene_Class::SetPhase:
+			{
+				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+				{
+
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							if (m_selectPieceCanMoveBord[h][w]->GetAlive())
+							{
+								if (0.5f > (Math::Vector3::Distance(m_selectPieceCanMoveBord[h][w]->GetPos2(), BordOnMouse())))
+								{
+									m_canMoveBordInfo[h][w] = BaseObject_Class::Select;
+
+									if (m_bordInfo[h][w] != BaseObject_Class::None)
+									{
+										KillPiece(m_bordInfo[h][w]);
+										m_bordInfo[h][w] = BaseObject_Class::None;
+									}
+									m_bordInfo[h][w] = m_movePieceID;
+
+									m_Phase = EndPhase;
+								}
+							}
+							if (0.5 > (Math::Vector3::Distance(m_beforeSelectPos, { h * 1 - 3.5f,0,w * 1 - 3.5f })))
+							{
+								m_bordInfo[h][w] = BaseObject_Class::None;
+							}
+
+						}
+					}
+				}
+				if (GetAsyncKeyState(VK_RBUTTON))
+				{
+					m_startPhaseInit = false;
+					m_Phase = StartPhase;
+				}
+				break;
+			}
+			case GameScene_Class::EndPhase:
+			{
+				if (!m_kingWhite->GetAlive())
+				{
+					m_winner = Enemy;
+				}
 				m_Trun = Player;
 				m_waitTime = waitTime;
 				m_selectObject = false;
@@ -673,6 +843,7 @@ void GameScene_Class::CheseAI()
 			}
 		}
 	}
+	
 }
 
 Math::Vector3 GameScene_Class::BordOnMouse()

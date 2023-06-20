@@ -26,6 +26,8 @@ public:
 	 void PreUpdate()override;
 	 void PostUpdate()override;
 	 void PreDraw()override;
+
+	 //指定されたIDのピースを殺す
 	 void KillPiece(int _id)
 	 {
 		 for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
@@ -36,11 +38,13 @@ public:
 			 }
 		 }
 	 }
+
 	 void Release()override;
 
 	 //ピースの再配置
 	 void PieceSet();
 
+	 //float型ランダム
 	 float fRandom(float min, float max)
 	 {
 		 std::random_device rand;
@@ -50,6 +54,7 @@ public:
 		 return r;
 	 }
 
+	 //int型ランダム
 	 int iRandom(int min, int max)
 	 {
 		 std::random_device rand;
@@ -57,6 +62,11 @@ public:
 		 std::uniform_int_distribution<>dis(min, max);
 		 int r = dis(gen);
 		 return r;
+	 }
+
+	 int GetWinPlayer()
+	 {
+		 return m_winner;
 	 }
 
 	 void CheseAI();
@@ -90,7 +100,6 @@ public:
 		 Player,
 		 Enemy,
 	 };
-	 int m_FirstTurn;
 
 	 void CreateCons();
 	 void DestoryCons();
@@ -129,33 +138,52 @@ private:
 
 	std::shared_ptr<BishopPieceObject_Class>m_bishopWhite[2];
 	std::shared_ptr<BishopPieceObject_Class>m_bishopBlack[2];
+	//デバッグ
+	FILE* fp;
 
-	int m_Phase;
-
-	Math::Vector3 selectPos;
-	bool m_selectObject = false;
-	int m_Trun = Player;
+	//マウス
 	POINT MousePos;
 
-	int m_round = 0;
-	int m_deathPieceID = -1;
-	bool m_deathPiece;
-	
-	FILE* fp;
-	int selectBordMode;
+	//フェーズ管理
+	int m_Phase;
+
+	//どちらが最初のターンか
+	int m_FirstTurn;
+
+	//選択した座標
+	Math::Vector3 selectPos;
+	//ピース(オブジェクト)が選択されているか
+	bool m_selectObject = false;
+	//現在どちらのターンか
+	int m_Trun = Player;
+
+	//移動前選択座標
 	Math::Vector3 m_beforeSelectPos;
+	//移動先選択座標
 	Math::Vector3 m_afterSelectPos;
 
+	//今のターン数
+	int m_round = 0;
+
+	//マウスクリック誤入力回避用待機時間
 	int m_waitTime = 0;
 
+	//待機時間
 	const int waitTime = 10;
-	float m_aiScore;
 
+	//移動したピースのID
 	int m_movePieceID;
 
+	//開始フェーズの各Init処理が終了したか
 	bool m_startPhaseInit = false;
-	bool m_cancel;
 
+	//チェックメイト
+	bool m_check = false;
+
+	//勝った方
+	int m_winner = -1;
+
+	//現在の盤面状況
 	int m_bordInfo[8][8] =
 	{
 		0,0,0,0,0,0,0,0,
@@ -167,6 +195,8 @@ private:
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 	};
+
+	//選択されている駒の移動できる先
 	int m_canMoveBordInfo[8][8] =
 	{
 		0,0,0,0,0,0,0,0,
@@ -178,6 +208,8 @@ private:
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 	};
+
+	//初期配置
 	int NORMAL_RULE_BORD[8][8] =
 	{
 		BaseObject_Class::BlackRook0,BaseObject_Class::BlackKnight0,BaseObject_Class::BlackBishop0,BaseObject_Class::BlackQueen,BaseObject_Class::BlackKing,BaseObject_Class::BlackBishop1,BaseObject_Class::BlackKnight1,BaseObject_Class::BlackRook1,
@@ -189,6 +221,17 @@ private:
 		BaseObject_Class::WhitePawn0,BaseObject_Class::WhitePawn1,BaseObject_Class::WhitePawn2,BaseObject_Class::WhitePawn3,BaseObject_Class::WhitePawn4,BaseObject_Class::WhitePawn5,BaseObject_Class::WhitePawn6,BaseObject_Class::WhitePawn7,
 		BaseObject_Class::WhiteRook0,BaseObject_Class::WhiteKnight0,BaseObject_Class::WhiteBishop0,BaseObject_Class::WhiteQueen,BaseObject_Class::WhiteKing,BaseObject_Class::WhiteBishop1,BaseObject_Class::WhiteKnight1,BaseObject_Class::WhiteRook1,
 	};
+
+	//AI用
+	float m_aiScore;
+
+	const int QUEEN_POINT = 10;
+	const int ROOK_POINT = 5;
+	const int BISHOP_POINT = 4;
+	const int KNIGHT_POINT = 3;
+	const int PAWN_POINT = 1;
+	const int KING_POINT = 100;
+
 	struct AICheck
 	{
 		int m_canMoveBordInfo[8][8] =
@@ -207,6 +250,7 @@ private:
 	AICheck WhiteKing, WhiteQueen, WhiteRook0,WhiteRook1,WhiteBishop0,WhiteBishop1,WhiteKnight0,WhiteKnight1,WhitePawn0,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7;
 	AICheck BlackKing, BlackQueen, BlackRook0, BlackRook1, BlackBishop0, BlackBishop1, BlackKnight0, BlackKnight1, BlackPawn0, BlackPawn1, BlackPawn2, BlackPawn3, BlackPawn4, BlackPawn5, BlackPawn6, BlackPawn7;
 public:
+	//シングルトン
 	static GameScene_Class& instance()
 	{
 		static GameScene_Class instance;
