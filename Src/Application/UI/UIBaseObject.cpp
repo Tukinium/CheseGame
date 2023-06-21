@@ -3,7 +3,13 @@
 void UIBaseObject_Class::Init()
 {
 	m_type = Sprite;
-	SetAsset(m_type, fillPass);
+	if (fillPass == "")
+	{
+	}
+	else
+	{
+		SetAsset(m_type, fillPass);
+	}
 	m_scale = DEFAULT_SCALE;
 	m_Alive = false;
 }

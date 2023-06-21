@@ -136,6 +136,15 @@
     <Filter Include="Src\Application\Object\Audio">
       <UniqueIdentifier>{390989a4-3cb1-4e6a-83d3-0b52f3d3fbb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\MainMenuScene">
+      <UniqueIdentifier>{261d0e28-8fbc-458e-87ff-3a43c81461e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Scene\ResultScene">
+      <UniqueIdentifier>{81aca50a-90ed-4c3b-bd36-0bb385696365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\UI\ButtonUI">
+      <UniqueIdentifier>{119370ef-d294-459f-b1c5-6ed1a405bb3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -324,6 +333,15 @@
     <ClInclude Include="Src\Application\Audio\BaseAudio_Class.h">
       <Filter>Src\Application\Object\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\MainMenu\MainMenuScene.h">
+      <Filter>Src\Application\Scene\MainMenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene_Class.h">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\UI\ButtonUI\ButtonUI_Class.h">
+      <Filter>Src\Application\Object\UI\ButtonUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -487,6 +505,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Audio\BaseAudio_Class.cpp">
       <Filter>Src\Application\Object\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\MainMenu\MainMenuScene.cpp">
+      <Filter>Src\Application\Scene\MainMenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene_Class.cpp">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\UI\ButtonUI\ButtonUI_Class.cpp">
+      <Filter>Src\Application\Object\UI\ButtonUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,38 +2,22 @@
 #include"Application/Object/BaseObject/BaseObject.h"
 void TitleScene_Class::Init()
 {
-	/*
-	class temp : public BaseObject_Class
-	{
-	public:
-		temp() {};
-		~temp() {};
-		void DrawSprite()
-		{
-			Math::Rectangle rc = { 0,0,64,64 };
-			KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
-			KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), 0, 0, &rc);
-		}
-		void setTexture(std::string _pass)
-		{
-			m_tex = std::make_shared<KdTexture>();
-			m_tex = (KdAssets::Instance().m_textures.GetData(_pass));
-		}
-	private:
-		std::shared_ptr<KdTexture>m_tex;
-		
-	};
-	
-
-	std::shared_ptr<temp>a = std::make_shared<temp>();
-	a->setTexture("");
-	m_baseObjList.push_back(a);
-	*/
 	BaseScene_Class::Init();
 }
 
 void TitleScene_Class::Update()
 {
 	BaseScene_Class::Update();
-	if (GetAsyncKeyState(VK_RETURN))m_nowScene = false;
+	if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
+	{
+		m_changeScene = BaseScene_Class::MainMenuScene;
+		CheangeThisScene();
+	}
+}
+
+void TitleScene_Class::SetSharedPtr()
+{
+	if (!m_backTex)m_backTex = std::make_shared<BaseObject_Class>();
+	m_backTex->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/Title_Back.png");
+	m_baseObjList.push_back(m_backTex);
 }

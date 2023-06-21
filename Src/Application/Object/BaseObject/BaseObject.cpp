@@ -52,6 +52,8 @@ void BaseObject_Class::PostUpdate()
 
 void BaseObject_Class::MathMatrix()
 {
+	
+	m_mWorld = Math::Matrix::CreateScale(m_scale);
 	m_mWorld = Math::Matrix::CreateTranslation(m_pos);
 }
 

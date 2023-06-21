@@ -2,37 +2,22 @@
 #include "Application/Scene/BaseScene/BaseScene.h"
 #include"Application/Scene/GameScene/GameScene.h"
 #include"Application/Scene/TitleScene/TitleScene.h"
+#include"Application/Scene/MainMenu/MainMenuScene.h"
+#include"Application/main.h"
 void SceneManager_Class::Init()
 {
-	m_nowScene = std::make_unique<GameScene_Class>();
+	CreateCons();
+	SceneChange(BaseScene_Class::TitleScene);
 	m_nowScene->Init();
 }
 
 void SceneManager_Class::Update()
 {
 	m_nowScene->Update();
-	if (GetAsyncKeyState(VK_RETURN))
-	{
-		if (m_Scene == GameScene)
-		{
-			std::cout << "TitleScene Shift" << std::endl;
-			m_nowScene.reset();
-			m_nowScene = std::make_unique<TitleScene_Class>();
-			m_nowScene->Init();
-			m_Scene = TitleScene;
 
-		}
-	}
-	if (GetAsyncKeyState(VK_UP))
+	if (m_nowScene->CheangeThisScene() != BaseScene_Class::NoneScene)
 	{
-		if (m_Scene == TitleScene)
-		{
-			std::cout << "GameScene Shift" << std::endl;
-			m_nowScene.reset();
-			m_nowScene = std::make_unique<GameScene_Class>();
-			m_nowScene->Init();
-			m_Scene = GameScene;
-		}
+		SceneChange(m_nowScene->CheangeThisScene());
 	}
 }
 
@@ -89,5 +74,67 @@ void SceneManager_Class::PostUpdate()
 
 void SceneManager_Class::Release()
 {
+	DestoryCons();
 	m_nowScene->Release();
 }
+
+void SceneManager_Class::SceneChange(int _scene)
+{
+	switch (_scene)
+	{
+	case BaseScene_Class::GameScene:
+	{
+		std::cout << "GameScene Shift" << std::endl;
+		m_nowScene.reset();
+		m_nowScene = std::make_unique<GameScene_Class>();
+		m_nowScene->Init();
+		m_Scene = BaseScene_Class::GameScene;
+		m_waitTime = WAIT_TIME;
+		break;
+	}
+	case BaseScene_Class::TitleScene:
+	{
+		std::cout << "TitleScene Shift" << std::endl;
+		m_nowScene.reset();
+		m_nowScene = std::make_unique<TitleScene_Class>();
+		m_nowScene->Init();
+		m_Scene = BaseScene_Class::TitleScene;
+		m_waitTime = WAIT_TIME;
+		break;
+	}
+	case BaseScene_Class::MainMenuScene:
+	{
+		m_nowScene.reset();
+		m_nowScene = std::make_unique<MainMenuScene_Class>();
+		m_nowScene->Init();
+		m_Scene = BaseScene_Class::MainMenuScene;
+		m_waitTime = WAIT_TIME;
+		break;
+	}
+	case BaseScene_Class::ExitScene:
+	{
+		m_exitFlg = true;
+		break;
+	}
+	default:
+		break;
+	}
+
+}
+
+void SceneManager_Class::GetSceneChange(int _sceneNum)
+{
+	SceneChange(_sceneNum);
+}
+
+void SceneManager_Class::CreateCons()
+{
+	AllocConsole();
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+}
+
+void SceneManager_Class::DestoryCons()
+{
+	FreeConsole();
+}
+

@@ -54,6 +54,10 @@ void Application::PreUpdate()
 void Application::Update()
 {
 	SceneManager_Class::instance().Update();
+	if (SceneManager_Class::instance().SetExit())
+	{
+		End();
+	}
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////

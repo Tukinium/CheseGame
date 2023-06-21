@@ -1,11 +1,11 @@
 #pragma once
 #include"Application/Scene/BaseScene/BaseScene.h"
-class SceneManager_Class;
 class TitleScene_Class : public BaseScene_Class
 {
 public:
 	void Init()override;
 	void Update()override;
+	void SetSharedPtr()override;
 	bool NowSceneActive()
 	{
 		return m_nowScene;
@@ -16,10 +16,5 @@ public:
 	}
 private:
 	bool m_nowScene;
-
-	static TitleScene_Class& instance()
-	{
-		static TitleScene_Class instance;
-		return instance;
-	}
+	std::shared_ptr<BaseObject_Class>m_backTex;
 };

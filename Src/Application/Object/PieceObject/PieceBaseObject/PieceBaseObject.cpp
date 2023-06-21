@@ -12,6 +12,7 @@ void PieceBaseObject_Class::Init()
 	m_type = Model;
 	//SetAsset(m_type, fillPass);
 	m_scale = DEFAULT_SCALE;
+	m_Alive = true;
 }
 
 void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()

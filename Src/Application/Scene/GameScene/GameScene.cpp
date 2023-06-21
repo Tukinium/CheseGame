@@ -13,10 +13,10 @@
 #include"Application/UI/PieceSelectingUI/PieceSelectingUI.h"
 #include"Application/UI/OnTurnViewUI/OnTurnViewUI_Class.h"
 #include"Application/UI/NumUI/NumUI_Class.h"
+#include"Application/UI/ButtonUI/ButtonUI_Class.h"
 
 void GameScene_Class::Init()
 {
-	CreateCons();
 	BaseScene_Class::Init();
 	for (std::shared_ptr<BaseObject_Class> obj : m_baseObjList)
 	{
@@ -191,7 +191,6 @@ void GameScene_Class::SetSharedPtr()
 
 void GameScene_Class::Update()
 {
-	GetCursorPos(&MousePos);
 	m_camera->setCamViewMode(m_camera->UpperCamMode);
 	PieceSet();
 	BordOnMouse();
@@ -314,7 +313,19 @@ void GameScene_Class::Update()
 				{
 					m_selectObject = false;
 					m_startPhaseInit = false;
-					m_Phase = StartPhase;
+					m_movePieceID = -1;
+					m_selectObject = false;
+					m_beforeSelectPos = { 12345,12345,12345 };
+					m_afterSelectPos = { 12345,12345,12345 };
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							m_canMoveBordInfo[h][w] = 0;
+							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+						}
+					}
+					m_Phase = StandByPhase;
 				}
 				break;
 			}
@@ -354,21 +365,36 @@ void GameScene_Class::Update()
 				if (GetAsyncKeyState(VK_RBUTTON))
 				{
 					m_startPhaseInit = false;
-					m_Phase = StartPhase;
+					m_movePieceID = -1;
+					m_selectObject = false;
+					m_beforeSelectPos = { 12345,12345,12345 };
+					m_afterSelectPos = { 12345,12345,12345 };
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							m_canMoveBordInfo[h][w] = 0;
+							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+						}
+					}
+					m_Phase = StandByPhase;
 				}
 				break;
 			}
 			case GameScene_Class::EndPhase:
 			{
-				if (!m_kingBlack->GetAlive())
-				{
-					m_winner = Player;
-				}
 				m_Trun = Enemy;
 				m_waitTime = waitTime;
 				m_selectObject = false;
 				std::cout << "EndPhaseEnd" << std::endl;
 				m_startPhaseInit = false;
+				m_round++;
+				if (!m_kingBlack->GetAlive())
+				{
+					m_winner = Player;
+					m_changeScene = ResultScene;
+					CheangeThisScene();
+				}
 				m_Phase = StartPhase;
 				break;
 			}
@@ -432,7 +458,9 @@ void GameScene_Class::Update()
 								{
 									//クリックしたオブジェクトに現在の盤面状況を渡す
 									obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+									printf("%d_", m_bordInfo[h][w]);
 								}
+								printf("\n");
 							}
 							for (int h = 0; h < 8; h++)
 							{
@@ -441,10 +469,18 @@ void GameScene_Class::Update()
 									//オブジェクトから動ける範囲が配列で返却される
 									obj->GenCanMoveBordInfo();
 									m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+									//printf("%d_", m_canMoveBordInfo[h][w]);
+								}
+								//printf("\n");
+
+							}
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
 									printf("%d_", m_canMoveBordInfo[h][w]);
 								}
 								printf("\n");
-
 							}
 							obj->SetfirstMoved(true);
 							m_beforeSelectPos = BordOnMouse();
@@ -480,7 +516,19 @@ void GameScene_Class::Update()
 				{
 					m_selectObject = false;
 					m_startPhaseInit = false;
-					m_Phase = StartPhase;
+					m_movePieceID = -1;
+					m_selectObject = false;
+					m_beforeSelectPos = { 12345,12345,12345 };
+					m_afterSelectPos = { 12345,12345,12345 };
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							m_canMoveBordInfo[h][w] = 0;
+							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+						}
+					}
+					m_Phase = StandByPhase;
 				}
 				break;
 			}
@@ -520,22 +568,35 @@ void GameScene_Class::Update()
 				if (GetAsyncKeyState(VK_RBUTTON))
 				{
 					m_startPhaseInit = false;
-					m_Phase = StartPhase;
+					m_movePieceID = -1;
+					m_selectObject = false;
+					m_beforeSelectPos = { 12345,12345,12345 };
+					m_afterSelectPos = { 12345,12345,12345 };
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							m_canMoveBordInfo[h][w] = 0;
+							m_selectPieceCanMoveBord[h][w]->SetAlive(false);
+						}
+					}
+					m_Phase = StandByPhase;
 				}
 				break;
 			}
 			case GameScene_Class::EndPhase:
 			{
-				if (!m_kingWhite->GetAlive())
-				{
-					m_winner = Enemy;
-				}
 				m_Trun = Player;
 				m_waitTime = waitTime;
 				m_selectObject = false;
 				std::cout << "EndPhaseEnd" << std::endl;
 				m_startPhaseInit = false;
-				m_round += 1;
+				if (!m_kingWhite->GetAlive())
+				{
+					m_winner = Enemy;
+					m_changeScene = ResultScene;
+					CheangeThisScene();
+				}
 				m_Phase = StartPhase;
 				break;
 			}
@@ -546,13 +607,7 @@ void GameScene_Class::Update()
 		}
 		}
 	}
-
 	BaseScene_Class::Update();
-
-	if (m_waitTime >= 0)
-	{
-		m_waitTime--;
-	}
 
 }
 
@@ -576,7 +631,6 @@ void GameScene_Class::PreDraw()
 
 void GameScene_Class::Release()
 {
-	DestoryCons();
 }
 
 void GameScene_Class::PieceSet()
@@ -929,15 +983,3 @@ void GameScene_Class::SelectPieceUIActive()
 		m_pieceSelectUI->SetAlive(false);
 	}
 }
-
-void GameScene_Class::CreateCons()
-{
-	AllocConsole();
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-}
-
-void GameScene_Class::DestoryCons()
-{
-	FreeConsole();
-}
-

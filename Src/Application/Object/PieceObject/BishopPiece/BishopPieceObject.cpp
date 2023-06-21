@@ -83,7 +83,6 @@ void BishopPieceObject_Class::GenCanMoveBordInfo()
 			if (n == n2)
 			{
 				m_canMoveBordInfo[centerH - n][centerW + n2] = CanMove;
-				std::cout << centerH - n << "_" << centerW + n2 << std::endl;
 				if (m_nowBordInfo[centerH - n - 1][centerW + n2 + 1] != None)
 				{
 					m_canMoveBordInfo[centerH - n - 1][centerW + n2 + 1] = CanMove;
@@ -108,5 +107,5 @@ void BishopPieceObject_Class::GenCanMoveBordInfo()
 		}
 	}
 	m_canMoveBordInfo[centerH][centerW] = Me;
-	//PieceMoveFixForTeamAreaNotMove();
+	PieceMoveFixForTeamAreaNotMove();
 }

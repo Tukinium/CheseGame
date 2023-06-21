@@ -1,7 +1,8 @@
 #pragma once
-class BaseScene_Class;
+#include"Application/Scene/BaseScene/BaseScene.h"
 class GameScene_Class;
 class TitleScene_Class;
+class MainMenuScene_Class;
 class SceneManager_Class
 {
 public:
@@ -20,15 +21,19 @@ public:
 	void PreUpdate();
 	void PostUpdate();
 	void Release();
-
+	void SceneChange(int _scene);
+	void GetSceneChange(int _sceneNum);
+	void CreateCons();
+	void DestoryCons();
+	bool SetExit() { return m_exitFlg; }
 private:
-	enum Scene
-	{
-		TitleScene,
-		GameScene,
-	};
-	int m_Scene = GameScene;
+	//デバッグ
+	FILE* fp;
+	int m_Scene = BaseScene_Class::TitleScene;
 	std::unique_ptr<BaseScene_Class>m_nowScene;
+	int m_waitTime = 0;
+	const int WAIT_TIME = 10;
+	bool m_exitFlg = false;
 public:
 
 	static SceneManager_Class& instance()

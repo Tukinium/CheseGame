@@ -14,6 +14,7 @@ class KnightPieceObject_Class;
 class PieceSelectingUI_Class;
 class OnTurnStartViewUI_Class;
 class NumUI_Class;
+class ButtonUI_Class;
 #include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/BaseScene/BaseScene.h"
 
@@ -101,8 +102,7 @@ public:
 		 Enemy,
 	 };
 
-	 void CreateCons();
-	 void DestoryCons();
+
 
 	 
 
@@ -138,11 +138,6 @@ private:
 
 	std::shared_ptr<BishopPieceObject_Class>m_bishopWhite[2];
 	std::shared_ptr<BishopPieceObject_Class>m_bishopBlack[2];
-	//デバッグ
-	FILE* fp;
-
-	//マウス
-	POINT MousePos;
 
 	//フェーズ管理
 	int m_Phase;
@@ -165,12 +160,6 @@ private:
 	//今のターン数
 	int m_round = 0;
 
-	//マウスクリック誤入力回避用待機時間
-	int m_waitTime = 0;
-
-	//待機時間
-	const int waitTime = 10;
-
 	//移動したピースのID
 	int m_movePieceID;
 
@@ -179,9 +168,6 @@ private:
 
 	//チェックメイト
 	bool m_check = false;
-
-	//勝った方
-	int m_winner = -1;
 
 	//現在の盤面状況
 	int m_bordInfo[8][8] =
@@ -249,11 +235,4 @@ private:
 	};
 	AICheck WhiteKing, WhiteQueen, WhiteRook0,WhiteRook1,WhiteBishop0,WhiteBishop1,WhiteKnight0,WhiteKnight1,WhitePawn0,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7;
 	AICheck BlackKing, BlackQueen, BlackRook0, BlackRook1, BlackBishop0, BlackBishop1, BlackKnight0, BlackKnight1, BlackPawn0, BlackPawn1, BlackPawn2, BlackPawn3, BlackPawn4, BlackPawn5, BlackPawn6, BlackPawn7;
-public:
-	//シングルトン
-	static GameScene_Class& instance()
-	{
-		static GameScene_Class instance;
-		return instance;
-	}
 };

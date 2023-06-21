@@ -6,15 +6,24 @@ void BaseScene_Class::Update()
 	{
 		gameObject->Update();
 	}
+	GetCursorPos(&MousePos);
+	if (m_waitTime >= 0)
+	{
+		m_waitTime--;
+	}
+	fixMousePos.x = MousePos.x - 1280 / 2;
+	fixMousePos.y = MousePos.y - 720 / 2;
 }
 
 void BaseScene_Class::Init()
 {
 	SetSharedPtr();
+	m_changeScene = NoneScene;
 	for (std::shared_ptr<BaseObject_Class> gameObject : m_baseObjList)
 	{
 		gameObject->Init();
 	}
+	m_waitTime = waitTime;
 }
 
 void BaseScene_Class::Draw()

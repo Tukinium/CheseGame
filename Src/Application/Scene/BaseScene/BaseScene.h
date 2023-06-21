@@ -20,11 +20,33 @@ public:
 	virtual void PostUpdate();
 	virtual void SetSharedPtr();
 	virtual void Release() {};
-	bool LeaveScene()
+	int CheangeThisScene()
 	{
-		return m_sceneNow;
+		return m_changeScene;
 	}
+	int SetWinner()
+	{
+		return m_winner;
+	}
+	enum Scene
+	{
+		NoneScene,
+		TitleScene,
+		MainMenuScene,
+		ResultScene,
+		GameScene,
+		ExitScene,
+	};
 protected:
 	std::list<std::shared_ptr<BaseObject_Class>>m_baseObjList;
-	bool m_sceneNow;
+	int m_changeScene = NoneScene;
+	//マウスクリック誤入力回避用待機時間
+	int m_waitTime = 0;
+	//待機時間
+	const int waitTime = 10;
+	//勝った方
+	int m_winner = -1;
+	//マウス
+	POINT MousePos;
+	Math::Vector3 fixMousePos;
 };
