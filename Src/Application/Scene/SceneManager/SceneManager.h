@@ -3,6 +3,7 @@
 class GameScene_Class;
 class TitleScene_Class;
 class MainMenuScene_Class;
+class ResultScene_Class;
 class SceneManager_Class
 {
 public:

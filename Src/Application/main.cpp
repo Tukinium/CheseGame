@@ -206,7 +206,6 @@ bool Application::Init(int w, int h)
 
 		SceneManager_Class::instance().Init();
 	}
-	CreateCons();
 
 	//カメラセット
 
@@ -324,7 +323,6 @@ void Application::Release()
 
 		KdDirect3D::Instance().Release();
 	}
-	DestoryCons();
 	// ウィンドウ削除
 	SceneManager_Class::instance().Release();
 	m_window.Release();
@@ -336,14 +334,3 @@ void Application::Release()
 //=====================================================
 // ユーザー追加
 //=====================================================
-
-void Application::CreateCons()
-{
-	AllocConsole();
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-}
-
-void Application::DestoryCons()
-{
-	FreeConsole();
-}

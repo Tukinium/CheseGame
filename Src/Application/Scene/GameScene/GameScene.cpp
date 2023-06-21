@@ -389,7 +389,7 @@ void GameScene_Class::Update()
 				std::cout << "EndPhaseEnd" << std::endl;
 				m_startPhaseInit = false;
 				m_round++;
-				if (!m_kingBlack->GetAlive())
+				if (!(m_kingBlack->GetAlive()))
 				{
 					m_winner = Player;
 					m_changeScene = ResultScene;

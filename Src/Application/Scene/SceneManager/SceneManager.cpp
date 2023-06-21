@@ -3,10 +3,11 @@
 #include"Application/Scene/GameScene/GameScene.h"
 #include"Application/Scene/TitleScene/TitleScene.h"
 #include"Application/Scene/MainMenu/MainMenuScene.h"
+#include"Application/Scene/ResultScene/ResultScene_Class.h"
 #include"Application/main.h"
 void SceneManager_Class::Init()
 {
-	CreateCons();
+	//CreateCons();
 	SceneChange(BaseScene_Class::TitleScene);
 	m_nowScene->Init();
 }
@@ -74,7 +75,7 @@ void SceneManager_Class::PostUpdate()
 
 void SceneManager_Class::Release()
 {
-	DestoryCons();
+	//DestoryCons();
 	m_nowScene->Release();
 }
 
@@ -108,6 +109,15 @@ void SceneManager_Class::SceneChange(int _scene)
 		m_nowScene = std::make_unique<MainMenuScene_Class>();
 		m_nowScene->Init();
 		m_Scene = BaseScene_Class::MainMenuScene;
+		m_waitTime = WAIT_TIME;
+		break;
+	}
+	case BaseScene_Class::ResultScene:
+	{
+		m_nowScene.reset();
+		m_nowScene = std::make_unique<ResultScene_Class>();
+		m_nowScene->Init();
+		m_Scene = BaseScene_Class::ResultScene;
 		m_waitTime = WAIT_TIME;
 		break;
 	}

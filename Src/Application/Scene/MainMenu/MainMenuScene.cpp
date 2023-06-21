@@ -69,9 +69,5 @@ void MainMenuScene_Class::Update()
 			}
 		}
 	}
-	std::cout << fixMousePos.x << "_" << fixMousePos.y << std::endl;
-	//30/190
-	//m_changeScene = BaseScene_Class::GameScene;
-	//CheangeThisScene();
 }
 
