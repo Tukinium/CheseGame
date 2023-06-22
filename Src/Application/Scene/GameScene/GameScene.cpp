@@ -289,23 +289,12 @@ void GameScene_Class::Update()
 							{
 								obj->SetPropotion(3);
 							}
-							else
-							{
-								obj->SetfirstMoved(true);
-								m_beforeSelectPos = BordOnMouse();
-								m_selectObject = true;
-								m_Phase = SelectPhase;
-								std::cout << "StandByPhaseEnd" << std::endl;
-								m_waitTime = waitTime;
-							}
-							for (int h = 0; h < 8; h++)
-							{
-								for (int w = 0; w < 8; w++)
-								{
-									printf("%d_", m_canMoveBordInfo[h][w]);
-								}
-								printf("\n");
-							}
+							obj->SetfirstMoved(true);
+							m_beforeSelectPos = BordOnMouse();
+							m_selectObject = true;
+							m_Phase = SelectPhase;
+							std::cout << "StandByPhaseEnd" << std::endl;
+							m_waitTime = waitTime;
 						}
 					}
 				}
@@ -327,8 +316,8 @@ void GameScene_Class::Update()
 							std::cout << "SelectPhaseEnd" << std::endl;
 							m_Phase = SetPhase;
 						}
-						
-						
+
+
 					}
 				}
 
@@ -931,7 +920,7 @@ void GameScene_Class::CheseAI()
 			}
 		}
 	}
-	
+
 }
 
 Math::Vector3 GameScene_Class::BordOnMouse()

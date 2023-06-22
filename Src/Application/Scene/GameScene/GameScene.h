@@ -116,7 +116,7 @@ private:
 	std::shared_ptr<NumUI_Class>m_numUI;
 	std::shared_ptr<UIBaseObject_Class>m_PlayerTurnView;
 	std::shared_ptr<UIBaseObject_Class>m_EnemyTurnView;
-
+	std::shared_ptr<UIBaseObject_Class>m_ProPotionQueen;
 
 	std::shared_ptr<KingPieceObject_Class>m_kingBlack;
 	std::shared_ptr<KingPieceObject_Class>m_kingWhite;
