@@ -6,7 +6,7 @@ void BaseObject_Class::Update()
 
 void BaseObject_Class::Init()
 {
-	SetAsset(m_type, fillPass);
+	SetAsset(m_modeltype, fillPass);
 	m_scale = DEFAULT_SCALE;
 	m_Alive = true;
 }
@@ -52,7 +52,9 @@ void BaseObject_Class::PostUpdate()
 
 void BaseObject_Class::MathMatrix()
 {
-	
+	m_mWorld = Math::Matrix::CreateRotationX(m_rotateVec.x);
+	m_mWorld = Math::Matrix::CreateRotationY(m_rotateVec.z);
+	m_mWorld = Math::Matrix::CreateRotationZ(m_rotateVec.y);
 	m_mWorld = Math::Matrix::CreateScale(m_scale);
 	m_mWorld = Math::Matrix::CreateTranslation(m_pos);
 }

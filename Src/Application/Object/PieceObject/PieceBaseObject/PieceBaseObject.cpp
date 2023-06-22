@@ -9,7 +9,7 @@ void PieceBaseObject_Class::DrawLit()
 
 void PieceBaseObject_Class::Init()
 {
-	m_type = Model;
+	m_modeltype = Model;
 	//SetAsset(m_type, fillPass);
 	m_scale = DEFAULT_SCALE;
 	m_Alive = true;

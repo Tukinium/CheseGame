@@ -28,6 +28,10 @@ public:
 	{
 		return m_winner;
 	}
+	void GetWinner(int _winner)
+	{
+		m_winner = _winner;
+	}
 	enum Scene
 	{
 		NoneScene,

@@ -10,6 +10,7 @@
 #include"Application/Object/BordObject/BordObject.h"
 #include"Application/Object/CameraObject/Camera.h"
 
+#include"Application/UI/UIBaseObject.h"
 #include"Application/UI/PieceSelectingUI/PieceSelectingUI.h"
 #include"Application/UI/OnTurnViewUI/OnTurnViewUI_Class.h"
 #include"Application/UI/NumUI/NumUI_Class.h"
@@ -57,6 +58,19 @@ void GameScene_Class::SetSharedPtr()
 	if (!m_numUI)m_numUI = std::make_shared<NumUI_Class>();
 	m_baseObjList.push_back(m_numUI);
 
+	if (!m_PlayerTurnView)m_PlayerTurnView = std::make_shared<UIBaseObject_Class>();
+	m_PlayerTurnView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/PlayerTurn.png");
+	m_PlayerTurnView->SetPos2({ 0,100,0 });
+	m_baseObjList.push_back(m_PlayerTurnView);
+
+	if (!m_EnemyTurnView)m_EnemyTurnView = std::make_shared<UIBaseObject_Class>();
+	m_EnemyTurnView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/EnemyTurn.png");
+	m_EnemyTurnView->SetPos2({ 0,100,0 });
+
+	if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
+	m_baseObjList.push_back(m_sky);
+
+	m_baseObjList.push_back(m_EnemyTurnView);
 	{
 		if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
 		m_kingWhite->SetColor(kWhiteColor);
@@ -81,9 +95,6 @@ void GameScene_Class::SetSharedPtr()
 		m_queenBlack->SetId(BaseObject_Class::BlackQueen);
 		m_queenBlack->SetAsset(BaseObject_Class::Model, "Asset/Model/Piece/Black/Queen/Queen.gltf");
 		m_baseObjList.push_back(m_queenBlack);
-
-		if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
-		m_baseObjList.push_back(m_sky);
 
 		if (!m_nowSelectBord)m_nowSelectBord = std::make_shared<SelectingBord_Class>();
 		m_nowSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Now/Bord_NowSelecting.gltf");
@@ -195,7 +206,10 @@ void GameScene_Class::Update()
 	PieceSet();
 	BordOnMouse();
 	SelectPieceUIActive();
+	if (!m_GameStartCall)
+	{
 
+	}
 	for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
 	{
 		switch (m_Trun)
@@ -221,8 +235,8 @@ void GameScene_Class::Update()
 						}
 					}
 					m_onTurnViewUI->SetRoundNum(m_round);
-					m_onTurnViewUI->Entry();
-
+					m_onTurnViewUI->SetAlive(true);
+					m_PlayerTurnView->SetAlive(true);
 					m_numUI->SetNum(m_round);
 					m_numUI->SetPos2({ -150,0,0 });
 					m_numUI->SetAlive(true);
@@ -234,6 +248,7 @@ void GameScene_Class::Update()
 					std::cout << "StartPhaseEnd" << std::endl;
 					m_onTurnViewUI->Leave();
 					m_numUI->SetAlive(false);
+					m_PlayerTurnView->SetAlive(false);
 					m_waitTime = waitTime;
 				}
 				break;
@@ -243,7 +258,6 @@ void GameScene_Class::Update()
 
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
-
 					if (obj->thisPiece() && obj->GetColor() == kWhiteColor)
 					{
 						if (0.5f > (Math::Vector3::Distance(obj->GetPos(), BordOnMouse())))
@@ -271,6 +285,19 @@ void GameScene_Class::Update()
 								//printf("\n");
 
 							}
+							if (obj->SetCanPropotion())
+							{
+								obj->SetPropotion(3);
+							}
+							else
+							{
+								obj->SetfirstMoved(true);
+								m_beforeSelectPos = BordOnMouse();
+								m_selectObject = true;
+								m_Phase = SelectPhase;
+								std::cout << "StandByPhaseEnd" << std::endl;
+								m_waitTime = waitTime;
+							}
 							for (int h = 0; h < 8; h++)
 							{
 								for (int w = 0; w < 8; w++)
@@ -279,12 +306,6 @@ void GameScene_Class::Update()
 								}
 								printf("\n");
 							}
-							obj->SetfirstMoved(true);
-							m_beforeSelectPos = BordOnMouse();
-							m_selectObject = true;
-							m_Phase = SelectPhase;
-							std::cout << "StandByPhaseEnd" << std::endl;
-							m_waitTime = waitTime;
 						}
 					}
 				}
@@ -306,6 +327,8 @@ void GameScene_Class::Update()
 							std::cout << "SelectPhaseEnd" << std::endl;
 							m_Phase = SetPhase;
 						}
+						
+						
 					}
 				}
 
@@ -424,19 +447,21 @@ void GameScene_Class::Update()
 						}
 					}
 					m_onTurnViewUI->SetRoundNum(m_round);
-					m_onTurnViewUI->Entry();
-
+					m_onTurnViewUI->SetAlive(true);
+					m_EnemyTurnView->SetAlive(true);
 					m_numUI->SetNum(m_round);
 					m_numUI->SetPos2({ -150,0,0 });
 					m_numUI->SetAlive(true);
+
 
 				}
 				if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 				{
 					m_Phase = StandByPhase;
 					std::cout << "StartPhaseEnd" << std::endl;
-					m_onTurnViewUI->Leave();
+					m_onTurnViewUI->SetAlive(false);
 					m_numUI->SetAlive(false);
+					m_EnemyTurnView->SetAlive(false);
 					m_waitTime = waitTime;
 				}
 				break;

@@ -3,9 +3,9 @@
 
 void RookPieceObject_Class::Init()
 {
-	m_type = Model;
+	m_modeltype = Model;
 	fillPass = "Asset/Model/Piece/Rook/Rook.gltf";
-	SetAsset(m_type, fillPass);
+	SetAsset(m_modeltype, fillPass);
 	m_scale = DEFAULT_SCALE;
 }
 

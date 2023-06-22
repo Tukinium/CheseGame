@@ -35,6 +35,7 @@ private:
 	int m_waitTime = 0;
 	const int WAIT_TIME = 10;
 	bool m_exitFlg = false;
+	int m_winner;
 public:
 
 	static SceneManager_Class& instance()

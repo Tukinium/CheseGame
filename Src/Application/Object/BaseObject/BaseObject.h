@@ -48,11 +48,21 @@ public:
 	{
 		m_nowBordInfo[h][w] = _num;
 	}
+	void SetPropotion(int type)
+	{
+		m_PropotionType = type;
+		Propotioned = true;
+	}
 	// テクスチャ、ポリゴン、モデルいずれかを作成してテクスチャをセットする
 	// 実行と同時にスマートポインタが作成されるため注意
 	// _type  そのモデルのタイプ(Enum ModelType参照)
 	// _filePass  セットしたいテクスチャのパス
 	void SetAsset(int _type, std::string _filePass);
+
+	bool SetCanPropotion()
+	{
+		return m_canPropotion;
+	}
 
 	enum ModelType
 	{
@@ -176,7 +186,9 @@ protected:
 
 	bool m_Alive = false;
 
-	int m_type = NoneM;
+	int m_modeltype = NoneM;
+
+	bool m_canPropotion = false;
 
 	bool m_thisSprite = false;
 	std::shared_ptr<KdTexture>m_tex = nullptr;
@@ -196,7 +208,10 @@ protected:
 	//ポーン用、最初の2マス動いたかどうか
 	bool m_firstMoved = false;
 
+	bool Propotioned = false;
 
+	//プロポーション先(0 = Rook,1 = Bishop,2 = Knight,3 = Queen)
+	int m_PropotionType = -1;
 	//IDだヨ
 	int m_id;
 

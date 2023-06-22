@@ -70,9 +70,6 @@
     <Filter Include="Src\Application\Scene\BaseScene">
       <UniqueIdentifier>{67c02e2a-9b07-409b-b844-6dd64fae02dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\BaseObeject">
-      <UniqueIdentifier>{24b5ff17-55da-4b4b-ae25-be9fa6c32bef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\CameraObject">
       <UniqueIdentifier>{ad5fad5c-e48f-4441-8a7a-8e3801c40c8d}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,9 @@
     </Filter>
     <Filter Include="Src\Application\Object\UI\ButtonUI">
       <UniqueIdentifier>{119370ef-d294-459f-b1c5-6ed1a405bb3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\BaseObeject">
+      <UniqueIdentifier>{24b5ff17-55da-4b4b-ae25-be9fa6c32bef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

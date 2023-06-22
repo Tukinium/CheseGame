@@ -2,9 +2,9 @@
 
 void SkyBox_Class::Init()
 {
-	m_type = Model;
+	m_modeltype = Model;
 	fillPass = "Asset/Model/SkyBox/Test/SkyBoxTest.gltf";
-	SetAsset(m_type, fillPass);
+	SetAsset(m_modeltype, fillPass);
 	m_scale = DEFAULT_SCALE;
 
 	m_pCollider = std::make_unique<KdCollider>();

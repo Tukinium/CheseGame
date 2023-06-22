@@ -6,6 +6,7 @@ public:
 	void Init()override;
 	void SetDefaultPos(int n);
 	void GenCanMoveBordInfo()override;
+	void DrawLit()override;
 private:
 	const float BlackDefaultPosX = 0.5 - 0;
 	const float BlackDefaultPosZ = 0.5 - 3;
@@ -54,4 +55,10 @@ private:
 
 	const float WhiteDefaultPosX8 = 0.5 - 4;
 	const float WhiteDefaultPosZ8 = 0.5 + 2;
+
+	std::shared_ptr<KdModelWork>KnightModel;
+	std::shared_ptr<KdModelWork>BishopModel;
+	std::shared_ptr<KdModelWork>QueenModel;
+	std::shared_ptr<KdModelWork>RookModel;
+
 };

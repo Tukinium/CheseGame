@@ -15,6 +15,7 @@ class PieceSelectingUI_Class;
 class OnTurnStartViewUI_Class;
 class NumUI_Class;
 class ButtonUI_Class;
+class UIBaseObject_Class;
 #include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/BaseScene/BaseScene.h"
 
@@ -54,7 +55,6 @@ public:
 		 int r = dis(gen);
 		 return r;
 	 }
-
 	 //int型ランダム
 	 int iRandom(int min, int max)
 	 {
@@ -65,13 +65,7 @@ public:
 		 return r;
 	 }
 
-	 int GetWinPlayer()
-	 {
-		 return m_winner;
-	 }
-
 	 void CheseAI();
-
 	 //ボード上にあるマウス判定の座標を返す
 	 Math::Vector3 BordOnMouse();
 
@@ -120,6 +114,9 @@ private:
 	std::shared_ptr<PieceSelectingUI_Class>m_pieceSelectUI;
 	std::shared_ptr<OnTurnStartViewUI_Class>m_onTurnViewUI;
 	std::shared_ptr<NumUI_Class>m_numUI;
+	std::shared_ptr<UIBaseObject_Class>m_PlayerTurnView;
+	std::shared_ptr<UIBaseObject_Class>m_EnemyTurnView;
+
 
 	std::shared_ptr<KingPieceObject_Class>m_kingBlack;
 	std::shared_ptr<KingPieceObject_Class>m_kingWhite;
@@ -168,6 +165,8 @@ private:
 
 	//チェックメイト
 	bool m_check = false;
+
+	bool m_GameStartCall;
 
 	//現在の盤面状況
 	int m_bordInfo[8][8] =

@@ -10,8 +10,14 @@ public:
 private:
 	std::shared_ptr<BaseObject_Class>m_backTex;
 	std::shared_ptr<BaseObject_Class>m_uiTex;
+	
 	std::shared_ptr<ButtonUI_Class>m_SettingButtonUI;
 	std::shared_ptr<ButtonUI_Class>m_StartButtleButtonUI;
 	std::shared_ptr<ButtonUI_Class>m_UnSetedButtonUI;
+	std::shared_ptr<ButtonUI_Class>m_UnSetedButtonUI2;
+	std::shared_ptr<ButtonUI_Class>m_UnSetedButtonUI3;
+	std::shared_ptr<ButtonUI_Class>m_PartyButtonUI;
 	std::shared_ptr<ButtonUI_Class>m_ExitButtonUI;
+	std::shared_ptr<ButtonUI_Class>m_GatchaButtonUI;
+	std::string m_UserName = "UnSetName";
 };

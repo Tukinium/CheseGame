@@ -4,6 +4,25 @@ void PawnPieceObject_Class::Init()
 {
 	fillPass = "Asset/Model/Piece/Pawn/Pawn.gltf";
 	PieceBaseObject_Class::Init();
+	std::string str = "Asset/Model/Piece/";
+	KnightModel = std::make_shared<KdModelWork>();
+	BishopModel = std::make_shared<KdModelWork>();
+	RookModel = std::make_shared<KdModelWork>();
+	QueenModel = std::make_shared<KdModelWork>();
+	if (m_color == kWhiteColor)
+	{
+		KnightModel->SetModelData("Asset/Model/Piece/White/Knight/Knight.gltf");
+		RookModel->SetModelData("Asset/Model/Piece/White/Rook/Rook.gltf");
+		BishopModel->SetModelData("Asset/Model/Piece/White/Bishop/Bishop.gltf");
+		QueenModel->SetModelData("Asset/Model/Piece/White/Queen/Queen.gltf");
+	}
+	if (m_color == kBlackColor)
+	{
+		KnightModel->SetModelData("Asset/Model/Piece/Black/Knight/Knight.gltf");
+		RookModel->SetModelData("Asset/Model/Piece/Black/Rook/Rook.gltf");
+		BishopModel->SetModelData("Asset/Model/Piece/Black/Bishop/Bishop.gltf");
+		QueenModel->SetModelData("Asset/Model/Piece/Black/Queen/Queen.gltf");
+	}
 }
 
 void PawnPieceObject_Class::SetDefaultPos(int n)
@@ -149,6 +168,22 @@ void PawnPieceObject_Class::GenCanMoveBordInfo()
 		if (!m_firstMoved)
 		{
 			m_canMoveBordInfo[centerH - 2][centerW] = CanMove;
+			if (m_nowBordInfo[centerH - 2][centerW] != None)
+			{
+				m_canMoveBordInfo[centerH - 2][centerW] = None;
+			}
+		}
+		if (m_nowBordInfo[centerH - 1][centerW - 1] != None)
+		{
+			m_canMoveBordInfo[centerH - 1][centerW - 1] = CanMove;
+		}
+		if (m_nowBordInfo[centerH - 1][centerW + 1] != None)
+		{
+			m_canMoveBordInfo[centerH - 1][centerW + 1] = CanMove;
+		}
+		if (m_nowBordInfo[centerH - 1][centerW] != None)
+		{
+			m_canMoveBordInfo[centerH - 1][centerW] = None;
 		}
 	}
 	if (m_color == kBlackColor)
@@ -157,8 +192,72 @@ void PawnPieceObject_Class::GenCanMoveBordInfo()
 		if (!m_firstMoved)
 		{
 			m_canMoveBordInfo[centerH + 2][centerW] = CanMove;
+			if (m_nowBordInfo[centerH + 2][centerW] != None)
+			{
+				m_canMoveBordInfo[centerH + 2][centerW] = None;
+			}
+		}
+		if (m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn0 || m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn1 || m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn2 || m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn3 || m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn4 || m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn5 || m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn6 || m_nowBordInfo[centerH + 1][centerW - 1] == WhitePawn7)
+		{
+			m_canMoveBordInfo[centerH + 1][centerW - 1] = CanMove;
+		}
+		if (m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn0 || m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn1 || m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn2 || m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn3 || m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn4 || m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn5 || m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn6 || m_nowBordInfo[centerH + 1][centerW + 1] == WhitePawn7)
+		{
+			m_canMoveBordInfo[centerH + 1][centerW + 1] = CanMove;
+		}
+		if (m_nowBordInfo[centerH + 1][centerW] != None)
+		{
+			m_canMoveBordInfo[centerH + 1][centerW] = None;
 		}
 	}
 	m_canMoveBordInfo[centerH][centerW] = Me;
+
+	if (centerH == 0 && m_color == kWhiteColor)
+	{
+		m_canPropotion = true;
+	}
+	if (centerH == 8 && m_color == kWhiteColor)
+	{
+		m_canPropotion = true;
+	}
 	PieceMoveFixForTeamAreaNotMove();
+	
+}
+
+void PawnPieceObject_Class::DrawLit()
+{
+	if (!m_thisModel && !m_model)return;
+	if (!m_Alive)return;
+	if (!Propotioned)
+	{
+		KdHD2DShader.DrawModel(*m_model, m_mWorld);
+	}
+	if (Propotioned)
+	{
+		switch (m_PropotionType)
+		{
+		case 0:
+		{
+			KdHD2DShader.DrawModel(*RookModel, m_mWorld);
+			break;
+		}
+		case 1:
+		{
+			KdHD2DShader.DrawModel(*BishopModel, m_mWorld);
+			break;
+		}
+		case 2:
+		{
+			KdHD2DShader.DrawModel(*KnightModel, m_mWorld);
+			break;
+		}
+		case 3:
+		{
+			KdHD2DShader.DrawModel(*QueenModel, m_mWorld);
+			break;
+		}
+		default:
+			break;
+		}
+	}
 }
