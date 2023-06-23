@@ -67,6 +67,26 @@ void GameScene_Class::SetSharedPtr()
 	m_EnemyTurnView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/EnemyTurn.png");
 	m_EnemyTurnView->SetPos2({ 0,100,0 });
 
+	if (!m_ProPotionBishopView)m_ProPotionBishopView = std::make_shared<UIBaseObject_Class>();
+	m_ProPotionBishopView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/Propotion/ProptionBishop.png");
+	m_baseObjList.push_back(m_ProPotionBishopView);
+
+	if (!m_ProPotionKnightView)m_ProPotionKnightView = std::make_shared<UIBaseObject_Class>();
+	m_ProPotionKnightView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/Propotion/ProptionKnight.png");
+	m_baseObjList.push_back(m_ProPotionKnightView);
+
+	if (!m_ProPotionRookView)m_ProPotionRookView = std::make_shared<UIBaseObject_Class>();
+	m_ProPotionRookView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/Propotion/ProptionRook.png");
+	m_baseObjList.push_back(m_ProPotionRookView);
+
+	if (!m_ProPotionQueenView)m_ProPotionQueenView = std::make_shared<UIBaseObject_Class>();
+	m_ProPotionQueenView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/Propotion/ProptionQueen.png");
+	m_baseObjList.push_back(m_ProPotionQueenView);
+
+	if (!m_ProPotionSelectingView)m_ProPotionSelectingView = std::make_shared<UIBaseObject_Class>();
+	m_ProPotionSelectingView->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/Propotion/ProptionSelecting.png");
+	m_baseObjList.push_back(m_ProPotionSelectingView);
+
 	if (!m_sky)m_sky = std::make_shared<SkyBox_Class>();
 	m_baseObjList.push_back(m_sky);
 
@@ -285,16 +305,18 @@ void GameScene_Class::Update()
 								//printf("\n");
 
 							}
-							if (obj->SetCanPropotion())
-							{
-								obj->SetPropotion(3);
-							}
-							obj->SetfirstMoved(true);
-							m_beforeSelectPos = BordOnMouse();
-							m_selectObject = true;
-							m_Phase = SelectPhase;
-							std::cout << "StandByPhaseEnd" << std::endl;
-							m_waitTime = waitTime;
+
+								m_ProPotionBishopView->SetAlive(false);
+								m_ProPotionKnightView->SetAlive(false);
+								m_ProPotionQueenView->SetAlive(false);
+								m_ProPotionRookView->SetAlive(false);
+								obj->SetfirstMoved(true);
+								m_beforeSelectPos = BordOnMouse();
+								m_selectObject = true;
+								m_Phase = SelectPhase;
+								std::cout << "StandByPhaseEnd" << std::endl;
+								m_waitTime = waitTime;
+							
 						}
 					}
 				}
