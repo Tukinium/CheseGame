@@ -24,7 +24,6 @@ public:
 
 	enum ModelType
 	{
-		NoneM = 0,
 		Sprite = 1,
 		Polygon,
 		Model,
@@ -47,7 +46,7 @@ public:
 	}
 	void SetSelecting(bool _selecting)
 	{
-		Selecting = _selecting;
+		m_selecting = _selecting;
 	}
 
 protected:
@@ -58,15 +57,12 @@ protected:
 
 	bool m_Alive = false;
 
-	int m_modeltype = NoneM;
+	int m_modeltype = 0;
 
-	bool m_thisSprite = false;
 	std::shared_ptr<KdTexture>m_tex = nullptr;
 
-	bool m_thisPolygon = false;
 	std::shared_ptr<KdPolygon>m_polygon = nullptr;
 
-	bool m_thisModel = false;
 	std::shared_ptr<KdModelWork>m_model = nullptr;
 
 	std::string fillPass;
@@ -75,7 +71,7 @@ protected:
 
 	Math::Rectangle m_rc;
 
-	bool Selecting;
+	bool m_selecting;
 };
 
 //記述を楽にするためのマクロ #define

@@ -18,12 +18,12 @@ void KingPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };
+			SetPos({ WhiteDefaultPosX,0,WhiteDefaultPosZ });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX,0,BlackDefaultPosZ };
+			SetPos({ BlackDefaultPosX,0,BlackDefaultPosZ });
 			m_color = kBlackColor;
 		}
 		break;

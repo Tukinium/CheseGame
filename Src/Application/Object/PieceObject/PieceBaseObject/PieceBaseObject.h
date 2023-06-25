@@ -46,6 +46,7 @@ public:
 
 	void GenMassCenter();
 
+	Math::Vector3 GenRandomMove();
 
 	enum Bord
 	{

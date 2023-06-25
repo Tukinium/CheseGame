@@ -15,12 +15,12 @@ void KnightPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };
+			SetPos({ WhiteDefaultPosX,0,WhiteDefaultPosZ });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX,0,BlackDefaultPosZ };
+			SetPos({ BlackDefaultPosX,0,BlackDefaultPosZ });
 			m_color = kBlackColor;
 		}
 		break;
@@ -29,12 +29,12 @@ void KnightPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX2,0,WhiteDefaultPosZ2 };
+			SetPos({ WhiteDefaultPosX2,0,WhiteDefaultPosZ2 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX2,0,BlackDefaultPosZ2 };
+			SetPos({ BlackDefaultPosX2,0,BlackDefaultPosZ2 });
 			m_color = kBlackColor;
 		}
 		break;

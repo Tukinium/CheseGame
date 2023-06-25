@@ -19,14 +19,14 @@ void NumUI_Class::DrawSprite()
 	if (!m_Alive)return;
 	if (m_num < 10)
 	{
-		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_numTex[m_num], m_pos.x, m_pos.y /*,&m_rc*/);
+		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_numTex[m_num], GetPos().x, GetPos().y);
 	}
 	if (m_num >= 10)
 	{
 		std::string numStr = std::to_string(m_num);
 		int firstNum = m_num % 10;
 		int secondNum = (m_num /10) % 10;
-		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_numTex[firstNum], m_pos.x, m_pos.y /*,&m_rc*/);
-		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_numTex[secondNum], m_pos.x - 50, m_pos.y /*,&m_rc*/);
+		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_numTex[firstNum], GetPos().x, GetPos().y);
+		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_numTex[secondNum], GetPos().x - 50.0f, GetPos().y);
 	}
 }

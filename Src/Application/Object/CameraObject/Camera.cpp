@@ -2,7 +2,6 @@
 
 void Camera_Class::PreDraw()
 {
-	
 	m_cam->SetToShader();
 }
 
@@ -11,41 +10,36 @@ void Camera_Class::PreUpdate()
 	switch (camViewModeNum)
 	{
 	case Default:
-	{
-		m_pos = defaultCam.m_pos;
-		m_rotateVec = defaultCam.m_rotateVec;
+	{	
+		
 		break;
 	}
 	case CheseMode:
 	{
-		m_pos = cheseModeCam.m_pos;
-		m_rotateVec = cheseModeCam.m_rotateVec;
+
 		break;
 	}
 	case UpperCamMode:
 	{
-		m_pos = upperCamModeCam.m_pos;
-		m_rotateVec = upperCamModeCam.m_rotateVec;
+
 		break;
 	}
 	case SelectingMode:
 	{
-		m_rotateVec = selectingModeCam.m_rotateVec;
+
 		break;
 	}
 	default:
 		break;
 	}
-	m_transMat = Math::Matrix::CreateTranslation(m_pos);
-	m_scaleMat = Math::Matrix::CreateScale(m_scale);
-	m_rotateX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(m_rotateVec.x));
-	m_rotateY = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_rotateVec.y));
-	m_rotateZ = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(m_rotateVec.z));
-	m_rotateMat = m_rotateX * m_rotateY * m_rotateZ;
-
+	
+	Math::Matrix transMat= Math::Matrix::CreateTranslation({ 0,10,0 });
+	Math::Matrix scaleMat = Math::Matrix::Identity;
+	Math::Matrix rotateMatX = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(90));
+	Math::Matrix rotateMatY = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(180));
+	Math::Matrix rotateMatZ = Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(0));
 	//s—ñ‚Ì‡¬ = Šgk x ‰ñ“] x ˆÚ“®
-	m_mWorld = m_scaleMat * m_rotateMat * m_transMat;
-
+	m_mWorld = scaleMat * (rotateMatX * rotateMatY * rotateMatZ) * transMat;
 	m_cam->SetCameraMatrix(m_mWorld);
 }
 

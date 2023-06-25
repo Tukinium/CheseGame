@@ -16,11 +16,10 @@ void UIBaseObject_Class::Init()
 
 void UIBaseObject_Class::DrawSprite()
 {
-	if (!m_thisSprite || !m_Alive)return;
-	if (m_pos.z >= 0)
-	{
-		KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), m_pos.x, m_pos.y,nullptr);
-	}
+	if (!m_tex || !m_Alive)return;
+
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), GetPos().x, GetPos().y, nullptr);
+
 }
 
 void UIBaseObject_Class::PreUpdate()

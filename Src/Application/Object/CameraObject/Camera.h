@@ -3,9 +3,9 @@
 class Camera_Class : public BaseObject_Class
 {
 public:
-	void PreDraw();
-	void PreUpdate();
-	void Init();
+	void PreDraw()override;
+	void PreUpdate()override;
+	void Init()override;
 	void setCamViewMode(int _camViewNum)
 	{
 		camViewModeNum = _camViewNum;
@@ -17,6 +17,7 @@ public:
 		UpperCamMode,
 		SelectingMode,
 	};
+
 	std::shared_ptr<KdCamera> WorkCamera() const
 	{
 		return m_cam;
@@ -55,7 +56,8 @@ public:
 
 private:
 	//çsóÒÇÃçáê¨ = ägèk x âÒì] x à⁄ìÆ
+
 	int camViewModeNum = Default;
-	std::shared_ptr<KdCamera>m_cam;
+	std::shared_ptr<KdCamera>m_cam = nullptr;
 	
 };

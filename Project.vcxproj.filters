@@ -145,7 +145,7 @@
     <Filter Include="Src\Application\Object\UI\PropotionButtonUI">
       <UniqueIdentifier>{7a2c421c-5a43-475c-bb87-33a65ac6ac8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Scene\GameScene\ResultScene">
+    <Filter Include="Src\Application\Scene\ResultScene">
       <UniqueIdentifier>{81aca50a-90ed-4c3b-bd36-0bb385696365}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -340,7 +340,7 @@
       <Filter>Src\Application\Scene\MainMenuScene</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene_Class.h">
-      <Filter>Src\Application\Scene\GameScene\ResultScene</Filter>
+      <Filter>Src\Application\Scene\ResultScene</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\UI\ButtonUI\ButtonUI_Class.h">
       <Filter>Src\Application\Object\UI\ButtonUI</Filter>
@@ -516,7 +516,7 @@
       <Filter>Src\Application\Scene\MainMenuScene</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene_Class.cpp">
-      <Filter>Src\Application\Scene\GameScene\ResultScene</Filter>
+      <Filter>Src\Application\Scene\ResultScene</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\UI\ButtonUI\ButtonUI_Class.cpp">
       <Filter>Src\Application\Object\UI\ButtonUI</Filter>

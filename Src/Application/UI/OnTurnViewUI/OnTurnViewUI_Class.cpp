@@ -19,15 +19,14 @@ void OnTurnStartViewUI_Class::Leave()
 
 void OnTurnStartViewUI_Class::DrawSprite()
 {
-	if (!m_thisSprite || !m_Alive)return;
-	if (m_pos.z >= 0)
-	{
-		KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
-		KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), 0, 0 /*,&m_rc*/);
+	if (!m_tex || !m_Alive)return;
 
-		Math::Matrix mat2 = Math::Matrix::CreateTranslation({0,0,0});
-		KdShaderManager::Instance().m_spriteShader.SetMatrix(mat2);
-		KdShaderManager::Instance().m_spriteShader.DrawTex(&m_thRoundTxtTex, 0, 0 /*,&m_rc*/);
-		
-	}
+	KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), 0, 0 /*,&m_rc*/);
+
+	Math::Matrix mat2 = Math::Matrix::CreateTranslation({ 0,0,0 });
+	KdShaderManager::Instance().m_spriteShader.SetMatrix(mat2);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(&m_thRoundTxtTex, 0, 0 /*,&m_rc*/);
+
+
 }

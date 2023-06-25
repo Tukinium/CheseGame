@@ -34,12 +34,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };
+			SetPos({ WhiteDefaultPosX,0,WhiteDefaultPosZ });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX,0,BlackDefaultPosZ };
+			SetPos({ BlackDefaultPosX,0,BlackDefaultPosZ });
 			m_color = kBlackColor;
 		}
 		break;
@@ -48,12 +48,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX2,0,WhiteDefaultPosZ2 };
+			SetPos({ WhiteDefaultPosX2,0,WhiteDefaultPosZ2 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX2,0,BlackDefaultPosZ2 };
+			SetPos({ BlackDefaultPosX2,0,BlackDefaultPosZ2 });
 			m_color = kBlackColor;
 		}
 		break;
@@ -63,12 +63,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX3,0,WhiteDefaultPosZ3 };
+			SetPos({ WhiteDefaultPosX3,0,WhiteDefaultPosZ3 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX3,0,BlackDefaultPosZ3 };
+			SetPos({ BlackDefaultPosX3,0,BlackDefaultPosZ3 });
 			m_color = kBlackColor;
 		}
 		break;
@@ -78,12 +78,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX4,0,WhiteDefaultPosZ4 };
+			SetPos({ WhiteDefaultPosX4,0,WhiteDefaultPosZ4 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX4,0,BlackDefaultPosZ4 };
+			SetPos({ BlackDefaultPosX4,0,BlackDefaultPosZ4 });
 			m_color = kBlackColor;
 		}
 		break;
@@ -93,12 +93,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX5,0,WhiteDefaultPosZ5 };
+			SetPos({ WhiteDefaultPosX5,0,WhiteDefaultPosZ5 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX5,0,BlackDefaultPosZ5 };
+			SetPos({ BlackDefaultPosX5,0,BlackDefaultPosZ5 });
 			m_color = kBlackColor;
 		}
 		break;
@@ -108,12 +108,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX6,0,WhiteDefaultPosZ6 };
+			SetPos({ WhiteDefaultPosX6,0,WhiteDefaultPosZ6 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX6,0,BlackDefaultPosZ6 };
+			SetPos({ BlackDefaultPosX6,0,BlackDefaultPosZ6 });
 			m_color = kBlackColor;
 		}
 		break;
@@ -123,12 +123,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX7,0,WhiteDefaultPosZ7 };
+			SetPos({ WhiteDefaultPosX7,0,WhiteDefaultPosZ7 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX7,0,BlackDefaultPosZ7 };
+			SetPos({ BlackDefaultPosX7,0,BlackDefaultPosZ7 });
 			m_color = kBlackColor;
 		}
 		break;
@@ -138,12 +138,12 @@ void PawnPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX8,0,WhiteDefaultPosZ8 };
+			SetPos({ WhiteDefaultPosX8,0,WhiteDefaultPosZ8 });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX8,0,BlackDefaultPosZ8 };
+			SetPos({ BlackDefaultPosX8,0,BlackDefaultPosZ8 });
 			m_color = kBlackColor;
 		}
 		break;
@@ -499,7 +499,7 @@ void PawnPieceObject_Class::GenCanMoveBordInfo()
 
 void PawnPieceObject_Class::DrawLit()
 {
-	if (!m_thisModel && !m_model)return;
+	if (!m_model)return;
 	if (!m_Alive)return;
 	if (!m_propotioned)
 	{

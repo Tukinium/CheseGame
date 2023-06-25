@@ -13,13 +13,13 @@ void ProPotionButtonUI_Class::Init()
 void ProPotionButtonUI_Class::DrawSprite()
 {
 	if (!m_Alive)return;
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_UnSelectingBack.get(), m_pos.x, m_pos.y);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_UnSelectingBack.get(), GetPos().x, GetPos().y);
 
-	if (Selecting)
+	if (m_selecting)
 	{
-		KdShaderManager::Instance().m_spriteShader.DrawTex(m_SelectingBack.get(), m_pos.x, m_pos.y);
+		KdShaderManager::Instance().m_spriteShader.DrawTex(m_SelectingBack.get(), GetPos().x, GetPos().y);
 	}
 
 
-	KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), m_pos.x, m_pos.y /*,&m_rc*/);
+	KdShaderManager::Instance().m_spriteShader.DrawTex(m_tex.get(), GetPos().x, GetPos().y /*,&m_rc*/);
 }

@@ -7,10 +7,10 @@ public:
 	void DrawSprite()override;
 	void SetSelecting(bool _selecting)
 	{
-		Selecting = _selecting;
+		m_selecting = _selecting;
 	}
 private:
-	bool Selecting = false;
+	bool m_selecting = false;
 	std::shared_ptr<KdTexture>m_SelectingBack;
 	std::shared_ptr<KdTexture>m_UnSelectingBack;
 	POINT mousePos;

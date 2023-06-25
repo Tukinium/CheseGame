@@ -8,12 +8,12 @@ void QueenPieceObject_Class::SetDefaultPos(int n)
 	{
 		if (m_color == kWhiteColor)
 		{
-			m_pos = { WhiteDefaultPosX,0,WhiteDefaultPosZ };
+			SetPos({ WhiteDefaultPosX,0,WhiteDefaultPosZ });
 			m_color = kWhiteColor;
 		}
 		else if (m_color == kBlackColor)
 		{
-			m_pos = { BlackDefaultPosX,0,BlackDefaultPosZ };
+			SetPos({ BlackDefaultPosX,0,BlackDefaultPosZ });
 			m_color = kBlackColor;
 		}
 		break;
@@ -37,18 +37,10 @@ void QueenPieceObject_Class::GenCanMoveBordInfo()
 		for (int w1 = 0; w1 < 8; w1++)
 		{
 			m_canMoveBordInfo[h1][w1] = 0;
-			//Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-			Math::Vector3 pos = {GetPos().x};
-			if (Math::Vector3::Distance({ h1 * 1 - 3.5f,0,w1 * 1 - 3.5f }, pos) < 0.5)
-			{
-				centerH = h1;
-				centerW = w1;
-
-			}
 		}
 	}
 
-	//GenMassCenter();
+	GenMassCenter();
 
 	{
 		for (int d = 0; centerW - d > -1; d++)

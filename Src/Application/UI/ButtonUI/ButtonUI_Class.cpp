@@ -16,7 +16,7 @@ void ButtonUI_Class::DrawSprite()
 	KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
 	KdShaderManager::Instance().m_spriteShader.DrawTex(m_UnSelectingBack.get(), 0, 0);
 
-	if (Selecting)
+	if (m_selecting)
 	{
 		KdShaderManager::Instance().m_spriteShader.SetMatrix(m_mWorld);
 		KdShaderManager::Instance().m_spriteShader.DrawTex(m_SelectingBack.get(), 0, 0);

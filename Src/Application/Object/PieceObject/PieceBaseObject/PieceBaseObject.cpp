@@ -151,7 +151,7 @@ void PieceBaseObject_Class::GenMassCenter()
 		for (int w = 0; w < 8; w++)
 		{
 			Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-			if (Math::Vector3::Distance(massPos, GetPos2()) < 0.5)
+			if (Math::Vector3::Distance(massPos, GetPos()) < 0.5)
 			{
 				centerH = h;
 				centerW = w;
@@ -163,3 +163,14 @@ void PieceBaseObject_Class::GenMassCenter()
 	//centerW = static_cast<int>(GetPos2().y - 0.5);
 
 }
+
+Math::Vector3 PieceBaseObject_Class::GenRandomMove()
+{
+	bool leave = false;
+	while (1)
+	{
+		
+	}
+	return Math::Vector3();
+}
+
