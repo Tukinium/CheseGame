@@ -4,6 +4,7 @@ void BishopPieceObject_Class::Init()
 {
 	fillPass = "Asset/Model/Piece/Bishop/Bishop.gltf";
 	PieceBaseObject_Class::Init();
+	m_point = 50;
 }
 
 void BishopPieceObject_Class::SetDefaultPos(int n)

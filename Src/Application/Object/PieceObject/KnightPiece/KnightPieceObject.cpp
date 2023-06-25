@@ -4,7 +4,7 @@ void KnightPieceObject_Class::Init()
 {
 	fillPass = "Asset/Model/Piece/Knight/Knight.gltf";
 	PieceBaseObject_Class::Init();
-
+	m_point = 10;
 }
 
 void KnightPieceObject_Class::SetDefaultPos(int n)
@@ -53,6 +53,7 @@ void KnightPieceObject_Class::GenCanMoveBordInfo()
 			m_canMoveBordInfo[h][w] = 0;
 		}
 	}
+
 
 	GenMassCenter();
 	if (centerH + 2 < 8)

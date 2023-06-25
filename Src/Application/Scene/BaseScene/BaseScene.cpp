@@ -23,7 +23,8 @@ void BaseScene_Class::Init()
 	{
 		gameObject->Init();
 	}
-	m_waitTime = waitTime;
+	m_waitTime = WAIT_TIME;
+	
 }
 
 void BaseScene_Class::Draw()

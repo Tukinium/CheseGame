@@ -25,20 +25,31 @@ void QueenPieceObject_Class::SetDefaultPos(int n)
 
 void QueenPieceObject_Class::Init()
 {
+	m_point = 100;
 	fillPass = "Asset/Model/Piece/Queen/Queen.gltf";
 	PieceBaseObject_Class::Init();
 }
 
 void QueenPieceObject_Class::GenCanMoveBordInfo()
 {
-	for (int h = 0; h < 8; h++)
+	for (int h1 = 0; h1 < 8; h1++)
 	{
-		for (int w = 0; w < 8; w++)
+		for (int w1 = 0; w1 < 8; w1++)
 		{
-			m_canMoveBordInfo[h][w] = 0;
+			m_canMoveBordInfo[h1][w1] = 0;
+			//Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+			Math::Vector3 pos = {GetPos().x};
+			if (Math::Vector3::Distance({ h1 * 1 - 3.5f,0,w1 * 1 - 3.5f }, pos) < 0.5)
+			{
+				centerH = h1;
+				centerW = w1;
+
+			}
 		}
 	}
-	GenMassCenter();
+
+	//GenMassCenter();
+
 	{
 		for (int d = 0; centerW - d > -1; d++)
 		{

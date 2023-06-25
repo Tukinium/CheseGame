@@ -28,7 +28,7 @@ public:
 	{
 		return m_winner;
 	}
-	void GetWinner(int _winner)
+	void SetWinner(int _winner)
 	{
 		m_winner = _winner;
 	}
@@ -41,13 +41,20 @@ public:
 		GameScene,
 		ExitScene,
 	};
+	enum Turn
+	{
+		Player,
+		Enemy,
+	};
+
 protected:
 	std::list<std::shared_ptr<BaseObject_Class>>m_baseObjList;
+
 	int m_changeScene = NoneScene;
 	//マウスクリック誤入力回避用待機時間
 	int m_waitTime = 0;
 	//待機時間
-	const int waitTime = 10;
+	const int WAIT_TIME = 10;
 	//勝った方
 	int m_winner = -1;
 	//マウス

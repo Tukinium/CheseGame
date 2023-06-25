@@ -42,21 +42,12 @@ void BaseObject_Class::DrawSprite()
 
 void BaseObject_Class::PreUpdate()
 {
-	MathMatrix();
+
 }
 
 void BaseObject_Class::PostUpdate()
 {
 	//MathMatrix();
-}
-
-void BaseObject_Class::MathMatrix()
-{
-	m_mWorld = Math::Matrix::CreateRotationX(m_rotateVec.x);
-	m_mWorld = Math::Matrix::CreateRotationY(m_rotateVec.z);
-	m_mWorld = Math::Matrix::CreateRotationZ(m_rotateVec.y);
-	m_mWorld = Math::Matrix::CreateScale(m_scale);
-	m_mWorld = Math::Matrix::CreateTranslation(m_pos);
 }
 
 void BaseObject_Class::SetAsset(int _type, std::string _filePass)

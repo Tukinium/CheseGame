@@ -7,6 +7,7 @@ void RookPieceObject_Class::Init()
 	fillPass = "Asset/Model/Piece/Rook/Rook.gltf";
 	SetAsset(m_modeltype, fillPass);
 	m_scale = DEFAULT_SCALE;
+	m_point = 70;
 }
 
 void RookPieceObject_Class::SetDefaultPos(int n)
@@ -59,6 +60,7 @@ void RookPieceObject_Class::GenCanMoveBordInfo()
 	}
 
 	GenMassCenter();
+
 	const int max = 8;
 	for (int d = 0; centerW - d > -1; d++)
 	{

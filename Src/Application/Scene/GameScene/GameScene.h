@@ -16,6 +16,10 @@ class OnTurnStartViewUI_Class;
 class NumUI_Class;
 class ButtonUI_Class;
 class UIBaseObject_Class;
+class ProPotionButtonUI_Class;
+
+class BaseAudio_Class;
+#include"Application/Object/PieceObject/PieceBaseObject/PieceBaseObject.h"
 #include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/BaseScene/BaseScene.h"
 
@@ -29,17 +33,16 @@ public:
 	 void PostUpdate()override;
 	 void PreDraw()override;
 
+	 virtual void Draw()override;
+	 virtual void DrawLit()override;
+	 virtual void GenerateDepthMapFromLight()override;
+	 virtual void DrawBright()override;
+	 virtual void DrawUnLit()override;
+	 virtual void DrawSprite()override;
+	 virtual void PostDraw()override;
+
 	 //指定されたIDのピースを殺す
-	 void KillPiece(int _id)
-	 {
-		 for (std::shared_ptr<BaseObject_Class>obj : m_baseObjList)
-		 {
-			 if (obj->GetId() == _id)
-			 {
-				 obj->SetAlive(false);
-			 }
-		 }
-	 }
+	 void KillPiece(int _id);
 
 	 void Release()override;
 
@@ -65,7 +68,6 @@ public:
 		 return r;
 	 }
 
-	 void CheseAI();
 	 //ボード上にあるマウス判定の座標を返す
 	 Math::Vector3 BordOnMouse();
 
@@ -88,12 +90,9 @@ public:
 
 		 //諸々のリザルト
 		 EndPhase,
-	 };
 
-	 enum Turn
-	 {
-		 Player,
-		 Enemy,
+		 //特殊、プロポーション
+		 ProPotionPhase,
 	 };
 
 
@@ -118,12 +117,10 @@ private:
 	std::shared_ptr<UIBaseObject_Class>m_PlayerTurnView;
 	std::shared_ptr<UIBaseObject_Class>m_EnemyTurnView;
 
-	std::shared_ptr<UIBaseObject_Class>m_ProPotionQueenView;
-	std::shared_ptr<UIBaseObject_Class>m_ProPotionRookView;
-	std::shared_ptr<UIBaseObject_Class>m_ProPotionBishopView;
-	std::shared_ptr<UIBaseObject_Class>m_ProPotionKnightView;
-
-	std::shared_ptr<UIBaseObject_Class>m_ProPotionSelectingView;
+	std::shared_ptr<ProPotionButtonUI_Class>m_ProPotionQueenView;
+	std::shared_ptr<ProPotionButtonUI_Class>m_ProPotionRookView;
+	std::shared_ptr<ProPotionButtonUI_Class>m_ProPotionBishopView;
+	std::shared_ptr<ProPotionButtonUI_Class>m_ProPotionKnightView;
 
 	std::shared_ptr<KingPieceObject_Class>m_kingBlack;
 	std::shared_ptr<KingPieceObject_Class>m_kingWhite;
@@ -143,6 +140,10 @@ private:
 	std::shared_ptr<BishopPieceObject_Class>m_bishopWhite[2];
 	std::shared_ptr<BishopPieceObject_Class>m_bishopBlack[2];
 
+	std::shared_ptr<BaseAudio_Class>m_bgm1;
+
+	std::list<std::shared_ptr<PieceBaseObject_Class>>m_pieceList;
+
 	//フェーズ管理
 	int m_Phase;
 
@@ -154,7 +155,7 @@ private:
 	//ピース(オブジェクト)が選択されているか
 	bool m_selectObject = false;
 	//現在どちらのターンか
-	int m_Trun = Player;
+	int m_Trun = Enemy;
 
 	//移動前選択座標
 	Math::Vector3 m_beforeSelectPos;
@@ -165,8 +166,9 @@ private:
 	int m_round = 0;
 
 	//移動したピースのID
-	int m_movePieceID;
+	int m_selectPieceId = -1;
 
+	int m_aiPoint = 0;
 	//開始フェーズの各Init処理が終了したか
 	bool m_startPhaseInit = false;
 
@@ -175,6 +177,16 @@ private:
 
 	bool m_GameStartCall;
 
+	Math::Matrix m_transMat = Math::Matrix::Identity;
+	Math::Vector3 m_pos = {};
+
+	Math::Matrix m_rotateMat;
+	Math::Matrix m_rotateX;
+	Math::Matrix m_rotateY;
+	Math::Matrix m_rotateZ;
+	Math::Vector3 m_rotateVec = {};
+
+	Math::Matrix m_scaleMat;
 
 	//現在の盤面状況
 	int m_bordInfo[8][8] =
@@ -205,14 +217,14 @@ private:
 	//初期配置
 	int NORMAL_RULE_BORD[8][8] =
 	{
-		BaseObject_Class::BlackRook0,BaseObject_Class::BlackKnight0,BaseObject_Class::BlackBishop0,BaseObject_Class::BlackQueen,BaseObject_Class::BlackKing,BaseObject_Class::BlackBishop1,BaseObject_Class::BlackKnight1,BaseObject_Class::BlackRook1,
-		BaseObject_Class::BlackPawn0,BaseObject_Class::BlackPawn1,BaseObject_Class::BlackPawn2,BaseObject_Class::BlackPawn3,BaseObject_Class::BlackPawn4,BaseObject_Class::BlackPawn5,BaseObject_Class::BlackPawn6,BaseObject_Class::BlackPawn7,
+		PieceBaseObject_Class::BlackRook0,PieceBaseObject_Class::BlackKnight0,PieceBaseObject_Class::BlackBishop0,PieceBaseObject_Class::BlackQueen,PieceBaseObject_Class::BlackKing,PieceBaseObject_Class::BlackBishop1,PieceBaseObject_Class::BlackKnight1,PieceBaseObject_Class::BlackRook1,
+		PieceBaseObject_Class::BlackPawn0,PieceBaseObject_Class::BlackPawn1,PieceBaseObject_Class::BlackPawn2,PieceBaseObject_Class::BlackPawn3,PieceBaseObject_Class::BlackPawn4,PieceBaseObject_Class::BlackPawn5,PieceBaseObject_Class::BlackPawn6,PieceBaseObject_Class::BlackPawn7,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,
-		BaseObject_Class::WhitePawn0,BaseObject_Class::WhitePawn1,BaseObject_Class::WhitePawn2,BaseObject_Class::WhitePawn3,BaseObject_Class::WhitePawn4,BaseObject_Class::WhitePawn5,BaseObject_Class::WhitePawn6,BaseObject_Class::WhitePawn7,
-		BaseObject_Class::WhiteRook0,BaseObject_Class::WhiteKnight0,BaseObject_Class::WhiteBishop0,BaseObject_Class::WhiteQueen,BaseObject_Class::WhiteKing,BaseObject_Class::WhiteBishop1,BaseObject_Class::WhiteKnight1,BaseObject_Class::WhiteRook1,
+		PieceBaseObject_Class::WhitePawn0,PieceBaseObject_Class::WhitePawn1,PieceBaseObject_Class::WhitePawn2,PieceBaseObject_Class::WhitePawn3,PieceBaseObject_Class::WhitePawn4,PieceBaseObject_Class::WhitePawn5,PieceBaseObject_Class::WhitePawn6,PieceBaseObject_Class::WhitePawn7,
+		PieceBaseObject_Class::WhiteRook0,PieceBaseObject_Class::WhiteKnight0,PieceBaseObject_Class::WhiteBishop0,PieceBaseObject_Class::WhiteQueen,PieceBaseObject_Class::WhiteKing,PieceBaseObject_Class::WhiteBishop1,PieceBaseObject_Class::WhiteKnight1,PieceBaseObject_Class::WhiteRook1,
 	};
 
 	//AI用
@@ -225,21 +237,4 @@ private:
 	const int PAWN_POINT = 1;
 	const int KING_POINT = 100;
 
-	struct AICheck
-	{
-		int m_canMoveBordInfo[8][8] =
-		{
-			0,0,0,0,0,0,0,0,
-			0,0,0,0,0,0,0,0,
-			0,0,0,0,0,0,0,0,
-			0,0,0,0,0,0,0,0,
-			0,0,0,0,0,0,0,0,
-			0,0,0,0,0,0,0,0,
-			0,0,0,0,0,0,0,0,
-			0,0,0,0,0,0,0,0,
-		};
-
-	};
-	AICheck WhiteKing, WhiteQueen, WhiteRook0,WhiteRook1,WhiteBishop0,WhiteBishop1,WhiteKnight0,WhiteKnight1,WhitePawn0,WhitePawn1,WhitePawn2,WhitePawn3,WhitePawn4,WhitePawn5,WhitePawn6,WhitePawn7;
-	AICheck BlackKing, BlackQueen, BlackRook0, BlackRook1, BlackBishop0, BlackBishop1, BlackKnight0, BlackKnight1, BlackPawn0, BlackPawn1, BlackPawn2, BlackPawn3, BlackPawn4, BlackPawn5, BlackPawn6, BlackPawn7;
 };

@@ -1,6 +1,8 @@
 #include"MainMenuScene.h"
 #include"Application/UI/ButtonUI/ButtonUI_Class.h"
 #include"Application/Object/BaseObject/BaseObject.h"
+#include"Application/Audio/BaseAudio_Class.h"
+
 void MainMenuScene_Class::SetSharedPtr()
 {
 	if (!m_backTex)m_backTex = std::make_shared<BaseObject_Class>();
@@ -48,6 +50,8 @@ void MainMenuScene_Class::SetSharedPtr()
 	m_UnSetedButtonUI2->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/UI/ButtonUI/UnSetting_UI.png");
 	m_UnSetedButtonUI2->SetPos({ -500 + 175 * 3,-300,0 });
 	m_baseObjList.push_back(m_UnSetedButtonUI2);
+
+	
 }
 
 void MainMenuScene_Class::Update()
@@ -68,6 +72,7 @@ void MainMenuScene_Class::Update()
 			if (GetAsyncKeyState(VK_LBUTTON) && m_waitTime <= 0)
 			{
 				m_changeScene = BaseScene_Class::GameScene;
+
 				CheangeThisScene();
 			}
 		}

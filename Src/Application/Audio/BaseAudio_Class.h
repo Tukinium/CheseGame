@@ -1,13 +1,9 @@
 #pragma once
-#include"Application/Object/BaseObject/BaseObject.h"
-class BaseAudio_Class : public BaseObject_Class
+class KdSoundInstance;
+class BaseAudio_Class
 {
 public:
-	void SetAudio(std::string _pass)
-	{
-		m_audioPass = _pass;
-		m_audio->Play(_pass, false);
-	}
+	void SetAudio(std::string _pass);
 	void SetLoop(bool _loop)
 	{
 		m_loop = _loop;
@@ -16,7 +12,7 @@ public:
 	void StopAudio();
 protected:
 	std::string m_audioPass;
-	std::shared_ptr<KdAudioManager>m_audio;
+	std::shared_ptr<KdSoundInstance>m_sound;
 	bool m_loop = false;
 	bool m_stop = true;
 };

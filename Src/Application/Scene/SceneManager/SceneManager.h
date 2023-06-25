@@ -1,5 +1,6 @@
 #pragma once
 #include"Application/Scene/BaseScene/BaseScene.h"
+class BaseAudio_Class;
 class GameScene_Class;
 class TitleScene_Class;
 class MainMenuScene_Class;
@@ -36,6 +37,11 @@ private:
 	const int WAIT_TIME = 10;
 	bool m_exitFlg = false;
 	int m_winner;
+
+	std::shared_ptr<BaseAudio_Class>m_TitleBgm;
+	std::shared_ptr<BaseAudio_Class>m_MainMenuBgm;
+	std::shared_ptr<BaseAudio_Class>m_ResultBgm;
+
 public:
 
 	static SceneManager_Class& instance()

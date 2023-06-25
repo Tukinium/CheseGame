@@ -5,9 +5,20 @@
 #include"Application/Scene/MainMenu/MainMenuScene.h"
 #include"Application/Scene/ResultScene/ResultScene_Class.h"
 #include"Application/main.h"
+#include"Application/Audio/BaseAudio_Class.h"
 void SceneManager_Class::Init()
 {
 	CreateCons();
+
+	if (!m_MainMenuBgm)m_MainMenuBgm = std::make_shared<BaseAudio_Class>();
+	m_MainMenuBgm->SetAudio("Asset/Sound/MainMenuBGM.wav");
+
+	if (!m_ResultBgm)m_ResultBgm = std::make_shared<BaseAudio_Class>();
+	m_ResultBgm->SetAudio("Asset/Sound/ResultBGM.wav");
+
+	if (!m_TitleBgm)m_TitleBgm = std::make_shared<BaseAudio_Class>();
+	m_TitleBgm->SetAudio("Asset/Sound/TitleBGM.wav");
+
 	SceneChange(BaseScene_Class::TitleScene);
 	m_nowScene->Init();
 }
@@ -85,6 +96,7 @@ void SceneManager_Class::SceneChange(int _scene)
 	{
 	case BaseScene_Class::GameScene:
 	{
+		m_MainMenuBgm->StopAudio();
 		std::cout << "GameScene Shift" << std::endl;
 		m_nowScene.reset();
 		m_nowScene = std::make_unique<GameScene_Class>();
@@ -95,6 +107,7 @@ void SceneManager_Class::SceneChange(int _scene)
 	}
 	case BaseScene_Class::TitleScene:
 	{
+		m_TitleBgm->PlayAudio();
 		std::cout << "TitleScene Shift" << std::endl;
 		m_nowScene.reset();
 		m_nowScene = std::make_unique<TitleScene_Class>();
@@ -105,6 +118,9 @@ void SceneManager_Class::SceneChange(int _scene)
 	}
 	case BaseScene_Class::MainMenuScene:
 	{
+		m_ResultBgm->StopAudio();
+		m_TitleBgm->StopAudio();
+		m_MainMenuBgm->PlayAudio();
 		m_nowScene.reset();
 		m_nowScene = std::make_unique<MainMenuScene_Class>();
 		m_nowScene->Init();
@@ -114,11 +130,12 @@ void SceneManager_Class::SceneChange(int _scene)
 	}
 	case BaseScene_Class::ResultScene:
 	{
+		m_ResultBgm->PlayAudio();
 	    m_winner = m_nowScene->SetWinner();
 		m_nowScene.reset();
 		m_nowScene = std::make_unique<ResultScene_Class>();
 		m_nowScene->Init();
-		m_nowScene->GetWinner(m_winner);
+		m_nowScene->SetWinner(m_winner);
 		m_Scene = BaseScene_Class::ResultScene;
 		m_waitTime = WAIT_TIME;
 		break;

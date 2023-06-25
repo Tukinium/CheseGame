@@ -169,6 +169,7 @@
     <ClInclude Include="Src\Application\UI\NumUI\NumUI_Class.h" />
     <ClInclude Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.h" />
     <ClInclude Include="Src\Application\UI\PieceSelectingUI\PieceSelectingUI.h" />
+    <ClInclude Include="Src\Application\UI\ProPotionButtonUI\ProPotionButtonUI.h" />
     <ClInclude Include="Src\Application\UI\UIBaseObject.h" />
     <ClInclude Include="Src\Framework\Direct3D\KdMaterial.h" />
     <ClInclude Include="Src\Framework\Direct3D\Polygon\KdPolygon.h" />
@@ -230,6 +231,7 @@
     <ClCompile Include="Src\Application\UI\NumUI\NumUI_Class.cpp" />
     <ClCompile Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.cpp" />
     <ClCompile Include="Src\Application\UI\PieceSelectingUI\PieceSelectingUI.cpp" />
+    <ClCompile Include="Src\Application\UI\ProPotionButtonUI\ProPotionButtonUI.cpp" />
     <ClCompile Include="Src\Application\UI\UIBaseObject.cpp" />
     <ClCompile Include="Src\Framework\Direct3D\KdMaterial.cpp">
       <SubType>

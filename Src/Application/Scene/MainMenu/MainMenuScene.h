@@ -1,7 +1,8 @@
 #pragma once
-#include"Application/Scene/BaseScene/BaseScene.h"
+#include"Application/Scene/BaseScene/BaseScene.h"]
 class BaseObject;
 class ButtonUI_Class;
+class BaseAudio_Class;
 class MainMenuScene_Class : public BaseScene_Class
 {
 public:
@@ -19,5 +20,6 @@ private:
 	std::shared_ptr<ButtonUI_Class>m_PartyButtonUI;
 	std::shared_ptr<ButtonUI_Class>m_ExitButtonUI;
 	std::shared_ptr<ButtonUI_Class>m_GatchaButtonUI;
+
 	std::string m_UserName = "UnSetName";
 };

@@ -1,11 +1,5 @@
 #include"PieceBaseObject.h"
 
-void PieceBaseObject_Class::DrawLit()
-{
-	if (!m_thisModel && !m_model)return;
-	if (!m_Alive)return;
-	KdHD2DShader.DrawModel(*m_model, m_mWorld);
-}
 
 void PieceBaseObject_Class::Init()
 {
@@ -27,54 +21,54 @@ void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
 				{
 					switch (m_nowBordInfo[h][w])
 					{
-					case BaseObject_Class::None:
+					case None:
 						break;
-					case BaseObject_Class::WhitePawn0:
+					case WhitePawn0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhitePawn1:
+					case WhitePawn1:
 						//m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhitePawn2:
+					case WhitePawn2:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhitePawn3:
+					case WhitePawn3:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhitePawn4:
+					case WhitePawn4:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhitePawn5:
+					case WhitePawn5:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhitePawn6:
+					case WhitePawn6:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhitePawn7:
+					case WhitePawn7:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteKnight0:
+					case WhiteKnight0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteKnight1:
+					case WhiteKnight1:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteRook0:
+					case WhiteRook0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteRook1:
+					case WhiteRook1:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteBishop0:
+					case WhiteBishop0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteBishop1:
+					case WhiteBishop1:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteQueen:
+					case WhiteQueen:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::WhiteKing:
+					case WhiteKing:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
 					default:
@@ -82,61 +76,61 @@ void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
 					}
 				}
 			}
-			/*
+			
 			if (GetColor() == kBlackColor)
 			{
 				if (m_canMoveBordInfo[h][w] == CanMove)
 				{
 					switch (m_nowBordInfo[h][w])
 					{
-					case BaseObject_Class::None:
+					case None:
 						break;
-					case BaseObject_Class::BlackPawn0:
+					case BlackPawn0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackPawn1:
+					case BlackPawn1:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackPawn2:
+					case BlackPawn2:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackPawn3:
+					case BlackPawn3:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackPawn4:
+					case BlackPawn4:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackPawn5:
+					case BlackPawn5:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackPawn6:
+					case BlackPawn6:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackPawn7:
+					case BlackPawn7:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackKnight0:
+					case BlackKnight0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackKnight1:
+					case BlackKnight1:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackRook0:
+					case BlackRook0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackRook1:
+					case BlackRook1:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackBishop0:
+					case BlackBishop0:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackBishop1:
+					case BlackBishop1:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackQueen:
+					case BlackQueen:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
-					case BaseObject_Class::BlackKing:
+					case BlackKing:
 						m_canMoveBordInfo[h][w] = Empty;
 						break;
 					default:
@@ -144,7 +138,28 @@ void PieceBaseObject_Class::PieceMoveFixForTeamAreaNotMove()
 					}
 				}
 			}
-			*/
+			
 		}
 	}
+}
+
+void PieceBaseObject_Class::GenMassCenter()
+{
+	
+	for (int h = 0; h < 8; h++)
+	{
+		for (int w = 0; w < 8; w++)
+		{
+			Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+			if (Math::Vector3::Distance(massPos, GetPos2()) < 0.5)
+			{
+				centerH = h;
+				centerW = w;
+
+			}
+		}
+	}
+	//centerH = static_cast<int>(GetPos2().x - 0.5);
+	//centerW = static_cast<int>(GetPos2().y - 0.5);
+
 }
