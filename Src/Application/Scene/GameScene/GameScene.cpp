@@ -614,7 +614,6 @@ void GameScene_Class::Update()
 									{
 										switch (n)
 										{
-											std::cout << "Test" << std::endl;
 										case PieceBaseObject_Class::BlackKing:
 										{
 											if (m_aiPoint < 30)
