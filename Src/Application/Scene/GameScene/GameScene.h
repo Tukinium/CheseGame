@@ -55,7 +55,7 @@ public:
 		 std::random_device rand;
 		 std::mt19937 gen(rand());
 		 std::uniform_real_distribution<>dis(min, max);
-		 int r = dis(gen);
+		 float r = dis(gen);
 		 return r;
 	 }
 	 //int型ランダム
@@ -159,6 +159,7 @@ private:
 
 	//移動前選択座標
 	Math::Vector3 m_beforeSelectPos;
+
 	//移動先選択座標
 	Math::Vector3 m_afterSelectPos;
 
@@ -176,15 +177,6 @@ private:
 	bool m_check = false;
 
 	bool m_GameStartCall;
-
-	Math::Matrix m_transMat = Math::Matrix::Identity;
-	Math::Vector3 m_pos = {};
-
-	Math::Matrix m_rotateMat;
-	Math::Matrix m_rotateX;
-	Math::Matrix m_rotateY;
-	Math::Matrix m_rotateZ;
-	Math::Vector3 m_rotateVec = {};
 
 	Math::Matrix m_scaleMat;
 
@@ -226,18 +218,5 @@ private:
 		PieceBaseObject_Class::WhitePawn0,PieceBaseObject_Class::WhitePawn1,PieceBaseObject_Class::WhitePawn2,PieceBaseObject_Class::WhitePawn3,PieceBaseObject_Class::WhitePawn4,PieceBaseObject_Class::WhitePawn5,PieceBaseObject_Class::WhitePawn6,PieceBaseObject_Class::WhitePawn7,
 		PieceBaseObject_Class::WhiteRook0,PieceBaseObject_Class::WhiteKnight0,PieceBaseObject_Class::WhiteBishop0,PieceBaseObject_Class::WhiteQueen,PieceBaseObject_Class::WhiteKing,PieceBaseObject_Class::WhiteBishop1,PieceBaseObject_Class::WhiteKnight1,PieceBaseObject_Class::WhiteRook1,
 	};
-
-	//AI用
-	float m_aiScore;
-
-	int m_moveH = 0;
-	int m_moveW = 0;
-
-	const int QUEEN_POINT = 10;
-	const int ROOK_POINT = 5;
-	const int BISHOP_POINT = 4;
-	const int KNIGHT_POINT = 3;
-	const int PAWN_POINT = 1;
-	const int KING_POINT = 100;
 
 };

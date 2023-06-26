@@ -240,7 +240,6 @@ void GameScene_Class::Update()
 	//camera.SetCameraMatrix(mat);
 	///camera.SetToShader();
 
-
 	m_camera->setCamViewMode(m_camera->UpperCamMode);
 	PieceSet();
 	BordOnMouse();
@@ -591,9 +590,9 @@ void GameScene_Class::Update()
 			}
 			case GameScene_Class::StandByPhase:
 			{
+				OnAI();
 				if (m_waitTime <= 0)
 				{
-					OnAI();
 					if (obj->GetColor() == kBlackColor)
 					{
 						if (0.5f > (Math::Vector3::Distance(obj->GetPos(), m_beforeSelectPos)))

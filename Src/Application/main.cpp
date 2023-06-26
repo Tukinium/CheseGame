@@ -58,6 +58,11 @@ void Application::Update()
 	{
 		End();
 	}
+
+	if (GetAsyncKeyState(VK_RETURN))
+	{
+		std::cout << GetNowFPS() << std::endl;
+	}
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -160,7 +165,7 @@ bool Application::Init(int w, int h)
 		//===================================================================
 		// ウィンドウ作成
 		//===================================================================
-		if (m_window.Create(w, h, "3D GameProgramming", "Window") == false) {
+		if (m_window.Create(w, h, "たいとるどうしよう", "Window") == false) {
 			MessageBoxA(nullptr, "ウィンドウ作成に失敗", "エラー", MB_OK);
 			return false;
 		}

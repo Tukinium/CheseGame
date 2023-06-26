@@ -31,6 +31,8 @@ private:
 	void Draw();
 	void PostDraw();
 
+
+
 	void DrawSprite();
 
 	// アプリケーション初期化
