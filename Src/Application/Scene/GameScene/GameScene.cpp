@@ -606,15 +606,13 @@ void GameScene_Class::Update()
 					std::cout << "CanMove" << std::endl;
 					int n = 0;
 					while (1)
-					{
-						
+					{	
 						if (obj->GetId() == m_selectPieceId && obj->GetId() == n)
 						{
 							m_selectObject = true;
 							m_beforeSelectPos = obj->GetPos();
 							break;
 						}
-
 						n++;
 					}
 					std::cout << "StandByPhaseEnd" << std::endl;
@@ -653,6 +651,7 @@ void GameScene_Class::Update()
 						}
 					}
 					std::cout << "SetPhaseEnd" << std::endl;
+					
 					//m_Phase = EndPhase;
 					m_waitTime = WAIT_TIME;
 				}
@@ -693,12 +692,11 @@ void GameScene_Class::Update()
 			}
 		}
 		}
-
-		BaseScene_Class::Update();
-		for (auto obj : m_pieceList)
-		{
-			obj->Update();
-		}
+	}
+	BaseScene_Class::Update();
+	for (auto obj : m_pieceList)
+	{
+		obj->Update();
 	}
 }
 
