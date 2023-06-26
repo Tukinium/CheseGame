@@ -54,7 +54,7 @@ protected:
 	//マウスクリック誤入力回避用待機時間
 	int m_waitTime = 0;
 	//待機時間
-	const int WAIT_TIME = 10;
+	const int WAIT_TIME = 30;
 	//勝った方
 	int m_winner = -1;
 	//マウス

@@ -97,7 +97,7 @@ public:
 
 
 
-	 
+	 void OnAI();
 
 private:
 	std::shared_ptr<SkyBox_Class>m_sky;
@@ -229,6 +229,9 @@ private:
 
 	//AI—p
 	float m_aiScore;
+
+	int m_moveH = 0;
+	int m_moveW = 0;
 
 	const int QUEEN_POINT = 10;
 	const int ROOK_POINT = 5;

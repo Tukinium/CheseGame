@@ -217,7 +217,7 @@ void GameScene_Class::Init()
 		obj->Init();
 	}
 
-	m_Trun = Enemy;
+	m_Trun = Player;
 
 	for (int h = 0; h < 8; h++)
 	{
@@ -308,9 +308,7 @@ void GameScene_Class::Update()
 								{
 									//クリックしたオブジェクトに現在の盤面状況を渡す
 									obj->SetBordInfo(h, w, m_bordInfo[h][w]);
-									printf("%d_", m_bordInfo[h][w]);
 								}
-								printf("\n");
 							}
 							for (int h = 0; h < 8; h++)
 							{
@@ -319,9 +317,7 @@ void GameScene_Class::Update()
 									//オブジェクトから動ける範囲が配列で返却される
 									obj->GenCanMoveBordInfo();
 									m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
-									//printf("%d_", m_canMoveBordInfo[h][w]);
 								}
-								//printf("\n");
 
 							}
 							if (obj->GetCanPropotion() && !obj->GetPropotined())
@@ -448,7 +444,7 @@ void GameScene_Class::Update()
 				m_ProPotionQueenView->SetSelecting(false);
 				m_ProPotionRookView->SetSelecting(false);
 
-				m_Trun = Player;
+				m_Trun = Enemy;
 				m_waitTime = WAIT_TIME;
 				m_selectObject = false;
 				std::cout << "EndPhaseEnd" << std::endl;
@@ -560,6 +556,7 @@ void GameScene_Class::Update()
 			switch (m_Phase)
 			{
 			case GameScene_Class::StartPhase:
+			{
 				if (!m_startPhaseInit)
 				{
 					m_selectPieceId = -1;
@@ -580,6 +577,7 @@ void GameScene_Class::Update()
 					m_numUI->SetNum(m_round);
 					m_numUI->SetPos({ -150,0,0 });
 					m_numUI->SetAlive(true);
+					m_aiPoint = 0;
 
 				}
 				if (m_waitTime <= 0)
@@ -591,223 +589,116 @@ void GameScene_Class::Update()
 					m_EnemyTurnView->SetAlive(false);
 					m_waitTime = WAIT_TIME;
 				}
+
 				break;
+			}
 			case GameScene_Class::StandByPhase:
-				//黒色のピースを検索して回す
-				for (int n = PieceBaseObject_Class::BlackPawn0; n <= PieceBaseObject_Class::BlackKing; n++)
+			{
+				if (m_waitTime <= 0)
 				{
-					if (obj->GetId() == n)
+
+					OnAI();
+
+					std::cout << m_selectPieceId << std::endl;
+					
+					m_selectObject = true;
+
+					std::cout << "CanMove" << std::endl;
+					int n = 0;
+					while (1)
 					{
-						//ピースの可動範囲を生成
-						obj->GenCanMoveBordInfo();
+						
+						if (obj->GetId() == m_selectPieceId && obj->GetId() == n)
+						{
+							m_selectObject = true;
+							m_beforeSelectPos = obj->GetPos();
+							break;
+						}
+
+						n++;
+					}
+					std::cout << "StandByPhaseEnd" << std::endl;
+					m_Phase = SelectPhase;
+					m_waitTime = WAIT_TIME;
+				}
+				break;
+			}
+			case GameScene_Class::SelectPhase:
+			{
+				if (m_waitTime <= 0)
+				{
+					if (obj->GetId() == m_selectPieceId)
+					{
 						for (int h = 0; h < 8; h++)
 						{
 							for (int w = 0; w < 8; w++)
 							{
-								//移動可能なマスを検索
-								m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
-								//移動可能なら
-								if (m_canMoveBordInfo[h][w] == PieceBaseObject_Class::CanMove)
+
+								Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+								if (0.5f > Math::Vector3::Distance(massPos, m_beforeSelectPos))
 								{
-									//何もないなら
-									if (m_bordInfo[h][w] == PieceBaseObject_Class::None)
-									{
-										switch (n)
-										{
-										case PieceBaseObject_Class::BlackKing:
-										{
-											if (m_aiPoint < 30)
-											{
-												m_afterSelectPos = obj->GenRandomMove();
-												m_selectPieceId = obj->GetId();
-												m_aiPoint = 30;
-											}
-											break;
-										}
-										case PieceBaseObject_Class::BlackQueen:
-										{
-											if (m_aiPoint < 50)
-											{
-												m_afterSelectPos = obj->GenRandomMove();
-												m_selectPieceId = obj->GetId();
-												m_aiPoint = 50;
-											}
-											break;
-										}
-										case PieceBaseObject_Class::BlackBishop1:
-										case PieceBaseObject_Class::BlackBishop0:
-										{
-											if (m_aiPoint < 45)
-											{
-												m_afterSelectPos = obj->GenRandomMove();
-												m_selectPieceId = obj->GetId();
-												m_aiPoint = 45;
-											}
-											break;
-										}
-										case PieceBaseObject_Class::BlackRook1:
-										case PieceBaseObject_Class::BlackRook0:
-										{
-											if (m_aiPoint < 60)
-											{
-												m_afterSelectPos = obj->GenRandomMove();
-												m_selectPieceId = obj->GetId();
-												m_aiPoint = 60;
-											}
-											break;
-										}
-										case PieceBaseObject_Class::BlackKnight1:
-										case PieceBaseObject_Class::BlackKnight0:
-										{
-											if (m_aiPoint < 70)
-											{
-												m_afterSelectPos = obj->GenRandomMove();
-												m_selectPieceId = obj->GetId();
-												m_aiPoint = 70;
-											}
-											break;
-										}
-										case PieceBaseObject_Class::BlackPawn0:
-										case PieceBaseObject_Class::BlackPawn1:
-										case PieceBaseObject_Class::BlackPawn2:
-										case PieceBaseObject_Class::BlackPawn3:
-										case PieceBaseObject_Class::BlackPawn4:
-										case PieceBaseObject_Class::BlackPawn5:
-										case PieceBaseObject_Class::BlackPawn6:
-										case PieceBaseObject_Class::BlackPawn7:
-										{
-											if (m_aiPoint < 90)
-											{
-												m_afterSelectPos = obj->GenRandomMove();
-												m_selectPieceId = obj->GetId();
-												m_aiPoint = 90;
-											}
-											break;
-										}
-										default:
-											break;
-										}
-										
-									}
-									//そこにキングがあるなら
-									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteKing)
-									{
-										//選択するピースを決定
-										m_selectPieceId = obj->GetId();
-										m_aiPoint = 10000;
-										m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-									}
-									//ビショップなら150pt
-									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteBishop0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhiteBishop1)
-									{
-										if (m_aiPoint < 150)
-										{
-											m_selectPieceId = obj->GetId();
-											m_aiPoint = 150;
-											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-										}
-									}
-									//ルークだった場合170pt
-									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteRook0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhiteRook1)
-									{
-										if (m_aiPoint < 170)
-										{
-											m_selectPieceId = obj->GetId();
-											m_aiPoint = 170;
-											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-										}
-									}
-									//ナイトなら140点
-									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteKnight0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhiteKnight1)
-									{
-										if (m_aiPoint < 140)
-										{
-											m_selectPieceId = obj->GetId();
-											m_aiPoint = 140;
-											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-										}
-									}
-									//クイーンなら200点
-									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteQueen)
-									{
-										if (m_aiPoint < 200)
-										{
-											m_selectPieceId = obj->GetId();
-											m_aiPoint = 200;
-											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-										}
-									}
-									//ポーンなら100点
-									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn1 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn2 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn3 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn4 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn5 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn6 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn7)
-									{
-										if (m_aiPoint < 100)
-										{
-											m_selectPieceId = obj->GetId();
-											m_aiPoint = 100;
-											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-										}
-									}
-
-								}
-
-
-							}
-						}
-					}
-					std::cout << "Pos" << m_afterSelectPos.x <<"_" << m_afterSelectPos.y<< "_" << m_afterSelectPos.z << std::endl;
-					std::cout << "ID_" << m_selectPieceId << std::endl;
-					m_Phase = SelectPhase;
-				}
-				break;
-			case GameScene_Class::SelectPhase:
-				if (obj->GetId() == m_selectPieceId)
-				{
-					for (int h = 0; h < 8; h++)
-					{
-						for (int w = 0; w < 8; w++)
-						{
-							Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-							if (0.5f > Math::Vector3::Distance(massPos, m_beforeSelectPos))
-							{
-								m_bordInfo[h][w] = PieceBaseObject_Class::None;
-							}
-							if (0.5f > Math::Vector3::Distance(massPos, m_afterSelectPos))
-							{
-								if (m_bordInfo[h][w] != PieceBaseObject_Class::None)
-								{
-									KillPiece(m_bordInfo[h][w]);
 									m_bordInfo[h][w] = PieceBaseObject_Class::None;
 								}
-								m_bordInfo[h][w] = m_selectPieceId;
+								if (0.5f > Math::Vector3::Distance(massPos, m_afterSelectPos))
+								{
+									if (m_bordInfo[h][w] != PieceBaseObject_Class::None)
+									{
+										KillPiece(m_bordInfo[h][w]);
+										m_bordInfo[h][w] = PieceBaseObject_Class::None;
+									}
+									m_bordInfo[h][w] = m_selectPieceId;
+								}
+								m_selectObject = false;
 							}
-							m_Phase = SetPhase;
-							
 						}
 					}
+					std::cout << "SetPhaseEnd" << std::endl;
+					//m_Phase = EndPhase;
+					m_waitTime = WAIT_TIME;
 				}
-
-
 				break;
+			}
 			case GameScene_Class::SetPhase:
-
+			{
 				break;
+			}
 			case GameScene_Class::EndPhase:
+			{
+				m_ProPotionBishopView->SetSelecting(false);
+				m_ProPotionKnightView->SetSelecting(false);
+				m_ProPotionQueenView->SetSelecting(false);
+				m_ProPotionRookView->SetSelecting(false);
 
+				m_Trun = Player;
+				m_waitTime = WAIT_TIME;
+				m_selectObject = false;
+				std::cout << "EndPhaseEnd" << std::endl;
+				m_startPhaseInit = false;
+				m_round++;
+				if (!(m_kingWhite->GetAlive()))
+				{
+					m_winner = Enemy;
+					m_changeScene = ResultScene;
+					CheangeThisScene();
+				}
+				m_Phase = StartPhase;
 				break;
+			}
 			case GameScene_Class::ProPotionPhase:
-
+			{
 				break;
+			}
 			default:
 				break;
 			}
-			break;
 		}
 		}
-	}
-	BaseScene_Class::Update();
-	for (auto obj : m_pieceList)
-	{
-		obj->Update();
+
+		BaseScene_Class::Update();
+		for (auto obj : m_pieceList)
+		{
+			obj->Update();
+		}
 	}
 }
 
@@ -1105,5 +996,230 @@ void GameScene_Class::SelectPieceUIActive()
 		}
 		m_beforeSelectBord->SetAlive(false);
 		m_pieceSelectUI->SetAlive(false);
+	}
+}
+
+void GameScene_Class::OnAI()
+{
+	int n = PieceBaseObject_Class::BlackPawn0;
+	while (1)
+	{
+		for (auto obj : m_pieceList)
+		{
+			//動ける範囲に取れる駒がある場合
+			if (obj->GetId() == n)
+			{
+
+				//現在の盤面を渡す
+				for (int h = 0; h < 8; h++)
+				{
+					for (int w = 0; w < 8; w++)
+					{
+						obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+					}
+				}
+				//動ける範囲を生成
+				obj->GenCanMoveBordInfo();
+
+				//動ける範囲を取得
+				for (int h = 0; h < 8; h++)
+				{
+					for (int w = 0; w < 8; w++)
+					{
+
+						m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+						
+					}
+				}
+				
+				for (int h = 0; h < 8; h++)
+				{
+					for (int w = 0; w < 8; w++)
+					{
+						//ピースがある場所を検索
+						if (m_bordInfo[h][w] != PieceBaseObject_Class::None)
+						{
+							//そこが移動できる場所か検索
+							if (m_canMoveBordInfo[h][w] == PieceBaseObject_Class::CanMove)
+							{
+								//移動できる場所にあるピースを検索
+								//取れる可能性のあるピースに点を付けてより高い点を取るように仕向ける
+								switch (m_bordInfo[h][w])
+								{
+								case PieceBaseObject_Class::WhiteKing:
+								{
+									m_selectPieceId = obj->GetId();
+									m_aiPoint = 10000;
+									m_afterSelectPos.x = h * 1 - 3.5f;
+									m_afterSelectPos.y = w * 1 - 3.5f;
+									break;
+								}
+								case PieceBaseObject_Class::WhiteBishop0:
+								case PieceBaseObject_Class::WhiteBishop1:
+								{
+									if (m_aiPoint < 130)
+									{
+										m_selectPieceId = obj->GetId();
+										m_afterSelectPos.x = h * 1 - 3.5f;
+										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_aiPoint = 130;
+									}
+									break;
+								}
+								case PieceBaseObject_Class::WhiteKnight0:
+								case PieceBaseObject_Class::WhiteKnight1:
+								{
+									if (m_aiPoint < 150)
+									{
+										m_selectPieceId = obj->GetId();
+										m_afterSelectPos.x = h * 1 - 3.5f;
+										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_aiPoint = 150;
+									}
+									break;
+								}
+								case PieceBaseObject_Class::WhiteRook0:
+								case PieceBaseObject_Class::WhiteRook1:
+								{
+									if (m_aiPoint < 170)
+									{
+										m_selectPieceId = obj->GetId();
+										m_afterSelectPos.x = h * 1 - 3.5f;
+										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_aiPoint = 170;
+									}
+									break;
+								}
+								case PieceBaseObject_Class::WhiteQueen:
+								{
+									if (m_aiPoint < 200)
+									{
+										m_selectPieceId = obj->GetId();
+										m_afterSelectPos.x = h * 1 - 3.5f;
+										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_aiPoint = 200;
+									}
+									break;
+								}
+								case PieceBaseObject_Class::WhitePawn0:
+								case PieceBaseObject_Class::WhitePawn1:
+								case PieceBaseObject_Class::WhitePawn2:
+								case PieceBaseObject_Class::WhitePawn3:
+								case PieceBaseObject_Class::WhitePawn4:
+								case PieceBaseObject_Class::WhitePawn5:
+								case PieceBaseObject_Class::WhitePawn6:
+								case PieceBaseObject_Class::WhitePawn7:
+								{
+									if (m_aiPoint < 100)
+									{
+										m_selectPieceId = obj->GetId();
+										m_afterSelectPos.x = h * 1 - 3.5f;
+										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_aiPoint = 100;
+									}
+									break;
+								}
+								}
+							}
+
+						}
+						//ピースが無い場合
+						if (m_bordInfo[h][w] == PieceBaseObject_Class::None)
+						{
+							//検索中のピースを特定
+							switch (obj->GetId())
+							{
+							case PieceBaseObject_Class::BlackKing:
+							{
+								if (m_aiPoint < 30)
+								{
+									m_afterSelectPos =  obj->GenRandomMove();
+									m_selectPieceId = obj->GetId();
+									m_aiPoint = 30;
+									break;
+								}
+							}
+							case PieceBaseObject_Class::BlackQueen:
+							{
+								if (m_aiPoint < 70)
+								{
+									obj->GenRandomMove();
+									m_selectPieceId = obj->GetId();
+									m_aiPoint = 70;
+									break;
+								}
+								break;
+							}
+							case PieceBaseObject_Class::BlackPawn0:
+							case PieceBaseObject_Class::BlackPawn1:
+							case PieceBaseObject_Class::BlackPawn2:
+							case PieceBaseObject_Class::BlackPawn3:
+							case PieceBaseObject_Class::BlackPawn4:
+							case PieceBaseObject_Class::BlackPawn5:
+							case PieceBaseObject_Class::BlackPawn6:
+							case PieceBaseObject_Class::BlackPawn7:
+							{
+								if (m_aiPoint < 99)
+								{
+									m_afterSelectPos = obj->GenRandomMove();
+									m_selectPieceId = obj->GetId();
+									m_aiPoint = 99;
+									
+								}
+								break;
+							}
+							case PieceBaseObject_Class::BlackBishop0:
+							case PieceBaseObject_Class::BlackBishop1:
+							{
+								if (m_aiPoint < 80)
+								{
+									m_afterSelectPos = obj->GenRandomMove();
+									m_selectPieceId = obj->GetId();
+									m_aiPoint = 80;
+									
+								}
+								break;
+							}
+							case PieceBaseObject_Class::BlackKnight0:
+							case PieceBaseObject_Class::BlackKnight1:
+							{
+								if (m_aiPoint < 85)
+								{
+									m_afterSelectPos = obj->GenRandomMove();
+									m_selectPieceId = obj->GetId();
+									m_aiPoint = 80;
+									
+								}
+								break;
+							}
+							case PieceBaseObject_Class::BlackRook0:
+							case PieceBaseObject_Class::BlackRook1:
+							{
+								if (m_aiPoint < 90)
+								{
+									m_afterSelectPos = obj->GenRandomMove();
+									m_selectPieceId = obj->GetId();
+									m_aiPoint = 90;
+									
+								}
+								break;
+							}
+							default:
+								break;
+							}
+						}
+					}
+				}
+
+			}
+
+			
+		}
+		n++;
+		if (n >= PieceBaseObject_Class::BlackKing + 1)
+		{
+			break;
+		}
+
 	}
 }
