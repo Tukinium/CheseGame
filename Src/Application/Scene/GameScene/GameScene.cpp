@@ -612,12 +612,14 @@ void GameScene_Class::Update()
 									//何もないなら
 									if (m_bordInfo[h][w] == PieceBaseObject_Class::None)
 									{
-										switch (obj->GetId())
+										switch (n)
 										{
+											std::cout << "Test" << std::endl;
 										case PieceBaseObject_Class::BlackKing:
 										{
 											if (m_aiPoint < 30)
 											{
+												m_afterSelectPos = obj->GenRandomMove();
 												m_selectPieceId = obj->GetId();
 												m_aiPoint = 30;
 											}
@@ -627,6 +629,7 @@ void GameScene_Class::Update()
 										{
 											if (m_aiPoint < 50)
 											{
+												m_afterSelectPos = obj->GenRandomMove();
 												m_selectPieceId = obj->GetId();
 												m_aiPoint = 50;
 											}
@@ -637,6 +640,7 @@ void GameScene_Class::Update()
 										{
 											if (m_aiPoint < 45)
 											{
+												m_afterSelectPos = obj->GenRandomMove();
 												m_selectPieceId = obj->GetId();
 												m_aiPoint = 45;
 											}
@@ -647,6 +651,7 @@ void GameScene_Class::Update()
 										{
 											if (m_aiPoint < 60)
 											{
+												m_afterSelectPos = obj->GenRandomMove();
 												m_selectPieceId = obj->GetId();
 												m_aiPoint = 60;
 											}
@@ -657,6 +662,7 @@ void GameScene_Class::Update()
 										{
 											if (m_aiPoint < 70)
 											{
+												m_afterSelectPos = obj->GenRandomMove();
 												m_selectPieceId = obj->GetId();
 												m_aiPoint = 70;
 											}
@@ -673,6 +679,7 @@ void GameScene_Class::Update()
 										{
 											if (m_aiPoint < 90)
 											{
+												m_afterSelectPos = obj->GenRandomMove();
 												m_selectPieceId = obj->GetId();
 												m_aiPoint = 90;
 											}
@@ -681,7 +688,7 @@ void GameScene_Class::Update()
 										default:
 											break;
 										}
-										m_afterSelectPos = obj->GenRandomMove();
+										
 									}
 									//そこにキングがあるなら
 									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteKing)
@@ -691,7 +698,7 @@ void GameScene_Class::Update()
 										m_aiPoint = 10000;
 										m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
 									}
-									//ビショップなら50pt
+									//ビショップなら150pt
 									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteBishop0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhiteBishop1)
 									{
 										if (m_aiPoint < 150)
@@ -701,7 +708,7 @@ void GameScene_Class::Update()
 											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
 										}
 									}
-									//ルークだった場合70pt
+									//ルークだった場合170pt
 									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteRook0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhiteRook1)
 									{
 										if (m_aiPoint < 170)
@@ -711,7 +718,7 @@ void GameScene_Class::Update()
 											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
 										}
 									}
-									//ナイトなら40点
+									//ナイトなら140点
 									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteKnight0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhiteKnight1)
 									{
 										if (m_aiPoint < 140)
@@ -721,7 +728,7 @@ void GameScene_Class::Update()
 											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
 										}
 									}
-									//クイーンなら100点
+									//クイーンなら200点
 									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhiteQueen)
 									{
 										if (m_aiPoint < 200)
@@ -731,7 +738,7 @@ void GameScene_Class::Update()
 											m_afterSelectPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
 										}
 									}
-									//ポーンなら10点
+									//ポーンなら100点
 									if (m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn0 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn1 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn2 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn3 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn4 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn5 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn6 || m_bordInfo[h][w] == PieceBaseObject_Class::WhitePawn7)
 									{
 										if (m_aiPoint < 100)
@@ -748,6 +755,9 @@ void GameScene_Class::Update()
 							}
 						}
 					}
+					std::cout << "Pos" << m_afterSelectPos.x <<"_" << m_afterSelectPos.y<< "_" << m_afterSelectPos.z << std::endl;
+					std::cout << "ID_" << m_selectPieceId << std::endl;
+					m_Phase = SelectPhase;
 				}
 				break;
 			case GameScene_Class::SelectPhase:
@@ -771,6 +781,8 @@ void GameScene_Class::Update()
 								}
 								m_bordInfo[h][w] = m_selectPieceId;
 							}
+							m_Phase = SetPhase;
+							
 						}
 					}
 				}

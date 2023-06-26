@@ -166,11 +166,25 @@ void PieceBaseObject_Class::GenMassCenter()
 
 Math::Vector3 PieceBaseObject_Class::GenRandomMove()
 {
+	Math::Vector3 massPos;
 	bool leave = false;
+	int h, w;
 	while (1)
 	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+
+		std::uniform_int_distribution<>dist(0, 7);
+		
+		h = dist(rd);
+		w = dist(rd);
+		if (m_canMoveBordInfo[h][w] == CanMove)
+		{
+			massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+			break;
+		}
 		
 	}
-	return Math::Vector3();
+	return massPos;
 }
 
