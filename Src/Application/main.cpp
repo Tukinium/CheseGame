@@ -211,6 +211,7 @@ bool Application::Init(int w, int h)
 
 		SceneManager_Class::instance().Init();
 	}
+	//asme
 
 	//カメラセット
 
