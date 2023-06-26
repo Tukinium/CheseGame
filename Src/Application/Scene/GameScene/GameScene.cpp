@@ -245,12 +245,9 @@ void GameScene_Class::Update()
 	PieceSet();
 	BordOnMouse();
 	SelectPieceUIActive();
-	if (!m_GameStartCall)
-	{
-
-	}
 	for (std::shared_ptr<PieceBaseObject_Class>obj : m_pieceList)
 	{
+		obj->Update();
 		switch (m_Trun)
 		{
 		case GameScene_Class::Player:
@@ -596,69 +593,106 @@ void GameScene_Class::Update()
 			{
 				if (m_waitTime <= 0)
 				{
-
 					OnAI();
-
-					std::cout << m_selectPieceId << std::endl;
-					
-					m_selectObject = true;
-
-					std::cout << "CanMove" << std::endl;
-					int n = 0;
-					while (1)
-					{	
-						if (obj->GetId() == m_selectPieceId && obj->GetId() == n)
+					if (obj->GetColor() == kBlackColor)
+					{
+						if (0.5f > (Math::Vector3::Distance(obj->GetPos(), m_beforeSelectPos)))
 						{
-							m_selectObject = true;
-							m_beforeSelectPos = obj->GetPos();
-							break;
+							m_selectPieceId = obj->GetId();
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
+									//クリックしたオブジェクトに現在の盤面状況を渡す
+									obj->SetBordInfo(h, w, m_bordInfo[h][w]);
+								}
+							}
+							for (int h = 0; h < 8; h++)
+							{
+								for (int w = 0; w < 8; w++)
+								{
+									//オブジェクトから動ける範囲が配列で返却される
+									obj->GenCanMoveBordInfo();
+									m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
+								}
+
+							}
+							if (obj->GetCanPropotion() && !obj->GetPropotined())
+							{
+								m_selectPieceId = obj->GetId();
+								m_Phase = ProPotionPhase;
+							}
+							else
+							{
+								m_ProPotionBishopView->SetAlive(false);
+								m_ProPotionKnightView->SetAlive(false);
+								m_ProPotionQueenView->SetAlive(false);
+								m_ProPotionRookView->SetAlive(false);
+								obj->SetfirstMoved(true);
+								m_selectObject = true;
+								m_Phase = SelectPhase;
+								std::cout << "StandByPhaseEnd" << std::endl;
+								m_waitTime = WAIT_TIME;
+							}
+
 						}
-						n++;
 					}
-					std::cout << "StandByPhaseEnd" << std::endl;
-					m_Phase = SelectPhase;
-					m_waitTime = WAIT_TIME;
 				}
 				break;
 			}
 			case GameScene_Class::SelectPhase:
 			{
+				for (int h = 0; h < 8; h++)
+				{
+					for (int w = 0; w < 8; w++)
+					{
+						//渡された情報から動ける範囲を可視化
+						Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
+						if (m_canMoveBordInfo[h][w] == PieceBaseObject_Class::CanMove)
+						{
+							m_selectPieceCanMoveBord[h][w]->SetAlive(true);
+							m_selectPieceCanMoveBord[h][w]->SetPos(massPos);
+							m_waitTime = WAIT_TIME;
+							std::cout << "SelectPhaseEnd" << std::endl;
+							m_Phase = SetPhase;
+						}
+					}
+				}
+				break;
+			}
+			case GameScene_Class::SetPhase:
+			{
 				if (m_waitTime <= 0)
 				{
-					if (obj->GetId() == m_selectPieceId)
-					{
-						for (int h = 0; h < 8; h++)
-						{
-							for (int w = 0; w < 8; w++)
-							{
 
-								Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };
-								if (0.5f > Math::Vector3::Distance(massPos, m_beforeSelectPos))
+					for (int h = 0; h < 8; h++)
+					{
+						for (int w = 0; w < 8; w++)
+						{
+							if (m_selectPieceCanMoveBord[h][w]->GetAlive())
+							{
+								if (0.5f > (Math::Vector3::Distance(m_selectPieceCanMoveBord[h][w]->GetPos(), m_afterSelectPos)))
 								{
-									m_bordInfo[h][w] = PieceBaseObject_Class::None;
-								}
-								if (0.5f > Math::Vector3::Distance(massPos, m_afterSelectPos))
-								{
+									m_canMoveBordInfo[h][w] = PieceBaseObject_Class::Select;
+
 									if (m_bordInfo[h][w] != PieceBaseObject_Class::None)
 									{
 										KillPiece(m_bordInfo[h][w]);
 										m_bordInfo[h][w] = PieceBaseObject_Class::None;
 									}
 									m_bordInfo[h][w] = m_selectPieceId;
+
+									m_Phase = EndPhase;
 								}
-								m_selectObject = false;
 							}
+							if (0.5 > (Math::Vector3::Distance(m_beforeSelectPos, { h * 1 - 3.5f,0,w * 1 - 3.5f })))
+							{
+								m_bordInfo[h][w] = PieceBaseObject_Class::None;
+							}
+
 						}
 					}
-					std::cout << "SetPhaseEnd" << std::endl;
-					
-					//m_Phase = EndPhase;
-					m_waitTime = WAIT_TIME;
 				}
-				break;
-			}
-			case GameScene_Class::SetPhase:
-			{
 				break;
 			}
 			case GameScene_Class::EndPhase:
@@ -694,10 +728,6 @@ void GameScene_Class::Update()
 		}
 	}
 	BaseScene_Class::Update();
-	for (auto obj : m_pieceList)
-	{
-		obj->Update();
-	}
 }
 
 void GameScene_Class::PreUpdate()
@@ -1024,9 +1054,7 @@ void GameScene_Class::OnAI()
 				{
 					for (int w = 0; w < 8; w++)
 					{
-
 						m_canMoveBordInfo[h][w] = obj->SetCanMoveBordInfo(h, w);
-						
 					}
 				}
 				
@@ -1047,9 +1075,10 @@ void GameScene_Class::OnAI()
 								case PieceBaseObject_Class::WhiteKing:
 								{
 									m_selectPieceId = obj->GetId();
+									m_beforeSelectPos = obj->GetPos();
 									m_aiPoint = 10000;
 									m_afterSelectPos.x = h * 1 - 3.5f;
-									m_afterSelectPos.y = w * 1 - 3.5f;
+									m_afterSelectPos.z = w * 1 - 3.5f;
 									break;
 								}
 								case PieceBaseObject_Class::WhiteBishop0:
@@ -1057,9 +1086,10 @@ void GameScene_Class::OnAI()
 								{
 									if (m_aiPoint < 130)
 									{
+										m_beforeSelectPos = obj->GetPos();
 										m_selectPieceId = obj->GetId();
 										m_afterSelectPos.x = h * 1 - 3.5f;
-										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_afterSelectPos.z = w * 1 - 3.5f;
 										m_aiPoint = 130;
 									}
 									break;
@@ -1069,9 +1099,10 @@ void GameScene_Class::OnAI()
 								{
 									if (m_aiPoint < 150)
 									{
+										m_beforeSelectPos = obj->GetPos();
 										m_selectPieceId = obj->GetId();
 										m_afterSelectPos.x = h * 1 - 3.5f;
-										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_afterSelectPos.z = w * 1 - 3.5f;
 										m_aiPoint = 150;
 									}
 									break;
@@ -1081,9 +1112,10 @@ void GameScene_Class::OnAI()
 								{
 									if (m_aiPoint < 170)
 									{
+										m_beforeSelectPos = obj->GetPos();
 										m_selectPieceId = obj->GetId();
 										m_afterSelectPos.x = h * 1 - 3.5f;
-										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_afterSelectPos.z = w * 1 - 3.5f;
 										m_aiPoint = 170;
 									}
 									break;
@@ -1092,9 +1124,10 @@ void GameScene_Class::OnAI()
 								{
 									if (m_aiPoint < 200)
 									{
+										m_beforeSelectPos = obj->GetPos();
 										m_selectPieceId = obj->GetId();
 										m_afterSelectPos.x = h * 1 - 3.5f;
-										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_afterSelectPos.z = w * 1 - 3.5f;
 										m_aiPoint = 200;
 									}
 									break;
@@ -1110,9 +1143,10 @@ void GameScene_Class::OnAI()
 								{
 									if (m_aiPoint < 100)
 									{
+										m_beforeSelectPos = obj->GetPos();
 										m_selectPieceId = obj->GetId();
 										m_afterSelectPos.x = h * 1 - 3.5f;
-										m_afterSelectPos.y = w * 1 - 3.5f;
+										m_afterSelectPos.z = w * 1 - 3.5f;
 										m_aiPoint = 100;
 									}
 									break;
@@ -1131,16 +1165,19 @@ void GameScene_Class::OnAI()
 							{
 								if (m_aiPoint < 30)
 								{
+									m_beforeSelectPos = obj->GetPos();
 									m_afterSelectPos =  obj->GenRandomMove();
 									m_selectPieceId = obj->GetId();
 									m_aiPoint = 30;
-									break;
+									
 								}
+								break;
 							}
 							case PieceBaseObject_Class::BlackQueen:
 							{
 								if (m_aiPoint < 70)
 								{
+									m_beforeSelectPos = obj->GetPos();
 									obj->GenRandomMove();
 									m_selectPieceId = obj->GetId();
 									m_aiPoint = 70;
@@ -1159,6 +1196,7 @@ void GameScene_Class::OnAI()
 							{
 								if (m_aiPoint < 99)
 								{
+									m_beforeSelectPos = obj->GetPos();
 									m_afterSelectPos = obj->GenRandomMove();
 									m_selectPieceId = obj->GetId();
 									m_aiPoint = 99;
@@ -1171,6 +1209,7 @@ void GameScene_Class::OnAI()
 							{
 								if (m_aiPoint < 80)
 								{
+									m_beforeSelectPos = obj->GetPos();
 									m_afterSelectPos = obj->GenRandomMove();
 									m_selectPieceId = obj->GetId();
 									m_aiPoint = 80;
@@ -1183,6 +1222,7 @@ void GameScene_Class::OnAI()
 							{
 								if (m_aiPoint < 85)
 								{
+									m_beforeSelectPos = obj->GetPos();
 									m_afterSelectPos = obj->GenRandomMove();
 									m_selectPieceId = obj->GetId();
 									m_aiPoint = 80;
@@ -1195,6 +1235,7 @@ void GameScene_Class::OnAI()
 							{
 								if (m_aiPoint < 90)
 								{
+									m_beforeSelectPos = obj->GetPos();
 									m_afterSelectPos = obj->GenRandomMove();
 									m_selectPieceId = obj->GetId();
 									m_aiPoint = 90;

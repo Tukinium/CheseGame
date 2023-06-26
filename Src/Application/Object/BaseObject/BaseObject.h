@@ -28,11 +28,11 @@ public:
 		Polygon,
 		Model,
 	};
-	bool GetAlive()
+	bool GetAlive()const
 	{
 		return m_Alive;
 	}
-	void SetAlive(bool _alive)
+	void SetAlive(const bool _alive)
 	{
 		m_Alive = _alive;
 	}
@@ -40,11 +40,11 @@ public:
 	{
 		m_color = _color;
 	}
-	Math::Color GetColor()
+	Math::Color GetColor()const
 	{
 		return m_color;
 	}
-	void SetSelecting(bool _selecting)
+	void SetSelecting(const bool _selecting)
 	{
 		m_selecting = _selecting;
 	}

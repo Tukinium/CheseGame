@@ -55,45 +55,45 @@ public:
 		CanMove,
 		Select,
 	};
-	bool GetCanPropotion()
+	bool GetCanPropotion()const
 	{
 		return m_canPropotion;
 	}
-	bool GetPropotined()
+	bool GetPropotined()const
 	{
 		return m_propotioned;
 	}
-	void SetBordInfo(int h, int w, int _num)
+	void SetBordInfo(const int h, int w, int _num)
 	{
 		m_nowBordInfo[h][w] = _num;
 	}
 
 	//プロポーション先(0 = Rook,1 = Bishop,2 = Knight,3 = Queen)
-	void SetPropotion(int type)
+	void SetPropotion(const int type)
 	{
 		m_PropotionType = type;
 		m_propotioned = true;
 		m_canPropotion = false;
 	}
-	virtual int SetCanMoveBordInfo(int h, int w) { return m_canMoveBordInfo[h][w]; };
+	virtual int SetCanMoveBordInfo(const int h, int w) { return m_canMoveBordInfo[h][w]; };
 	virtual void GenCanMoveBordInfo() {};
-	bool GetfirstMoved()
+	bool GetfirstMoved()const
 	{
 		return m_firstMoved;
 	}
-	void SetfirstMoved(bool _moved)
+	void SetfirstMoved(const bool _moved)
 	{
 		m_firstMoved = _moved;
 	}
-	int GetId()
+	int GetId() const 
 	{
 		return m_id;
 	}
-	void SetId(int _id)
+	void SetId(const int _id)
 	{
 		m_id = _id;
 	}
-	int GetPoint()
+	int GetPoint()const
 	{
 		return m_point;
 	}
