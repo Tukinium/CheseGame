@@ -18,8 +18,6 @@ class ButtonUI_Class;
 class UIBaseObject_Class;
 class ProPotionButtonUI_Class;
 
-class MouseCursor_Class;
-
 class BaseAudio_Class;
 #include"Application/Object/PieceObject/PieceBaseObject/PieceBaseObject.h"
 #include"Application/Object/BaseObject/BaseObject.h"
@@ -144,8 +142,6 @@ private:
 
 	std::shared_ptr<BaseAudio_Class>m_bgm1;
 	std::shared_ptr<BaseAudio_Class>m_piecePlaceSound;
-
-	std::shared_ptr<MouseCursor_Class>m_MouseCursor;
 
 	std::list<std::shared_ptr<PieceBaseObject_Class>>m_pieceList;
 

@@ -1,5 +1,4 @@
 #pragma once
-class MouseCursor_Class;
 #include"Application/Scene/BaseScene/BaseScene.h"
 class TitleScene_Class : public BaseScene_Class
 {
@@ -18,5 +17,4 @@ public:
 private:
 	bool m_nowScene;
 	std::shared_ptr<BaseObject_Class>m_backTex;
-	std::shared_ptr< MouseCursor_Class>m_MouseCursor;
 };

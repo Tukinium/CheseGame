@@ -22,7 +22,5 @@ void TitleScene_Class::SetSharedPtr()
 	m_backTex->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/Title_Back.png");
 	m_baseObjList.push_back(m_backTex);
 
-	if (!m_MouseCursor)m_MouseCursor = std::make_shared<MouseCursor_Class>();
-	m_baseObjList.push_back(m_MouseCursor);
 
 }

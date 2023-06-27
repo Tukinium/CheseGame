@@ -1,5 +1,6 @@
 #include "BaseScene.h"
 #include"Application/Object/BaseObject/BaseObject.h"
+#include"Application/Object/Mouse/Mouse_Class.h"
 void BaseScene_Class::Update()
 {
 	for (std::shared_ptr<BaseObject_Class> gameObject : m_baseObjList)
@@ -13,11 +14,17 @@ void BaseScene_Class::Update()
 	}
 	fixMousePos.x = MousePos.x - 1280 / 2;
 	fixMousePos.y = MousePos.y - 720 / 2;
+
+	m_MouseCursor->GetPos(fixMousePos.x,fixMousePos.y,m_isMaineMenu);
 }
 
 void BaseScene_Class::Init()
 {
 	SetSharedPtr();
+
+	if (!m_MouseCursor)m_MouseCursor = std::make_shared<MouseCursor_Class>();
+	m_baseObjList.push_back(m_MouseCursor);
+
 	m_changeScene = NoneScene;
 	for (std::shared_ptr<BaseObject_Class> gameObject : m_baseObjList)
 	{

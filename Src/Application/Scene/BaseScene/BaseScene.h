@@ -1,6 +1,7 @@
 #pragma once
 class BaseObject_Class;
 class UIBaseObject_Class;
+class MouseCursor_Class;
 class BaseScene_Class
 {
 public:
@@ -49,7 +50,7 @@ public:
 
 protected:
 	std::list<std::shared_ptr<BaseObject_Class>>m_baseObjList;
-
+	std::shared_ptr<MouseCursor_Class>m_MouseCursor;
 	int m_changeScene = NoneScene;
 	//マウスクリック誤入力回避用待機時間
 	int m_waitTime = 0;
@@ -60,4 +61,5 @@ protected:
 	//マウス
 	POINT MousePos;
 	Math::Vector3 fixMousePos;
+	bool m_isMaineMenu = false;
 };

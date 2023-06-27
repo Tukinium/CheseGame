@@ -52,10 +52,7 @@ void MainMenuScene_Class::SetSharedPtr()
 	m_UnSetedButtonUI2->SetPos({ -500 + 175 * 3,-300,0 });
 	m_baseObjList.push_back(m_UnSetedButtonUI2);
 
-	if (!m_MouseCursor)m_MouseCursor = std::make_shared<MouseCursor_Class>();
-	m_baseObjList.push_back(m_MouseCursor);
-
-	
+	m_isMaineMenu = true;
 }
 
 void MainMenuScene_Class::Update()

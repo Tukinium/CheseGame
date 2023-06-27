@@ -8,7 +8,7 @@
 #include"Application/Audio/BaseAudio_Class.h"
 void SceneManager_Class::Init()
 {
-	CreateCons();
+	//CreateCons();
 
 	if (!m_MainMenuBgm)m_MainMenuBgm = std::make_shared<BaseAudio_Class>();
 	m_MainMenuBgm->SetAudio("Asset/Sound/MainMenuBGM.wav");
@@ -18,7 +18,6 @@ void SceneManager_Class::Init()
 
 	if (!m_TitleBgm)m_TitleBgm = std::make_shared<BaseAudio_Class>();
 	m_TitleBgm->SetAudio("Asset/Sound/TitleBGM.wav");
-
 
 	SceneChange(BaseScene_Class::TitleScene);
 	m_nowScene->Init();
@@ -91,7 +90,7 @@ void SceneManager_Class::PostUpdate()
 
 void SceneManager_Class::Release()
 {
-	DestoryCons();
+	//DestoryCons();
 	m_nowScene->Release();
 }
 

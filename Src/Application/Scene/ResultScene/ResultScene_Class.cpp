@@ -17,8 +17,6 @@ void ResultScene_Class::SetSharedPtr()
 	m_resultLose->SetAlive(false);
 	m_baseObjList.push_back(m_resultLose);
 
-	if (!m_MouseCursor)m_MouseCursor = std::make_shared<MouseCursor_Class>();
-	m_baseObjList.push_back(m_MouseCursor);
 }
 
 void ResultScene_Class::Update()
