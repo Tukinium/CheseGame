@@ -71,7 +71,7 @@ protected:
 
 	Math::Rectangle m_rc;
 
-	bool m_selecting;
+	bool m_selecting = false;
 };
 
 //記述を楽にするためのマクロ #define

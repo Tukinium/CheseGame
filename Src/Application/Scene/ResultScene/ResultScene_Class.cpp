@@ -1,5 +1,6 @@
 #include"ResultScene_Class.h"
 #include"Application/Object/BaseObject/BaseObject.h"
+#include"Application/Object/Mouse/Mouse_Class.h"
 void ResultScene_Class::SetSharedPtr()
 {
 	if (!m_back)m_back = std::make_shared<BaseObject_Class>();
@@ -15,6 +16,9 @@ void ResultScene_Class::SetSharedPtr()
 	m_resultLose->SetAsset(BaseObject_Class::Sprite, "Asset/Textures/Result_Lose.png");
 	m_resultLose->SetAlive(false);
 	m_baseObjList.push_back(m_resultLose);
+
+	if (!m_MouseCursor)m_MouseCursor = std::make_shared<MouseCursor_Class>();
+	m_baseObjList.push_back(m_MouseCursor);
 }
 
 void ResultScene_Class::Update()

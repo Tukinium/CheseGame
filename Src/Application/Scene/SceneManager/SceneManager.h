@@ -39,9 +39,6 @@ private:
 	bool m_exitFlg = false;
 	int m_winner;
 
-	POINT mousePos;
-	std::shared_ptr<BaseObject_Class>
-
 	std::shared_ptr<BaseAudio_Class>m_TitleBgm;
 	std::shared_ptr<BaseAudio_Class>m_MainMenuBgm;
 	std::shared_ptr<BaseAudio_Class>m_ResultBgm;

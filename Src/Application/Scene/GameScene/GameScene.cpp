@@ -1,5 +1,4 @@
 #include"GameScene.h"
-
 //Include数が多いため分割する
 
 //ピース用Includeヘッダファイル
@@ -19,6 +18,8 @@
 
 #include"Application/Audio/BaseAudio_Class.h"
 #include"Application/Object/PieceObject/PieceBaseObject/PieceBaseObject.h"
+
+#include"Application/Object/Mouse/Mouse_Class.h"
 
 void GameScene_Class::SetSharedPtr()
 {
@@ -93,6 +94,9 @@ void GameScene_Class::SetSharedPtr()
 	m_beforeSelectBord->SetAsset(BaseObject_Class::Model, "Asset/Model/Bord_Selecting/Before/Bord_BeforeSelecting.gltf");
 	m_beforeSelectBord->SetAlive(false);
 	m_baseObjList.push_back(m_beforeSelectBord);
+
+	if (!m_MouseCursor)m_MouseCursor = std::make_shared<MouseCursor_Class>();
+	m_baseObjList.push_back(m_MouseCursor);
 
 	{
 		if (!m_kingWhite)m_kingWhite = std::make_shared<KingPieceObject_Class>();
@@ -205,6 +209,7 @@ void GameScene_Class::SetSharedPtr()
 			m_baseObjList.push_back(m_selectPieceCanMoveBord[h][w]);
 		}
 	}
+
 	std::cout << "GameScene SetSharedPtr checkOut" << std::endl;
 }
 
@@ -242,7 +247,6 @@ void GameScene_Class::Update()
 	//Math::Matrix mat;
 	//camera.SetCameraMatrix(mat);
 	///camera.SetToShader();
-
 	m_camera->setCamViewMode(m_camera->UpperCamMode);
 	PieceSet();
 	BordOnMouse();

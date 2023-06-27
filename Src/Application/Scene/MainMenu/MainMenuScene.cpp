@@ -2,6 +2,7 @@
 #include"Application/UI/ButtonUI/ButtonUI_Class.h"
 #include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Audio/BaseAudio_Class.h"
+#include"Application/Object/Mouse/Mouse_Class.h"
 
 void MainMenuScene_Class::SetSharedPtr()
 {
@@ -51,12 +52,16 @@ void MainMenuScene_Class::SetSharedPtr()
 	m_UnSetedButtonUI2->SetPos({ -500 + 175 * 3,-300,0 });
 	m_baseObjList.push_back(m_UnSetedButtonUI2);
 
+	if (!m_MouseCursor)m_MouseCursor = std::make_shared<MouseCursor_Class>();
+	m_baseObjList.push_back(m_MouseCursor);
+
 	
 }
 
 void MainMenuScene_Class::Update()
 {
 	BaseScene_Class::Update();
+
 	m_StartButtleButtonUI->SetSelecting(false);
 	m_UnSetedButtonUI2->SetSelecting(false);
 	m_UnSetedButtonUI3->SetSelecting(false);

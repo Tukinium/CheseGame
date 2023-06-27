@@ -148,6 +148,9 @@
     <Filter Include="Src\Application\Scene\ResultScene">
       <UniqueIdentifier>{81aca50a-90ed-4c3b-bd36-0bb385696365}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Mouse">
+      <UniqueIdentifier>{de37628c-293e-40dc-b75c-f2169652414b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -348,6 +351,9 @@
     <ClInclude Include="Src\Application\UI\ProPotionButtonUI\ProPotionButtonUI.h">
       <Filter>Src\Application\Object\UI\PropotionButtonUI</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Mouse\Mouse_Class.h">
+      <Filter>Src\Application\Object\Mouse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -523,6 +529,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\UI\ProPotionButtonUI\ProPotionButtonUI.cpp">
       <Filter>Src\Application\Object\UI\PropotionButtonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Mouse\Mouse_Class.cpp">
+      <Filter>Src\Application\Object\Mouse</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

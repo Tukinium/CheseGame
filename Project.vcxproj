@@ -149,6 +149,7 @@
     <ClInclude Include="Src\Application\Object\BaseObject\BaseObject.h" />
     <ClInclude Include="Src\Application\Object\BordObject\BordObject.h" />
     <ClInclude Include="Src\Application\Object\CameraObject\Camera.h" />
+    <ClInclude Include="Src\Application\Object\Mouse\Mouse_Class.h" />
     <ClInclude Include="Src\Application\Object\PieceObject\BishopPiece\BishopPieceObject.h" />
     <ClInclude Include="Src\Application\Object\PieceObject\KingPiece\KingPieceObject.h" />
     <ClInclude Include="Src\Application\Object\PieceObject\KnightPiece\KnightPieceObject.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="Src\Application\Object\BaseObject\BaseObject.cpp" />
     <ClCompile Include="Src\Application\Object\BordObject\BordObject.cpp" />
     <ClCompile Include="Src\Application\Object\CameraObject\Camera.cpp" />
+    <ClCompile Include="Src\Application\Object\Mouse\Mouse_Class.cpp" />
     <ClCompile Include="Src\Application\Object\PieceObject\BishopPiece\BishopPieceObject.cpp" />
     <ClCompile Include="Src\Application\Object\PieceObject\KingPiece\KingPieceObject.cpp" />
     <ClCompile Include="Src\Application\Object\PieceObject\KnightPiece\KnightPieceObject.cpp" />

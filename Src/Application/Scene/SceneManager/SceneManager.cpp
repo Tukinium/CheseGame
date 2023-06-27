@@ -19,6 +19,7 @@ void SceneManager_Class::Init()
 	if (!m_TitleBgm)m_TitleBgm = std::make_shared<BaseAudio_Class>();
 	m_TitleBgm->SetAudio("Asset/Sound/TitleBGM.wav");
 
+
 	SceneChange(BaseScene_Class::TitleScene);
 	m_nowScene->Init();
 }
@@ -31,15 +32,14 @@ void SceneManager_Class::Update()
 	{
 		SceneChange(m_nowScene->CheangeThisScene());
 	}
-
-	GetCursorPos(&mousePos);
-
-
+	ShowCursor(false);
 }
 
 void SceneManager_Class::Draw()
 {
 	m_nowScene->Draw();
+
+
 }
 
 void SceneManager_Class::DrawLit()
@@ -71,6 +71,7 @@ void SceneManager_Class::DrawSprite()
 void SceneManager_Class::PreDraw()
 {
 	m_nowScene->PreDraw();
+
 }
 
 void SceneManager_Class::PostDraw()
