@@ -5,6 +5,7 @@ class GameScene_Class;
 class TitleScene_Class;
 class MainMenuScene_Class;
 class ResultScene_Class;
+class BaseObject_Class;
 class SceneManager_Class
 {
 public:
@@ -37,6 +38,9 @@ private:
 	const int WAIT_TIME = 10;
 	bool m_exitFlg = false;
 	int m_winner;
+
+	POINT mousePos;
+	std::shared_ptr<BaseObject_Class>
 
 	std::shared_ptr<BaseAudio_Class>m_TitleBgm;
 	std::shared_ptr<BaseAudio_Class>m_MainMenuBgm;

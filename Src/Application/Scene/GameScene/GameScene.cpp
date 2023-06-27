@@ -25,6 +25,9 @@ void GameScene_Class::SetSharedPtr()
 	if (!m_bgm1)m_bgm1 = std::make_shared<BaseAudio_Class>();
 	m_bgm1->SetAudio("Asset/Sound/GameBGM1.wav");
 
+	if (!m_piecePlaceSound)m_piecePlaceSound = std::make_shared<BaseAudio_Class>();
+	m_piecePlaceSound->SetAudio("Asset/Sound/PlacePieceSound.wav");
+
 	std::string str;
 	std::string str2;
 	if (!m_camera)m_camera = std::make_shared<Camera_Class>();
@@ -230,7 +233,7 @@ void GameScene_Class::Init()
 	PieceSet();
 	m_waitTime = WAIT_TIME;
 
-	//m_bgm1->PlayAudio();
+	m_bgm1->PlayAudio();
 }
 
 void GameScene_Class::Update()
@@ -402,7 +405,7 @@ void GameScene_Class::Update()
 										m_bordInfo[h][w] = PieceBaseObject_Class::None;
 									}
 									m_bordInfo[h][w] = m_selectPieceId;
-
+									m_piecePlaceSound->PlayAudio();
 									m_Phase = EndPhase;
 								}
 							}
@@ -680,7 +683,7 @@ void GameScene_Class::Update()
 										m_bordInfo[h][w] = PieceBaseObject_Class::None;
 									}
 									m_bordInfo[h][w] = m_selectPieceId;
-
+									m_piecePlaceSound->PlayAudio();
 									m_Phase = EndPhase;
 								}
 							}
@@ -827,6 +830,7 @@ void GameScene_Class::KillPiece(int _id)
 		if (obj->GetId() == _id)
 		{
 			obj->SetAlive(false);
+			obj->SetPos({ 12345,12345,12345 });
 		}
 	}
 
@@ -1034,7 +1038,7 @@ void GameScene_Class::OnAI()
 		for (auto obj : m_pieceList)
 		{
 			//“®‚¯‚é”ÍˆÍ‚Éæ‚ê‚é‹î‚ª‚ ‚éê‡
-			if (obj->GetId() == n)
+			if (obj->GetId() == n && obj->GetAlive())
 			{
 
 				//Œ»İ‚Ì”Õ–Ê‚ğ“n‚·

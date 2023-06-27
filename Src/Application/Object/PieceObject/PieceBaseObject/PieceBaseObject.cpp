@@ -147,7 +147,7 @@ void PieceBaseObject_Class::GenMassCenter()
 {
 	
 	for (int h = 0; h < 8; h++)
-	{
+	{ 
 		for (int w = 0; w < 8; w++)
 		{
 			Math::Vector3 massPos = { h * 1 - 3.5f,0,w * 1 - 3.5f };

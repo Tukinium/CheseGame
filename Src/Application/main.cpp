@@ -1,5 +1,4 @@
 ﻿#include "main.h"
-#include"Application/Object/BaseObject/BaseObject.h"
 #include"Application/Scene/GameScene/GameScene.h"
 #include"Application/Scene/SceneManager/SceneManager.h"
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -234,9 +233,9 @@ void Application::Execute()
 	}
 
 	//===================================================================
-	// ゲームループ
-	//===================================================================
 
+	//===================================================================
+	// ゲームループ
 	// 時間
 	m_fpsController.Init();
 
@@ -280,6 +279,7 @@ void Application::Execute()
 		// アプリケーション更新処理
 		//
 		//=========================================
+
 		PreUpdate();
 
 		Update();

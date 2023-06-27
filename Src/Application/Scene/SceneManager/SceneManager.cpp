@@ -31,6 +31,10 @@ void SceneManager_Class::Update()
 	{
 		SceneChange(m_nowScene->CheangeThisScene());
 	}
+
+	GetCursorPos(&mousePos);
+
+
 }
 
 void SceneManager_Class::Draw()

@@ -141,6 +141,7 @@ private:
 	std::shared_ptr<BishopPieceObject_Class>m_bishopBlack[2];
 
 	std::shared_ptr<BaseAudio_Class>m_bgm1;
+	std::shared_ptr<BaseAudio_Class>m_piecePlaceSound;
 
 	std::list<std::shared_ptr<PieceBaseObject_Class>>m_pieceList;
 
