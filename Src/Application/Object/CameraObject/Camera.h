@@ -13,7 +13,7 @@ public:
 	enum CamViewType
 	{
 		Default = 0,
-		CheseMode,
+		SideViewMode,
 		UpperCamMode,
 		SelectingMode,
 	};
@@ -30,6 +30,7 @@ public:
 		const Math::Vector3 m_rotateVec = { 0,0,0 };
 	};
 	struct DefaultCam defaultCam;
+
 	struct CheseModeCam
 	{
 		const Math::Vector3 m_pos = { 0,10,-10 };
@@ -37,6 +38,14 @@ public:
 		const Math::Vector3 m_rotateVec = { 35,0,0 };
 	};
 	struct CheseModeCam cheseModeCam;
+
+	struct SideViewModeCam
+	{
+		const Math::Vector3 m_pos = { 10,10,0 };
+		const float m_scale = 1.0f;
+		const Math::Vector3 m_rotateVec = { 0,-90,0 };
+	};
+	struct SideViewModeCam sideViewCam;
 
 	struct UpperCamModeCam
 	{

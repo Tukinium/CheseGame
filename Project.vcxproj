@@ -166,6 +166,7 @@
     <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene_Class.h" />
     <ClInclude Include="Src\Application\Scene\SceneManager\SceneManager.h" />
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h" />
+    <ClInclude Include="Src\Application\Skill\SkillBaseSystem_Class.h" />
     <ClInclude Include="Src\Application\UI\ButtonUI\ButtonUI_Class.h" />
     <ClInclude Include="Src\Application\UI\NumUI\NumUI_Class.h" />
     <ClInclude Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene_Class.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp" />
+    <ClCompile Include="Src\Application\Skill\SkillBaseSystem_Class.cpp" />
     <ClCompile Include="Src\Application\UI\ButtonUI\ButtonUI_Class.cpp" />
     <ClCompile Include="Src\Application\UI\NumUI\NumUI_Class.cpp" />
     <ClCompile Include="Src\Application\UI\OnTurnViewUI\OnTurnViewUI_Class.cpp" />

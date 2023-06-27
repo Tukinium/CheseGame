@@ -1,5 +1,6 @@
 #pragma once
 #include"Application/Scene/BaseScene/BaseScene.h"
+class UIBaseObject_Class;
 class TitleScene_Class : public BaseScene_Class
 {
 public:
@@ -17,4 +18,8 @@ public:
 private:
 	bool m_nowScene;
 	std::shared_ptr<BaseObject_Class>m_backTex;
+	std::shared_ptr<BaseObject_Class>m_clickToStart;
+
+	bool m_upping;
+	float m_posY;
 };

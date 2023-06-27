@@ -95,8 +95,6 @@ public:
 		 ProPotionPhase,
 	 };
 
-
-
 	 void OnAI();
 
 private:

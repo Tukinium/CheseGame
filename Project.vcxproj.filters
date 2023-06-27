@@ -151,6 +151,9 @@
     <Filter Include="Src\Application\Object\Mouse">
       <UniqueIdentifier>{de37628c-293e-40dc-b75c-f2169652414b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\SkillSystem">
+      <UniqueIdentifier>{3cbeec7c-37a6-4ff5-845f-cb83fddd2737}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -354,6 +357,9 @@
     <ClInclude Include="Src\Application\Object\Mouse\Mouse_Class.h">
       <Filter>Src\Application\Object\Mouse</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Skill\SkillBaseSystem_Class.h">
+      <Filter>Src\Application\Object\SkillSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -532,6 +538,9 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Mouse\Mouse_Class.cpp">
       <Filter>Src\Application\Object\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Skill\SkillBaseSystem_Class.cpp">
+      <Filter>Src\Application\Object\SkillSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
